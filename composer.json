@@ -11,5 +11,10 @@
   ],
   "require": {
     "barryvdh/laravel-ide-helper": "v2.4.3"
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.9"
+    }
   }
 }
