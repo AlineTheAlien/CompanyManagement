@@ -20,9 +20,13 @@ Route::get('tables', function () {
     return view('tables');
 });
 
-Route::get('employees', function () {
-    return view('employees');
-});
+//Route::get('employees', function () {
+//    return view('employees');
+//});
+
+//Call to controller instead of return view
+Route::get('employees', 'EmployeeManagementController@EmployeeManagement');
+
 
 Route::get('dashboard', function () {
     return view('home');

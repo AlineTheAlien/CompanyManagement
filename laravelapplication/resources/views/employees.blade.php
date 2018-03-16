@@ -108,14 +108,27 @@
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>Col1</th>
-                                    <th>Col2</th>
-                                    <th>Col3</th>
-                                    <th>Col4</th>
-                                    <th>Col5</th>
+                                    <th>SIN</th>
+                                    <th>Name</th>
+                                    <th>Birth Date</th>
+                                    <th>Phone Number</th>
+                                    <th>Address</th>
+                                    <th>Salary</th>
+                                    <th>Gender</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($employees as $employee)
+                                    <tr>
+                                        <td>{{$employee->SIN}}</td>
+                                        <td>{{$employee->name}}</td>
+                                        <td>{{$employee->birthDate}}</td>
+                                        <td>{{$employee->phoneNumber}}</td>
+                                        <td>{{$employee->address}}</td>
+                                        <td>{{$employee->salary}}</td>
+                                        <td>{{$employee->gender}}</td>
+                                    </tr>
+                                @endforeach
                                 <tr class="odd gradeX">
                                     <td>Trident</td>
                                     <td>Internet Explorer 4.0</td>
