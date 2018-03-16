@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9bd062f8-563f-416a-9d11-a7b80d8f7869" name="Default" comment="Set up project with warm-up php file" />
+    <list default="true" id="9bd062f8-563f-416a-9d11-a7b80d8f7869" name="Default" comment="Set up project with warm-up php file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change beforePath="$PROJECT_DIR$/laravelapplication/.env.example" afterPath="" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,24 +19,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="warmup.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/warmup.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/laravelapplication/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-              <folding>
-                <marker date="1520803160903" expanded="true" signature="546:632" ph="SELECT Stude... Students" />
-                <marker date="1520803160903" expanded="true" signature="608:631" ph="SELECT SID F... Members" />
-                <marker date="1520803160903" expanded="true" signature="647:764" ph="SELECT Membe... Members" />
-                <marker date="1520803160903" expanded="true" signature="779:956" ph="SELECT Stude... Students" />
-                <marker date="1520803160903" expanded="true" signature="971:1020" ph="SELECT Teams... Teams" />
-                <marker date="1520803160903" expanded="true" signature="1035:1127" ph="SELECT Stude... Students" />
-                <marker date="1520803160903" expanded="true" signature="1142:1208" ph="SELECT DISTI... Demos" />
-                <marker date="1520803160903" expanded="true" signature="1223:1320" ph="SELECT TID, Teams" />
-                <marker date="1520803160903" expanded="true" signature="1335:1442" ph="SELECT Membe... Students" />
-                <marker date="1520803160903" expanded="true" signature="1457:1677" ph="SELECT Stude... Students" />
-                <marker date="1520803160903" expanded="true" signature="1566:1676" ph="SELECT Membe... Students" />
-              </folding>
+            <state relative-caret-position="229">
+              <caret line="49" column="2" lean-forward="true" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="helpers.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/laravelapplication/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,7 +104,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -110,16 +111,28 @@
               <item name="CompanyManagement" type="b2602c69:ProjectViewProjectNode" />
               <item name="CompanyManagement" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="CompanyManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompanyManagement" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravelapplication" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="CompanyManagement" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompanyManagement" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="laravelapplication" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="Laravel.SettingsForm" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/wamp64/bin/php/php7.1.9/php.exe" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -132,6 +145,14 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/laravelapplication/public/index.php" />
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="PHP Script.index.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -151,27 +172,31 @@
       <workItem from="1520804457100" duration="673000" />
       <workItem from="1520805146796" duration="162000" />
       <workItem from="1520805515136" duration="34000" />
+      <workItem from="1521145762908" duration="480000" />
+      <workItem from="1521146312066" duration="3173000" />
+      <workItem from="1521164077131" duration="1112000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2801000" />
+    <option name="totallyTimeSpent" value="7566000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-14" y="-14" width="3228" height="1738" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20885417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286385" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2883978" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2883978" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32997987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -199,23 +224,41 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/laravelapplication/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4830">
+          <caret line="230" column="0" lean-forward="true" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/warmup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/app/Http/Controllers/Auth/LoginController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1520803160903" expanded="true" signature="546:632" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="608:631" ph="SELECT SID F... Members" />
-            <marker date="1520803160903" expanded="true" signature="647:764" ph="SELECT Membe... Members" />
-            <marker date="1520803160903" expanded="true" signature="779:956" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="971:1020" ph="SELECT Teams... Teams" />
-            <marker date="1520803160903" expanded="true" signature="1035:1127" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1142:1208" ph="SELECT DISTI... Demos" />
-            <marker date="1520803160903" expanded="true" signature="1223:1320" ph="SELECT TID, Teams" />
-            <marker date="1520803160903" expanded="true" signature="1335:1442" ph="SELECT Membe... Students" />
-            <marker date="1520803160903" expanded="true" signature="1457:1677" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1566:1676" ph="SELECT Membe... Students" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="49" column="2" lean-forward="true" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -223,19 +266,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1520803160903" expanded="true" signature="546:632" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="608:631" ph="SELECT SID F... Members" />
-            <marker date="1520803160903" expanded="true" signature="647:764" ph="SELECT Membe... Members" />
-            <marker date="1520803160903" expanded="true" signature="779:956" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="971:1020" ph="SELECT Teams... Teams" />
-            <marker date="1520803160903" expanded="true" signature="1035:1127" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1142:1208" ph="SELECT DISTI... Demos" />
-            <marker date="1520803160903" expanded="true" signature="1223:1320" ph="SELECT TID, Teams" />
-            <marker date="1520803160903" expanded="true" signature="1335:1442" ph="SELECT Membe... Students" />
-            <marker date="1520803160903" expanded="true" signature="1457:1677" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1566:1676" ph="SELECT Membe... Students" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -243,19 +273,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1520803160903" expanded="true" signature="546:632" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="608:631" ph="SELECT SID F... Members" />
-            <marker date="1520803160903" expanded="true" signature="647:764" ph="SELECT Membe... Members" />
-            <marker date="1520803160903" expanded="true" signature="779:956" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="971:1020" ph="SELECT Teams... Teams" />
-            <marker date="1520803160903" expanded="true" signature="1035:1127" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1142:1208" ph="SELECT DISTI... Demos" />
-            <marker date="1520803160903" expanded="true" signature="1223:1320" ph="SELECT TID, Teams" />
-            <marker date="1520803160903" expanded="true" signature="1335:1442" ph="SELECT Membe... Students" />
-            <marker date="1520803160903" expanded="true" signature="1457:1677" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1566:1676" ph="SELECT Membe... Students" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warmup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warmup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -276,21 +307,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/warmup.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
+        <state relative-caret-position="189">
           <caret line="9" column="7" lean-forward="false" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-          <folding>
-            <marker date="1520803160903" expanded="true" signature="546:632" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="608:631" ph="SELECT SID F... Members" />
-            <marker date="1520803160903" expanded="true" signature="647:764" ph="SELECT Membe... Members" />
-            <marker date="1520803160903" expanded="true" signature="779:956" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="971:1020" ph="SELECT Teams... Teams" />
-            <marker date="1520803160903" expanded="true" signature="1035:1127" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1142:1208" ph="SELECT DISTI... Demos" />
-            <marker date="1520803160903" expanded="true" signature="1223:1320" ph="SELECT TID, Teams" />
-            <marker date="1520803160903" expanded="true" signature="1335:1442" ph="SELECT Membe... Students" />
-            <marker date="1520803160903" expanded="true" signature="1457:1677" ph="SELECT Stude... Students" />
-            <marker date="1520803160903" expanded="true" signature="1566:1676" ph="SELECT Membe... Students" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/app/Http/Controllers/Auth/LoginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="240" column="0" lean-forward="false" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/laravelapplication/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="49" column="2" lean-forward="true" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
