@@ -12,10 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return view('home');
 });
 
-Route::get('users', function()
-{
-    return 'Users!';
+Route::get('tables', function () {
+    return view('tables');
+});
+
+Route::get('employees', function () {
+    return view('employees');
+});
+
+Route::get('dashboard', function () {
+    return view('home');
 });
