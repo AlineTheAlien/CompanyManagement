@@ -168,6 +168,28 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+
+        $('#testButton').click(function(){
+            $.ajax({
+                type:'GET',
+                url:'getEmployee',
+                data:{SIN: '123456'},
+                success:function(employees){
+                    $('#dataTables-example tbody > tr').remove();
+                    $.each(employees, function(index, employee) {
+                        //alert(JSON.stringify(employee));
+                        $("#dataTables-example tbody").append(
+                            "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                            + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                            + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                        )
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(JSON.stringify(jqXHR).toString());
+                }
+            });
+        });
     });
 </script>
 
