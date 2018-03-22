@@ -77,10 +77,13 @@
                     </li>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="tables"><i class="fa fa-table fa-fw"></i>Table Management</a>
+                            <a href="departments"><i class="fa fa-table fa-fw"></i>Department Management</a>
                         </li>
                         <li>
                             <a href="employees" class="active"><i class="fa fa-table fa-fw"></i>Employee Management</a>
+                        </li>
+                        <li>
+                            <a href="projects"><i class="fa fa-table fa-fw"></i>Project Management</a>
                         </li>
                     </ul>
                 </ul>

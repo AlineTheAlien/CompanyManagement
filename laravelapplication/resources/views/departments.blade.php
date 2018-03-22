@@ -77,10 +77,13 @@
                     </li>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="tables" class="active"><i class="fa fa-table fa-fw"></i>Table Management</a>
+                            <a href="departments" class="active"><i class="fa fa-table fa-fw"></i>Department Management</a>
                         </li>
                         <li>
                             <a href="employees"><i class="fa fa-table fa-fw"></i>Employee Management</a>
+                        </li>
+                        <li>
+                            <a href="projects"><i class="fa fa-table fa-fw"></i>Project Management</a>
                         </li>
                     </ul>
                 </ul>
@@ -91,7 +94,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Table Management</h1>
+                <h1 class="page-header">Department Management</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>

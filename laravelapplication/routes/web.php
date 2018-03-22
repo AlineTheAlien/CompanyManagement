@@ -16,8 +16,12 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('tables', function () {
-    return view('tables');
+Route::get('departments', function () {
+    return view('departments');
+});
+
+Route::get('projects', function () {
+    return view('projects');
 });
 
 Route::get('employees', 'EmployeeManagementController@GetAllEmployees');
