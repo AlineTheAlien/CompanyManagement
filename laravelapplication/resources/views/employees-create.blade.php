@@ -9,6 +9,30 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">SIN</label>
+
+                                <div class="col-md-6">
+                                    <input id="sin" type="text" class="form-control" name="sin" value="{{ old('sin') }}" required>
+
+                                    @if ($errors->has('sin'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('sin') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Department</label>
+                                <div class="col-md-6">
+                                    <select class="form-control js-states" name="department_id">
+                                        <option value="-1">Select department</option>
+                                        {{--  @foreach ($departments as $department)
+                                            <option value="{{$department->id}}">{{$department->name}}</option>
+                                        @endforeach  --}}
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -18,6 +42,30 @@
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Birthday</label>
+                                <div class="col-md-6">
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" value="{{ old('birthdate') }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Phone Number</label>
+
+                                <div class="col-md-6">
+                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" required>
+
+                                    @if ($errors->has('phonenumber'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('phonenumber') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -35,26 +83,27 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Department</label>
+                            <div class="form-group{{ $errors->has('salary') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Salary</label>
+
                                 <div class="col-md-6">
-                                    <select class="form-control js-states" name="state_id">
-                                        <option value="-1">Select department</option>
-                                        {{--  @foreach ($departments as $department)
-                                            <option value="{{$department->id}}">{{$state->name}}</option>
-                                        @endforeach  --}}
-                                    </select>
+                                    <input id="salary" type="text" class="form-control" name="salary" value="{{ old('salary') }}" required>
+
+                                    @if ($errors->has('salary'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('salary') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Birthday</label>
+                                <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" value="{{ old('birthdate') }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
-                                    </div>
+                                    <select class="form-control js-states" name="state_id">
+                                        <option value="-1">Select Gender</option>
+                                            <option value="F">F</option>
+                                            <option value="M">M</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
