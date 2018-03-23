@@ -32,7 +32,11 @@ Route::get('projects', 'EmployeeManagementController@GetAllProjects');
 
 Route::get('getEmployee', 'EmployeeManagementController@GetEmployeeBySIN');
 
-Route::get('createEmployee', 'EmployeeManagementController@CreateEmployee');
+Route::post('createEmployee', 'EmployeeManagementController@CreateEmployee')->name("createEmployee");
+
+Route::get('employees-create', function () {
+    return view('employees-create');
+});
 
 Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
 
