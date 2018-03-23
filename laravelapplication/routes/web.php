@@ -42,7 +42,7 @@ Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
 
 Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
-Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee');
+Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->name("updateEmployee");
 
 Route::get('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
 

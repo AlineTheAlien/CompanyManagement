@@ -31,7 +31,6 @@ class EmployeeManagementController extends Controller
         $SIN = $request->input('SIN');
         $employees = DB::connection('management')->select("SELECT * FROM employee WHERE SIN = $SIN;");
         return response()->json($employees);
-        //return View('employees')->with('employees', $employees);
     }
 
     public function CreateEmployee(Request $request)
@@ -80,6 +79,8 @@ class EmployeeManagementController extends Controller
     }
 
     public function UpdateEmployee(Request $request) {
-        return view('employees-update');
+        $SIN = $request->input('SIN');
+        $employees = DB::connection('management')->select("SELECT * FROM employee WHERE SIN = $SIN;");
+        return view('employees-update')->with('employee', $employees[0]);
     }
 }

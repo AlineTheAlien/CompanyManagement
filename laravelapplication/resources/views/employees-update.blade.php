@@ -16,7 +16,7 @@
                                 <label class="col-md-4 control-label">SIN</label>
 
                                 <div class="col-md-6">
-                                    <input id="sin" type="text" class="form-control" name="sin" value="{{ old('sin') }}" required>
+                                    <input id="sin" type="text" class="form-control" name="sin" value="{{$employee->SIN}}" required>
 
                                     @if ($errors->has('sin'))
                                         <span class="help-block">
@@ -40,7 +40,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="nname" value="{{ old('nname') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="nname" value="{{ $employee->name }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -56,7 +56,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" value="{{ old('birthdate') }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
+                                        <input type="text" value="{{ $employee->birthDate }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <label class="col-md-4 control-label">Phone Number</label>
 
                                 <div class="col-md-6">
-                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" required>
+                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ $employee->phoneNumber }}" required>
 
                                     @if ($errors->has('phonenumber'))
                                         <span class="help-block">
@@ -77,7 +77,7 @@
                                 <label for="address" class="col-md-4 control-label">Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>
+                                    <input id="address" type="text" class="form-control" name="address" value="{{ $employee->address }}" required>
 
                                     @if ($errors->has('address'))
                                         <span class="help-block">
@@ -90,7 +90,7 @@
                                 <label class="col-md-4 control-label">Salary</label>
 
                                 <div class="col-md-6">
-                                    <input id="salary" type="text" class="form-control" name="salary" value="{{ old('salary') }}" required>
+                                    <input id="salary" type="text" class="form-control" name="salary" value="{{ $employee->salary }}" required>
 
                                     @if ($errors->has('salary'))
                                         <span class="help-block">
@@ -104,8 +104,14 @@
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="gender">
                                         <option value="-1">Select gender</option>
+                                        @if ($employee->gender == "M")
+                                        <option selected value="M">M</option>
                                         <option value="F">F</option>
+                                        @endif
+                                        @if ($employee->gender == "F")
                                         <option value="M">M</option>
+                                        <option selected value="F">F</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
