@@ -105,7 +105,9 @@
                         List of employees
                     </div>
                     <div class="panel-body" align="right">
-                        <button type="button" id="new-employee" class="btn btn-success">Add new employee</button>
+                        <a href="createEmployee">
+                            <button type="button" id="new-employee" class="btn btn-success">Add new employee</button>
+                        </a>
                     </div>
 
                     <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
