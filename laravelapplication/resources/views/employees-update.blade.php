@@ -104,15 +104,15 @@
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="state_id">
                                         <option value="-1">Select gender</option>
-                                            <option value="F">F</option>
-                                            <option value="M">M</option>
+                                        <option value="F">F</option>
+                                        <option value="M">M</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Create new employee
+                                        Update employee
                                     </button>
                                 </div>
                             </div>

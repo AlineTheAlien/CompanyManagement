@@ -46,4 +46,7 @@ class EmployeeManagementController extends Controller
 //        return view('employees')->with('employees', $employees);
     }
 
+    public function UpdateEmployee(Request $request) {
+        return view('employees-update');
+    }
 }
