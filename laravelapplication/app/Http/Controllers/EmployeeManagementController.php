@@ -51,6 +51,12 @@ class EmployeeManagementController extends Controller
         return redirect('employees');
     }
 
+    public function DeleteEmployee(Request $request)
+    {
+        $SIN = $request->input('SIN');
+        DB::connection('management')->delete("DELETE FROM employee WHERE SIN = $SIN;");
+    }
+
     public function UpdateEmployee(Request $request) {
         return view('employees-update');
     }

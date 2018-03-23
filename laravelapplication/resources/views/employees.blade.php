@@ -198,7 +198,7 @@
                                 <tbody>
                                 @foreach($employees as $employee)
                                     <tr>
-                                        <td>{{$employee->SIN}}</td>
+                                        <td class="SIN">{{$employee->SIN}}</td>
                                         <td>{{$employee->name}}</td>
                                         <td>{{$employee->birthDate}}</td>
                                         <td>{{$employee->phoneNumber}}</td>
@@ -214,21 +214,8 @@
                                             <button type="button" class="btn btn-link">View projects</button>
                                         </td>
                                         <td>
-                                            {{--
-                                            route doesn't work...
-                                            <form class="row" method="POST" action="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" onsubmit = "return confirm('Are you sure?')">
-                                            <a href="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" class="btn btn-warning">
-                                               --}}
-                                            <form method="POST" action="" onsubmit = "return confirm('Are you sure?')">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <a href="updateEmployee" class="btn btn-warning">
-                                                    Update
-                                                </a>
-                                                <button type="submit" class="btn btn-danger">
-                                                    Delete
-                                                </button>
-                                            </form>
+                                            <a href="updateEmployee" class="btn btn-warning"> Update </a>
+                                            <button class="btn btn-danger"> Delete </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -272,6 +259,25 @@
             responsive: true
         });
 
+        $('.btn-danger').on('click', function (){
+            if (confirm('Are you sure?')){
+                var url = '{{route('deleteEmployee')}}';
+                var clickedButton = $(this);
+                var SIN = $(this).parent().siblings('.SIN').text();
+                $.ajax({
+                    type:'GET',
+                    url: url,
+                    data:{SIN: SIN},
+                    success:function(data){
+                        clickedButton.parent().parent().remove();
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            }
+        });
+
         $('#testButton').click(function(){
             $.ajax({
                 type:'GET',
@@ -293,14 +299,6 @@
                 }
             });
         });
-
-        $('#new-employee').click(function(){
-            $.ajax({
-                type: 'GET',
-                url:'createEmployee'
-            });
-        });
-
 
     });
 </script>
