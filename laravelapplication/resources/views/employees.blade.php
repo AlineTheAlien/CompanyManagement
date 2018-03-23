@@ -105,7 +105,10 @@
                         List of employees
                     </div>
                     <div class="panel-body" align="right">
-                        <button type="button" id="new-employee" href="home" class="btn btn-success">Add new employee</button>
+                        <a href="createEmployee">
+                            <button type="button" id="new-employee" class="btn btn-success">Add new employee</button>
+                        </a>
+
                     </div>
 
                     <!-- /.panel-heading -->
