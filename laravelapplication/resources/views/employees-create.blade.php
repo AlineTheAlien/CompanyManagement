@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Birthday</label>
+                                <label class="col-md-4 control-label">Birth Date</label>
                                 <div class="col-md-6">
                                     <div class="input-group date">
                                         <div class="input-group-addon">
@@ -100,7 +100,7 @@
                                 <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="state_id">
-                                        <option value="-1">Select Gender</option>
+                                        <option value="-1">Select gender</option>
                                             <option value="F">F</option>
                                             <option value="M">M</option>
                                     </select>
@@ -109,7 +109,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Create
+                                        Create new employee
                                     </button>
                                 </div>
                             </div>
