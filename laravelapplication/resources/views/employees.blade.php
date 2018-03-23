@@ -105,9 +105,76 @@
                         List of employees
                     </div>
                     <div class="panel-body" align="right">
-                        <button type="button" id="new-employee" href="home" class="btn btn-success">Add new employee</button>
+                        <button type="button" id="new-employee" class="btn btn-success">Add new employee</button>
                     </div>
 
+                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
+                            <label class="col-md-1 control-label">SIN</label>
+
+                            <div class="col-md-1">
+                                <input id="sin" type="text" class="form-control" name="sin" value="{{ old('sin') }}">
+
+                                @if ($errors->has('sin'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sin') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Department</label>
+                            <div class="col-md-2">
+                                <select class="form-control js-states" name="department_id">
+                                    <option value="-1">Select department</option>
+                                    {{--  @foreach ($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @endforeach  --}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name" class="col-md-1 control-label">Name</label>
+                            <div class="col-md-2">
+                                <input id="name" type="text" class="form-control" name="nname" value="{{ old('nname') }}" autofocus>
+
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('salary') ? ' has-error' : '' }}">
+                            <label class="col-md-1 control-label">Salary</label>
+                            <div class="col-md-2">
+                                <select class="form-control js-states" name="Salary">
+                                    <option value="-1">Select range</option>
+                                        <option value="range1"><$30,000</option>
+                                        <option value="range2">$30,000 to $50,000</option>
+                                        <option value="range3">>$50,000 to $100,000</option>
+                                        <option value="range3">>$100,000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Gender</label>
+                            <div class="col-md-2">
+                                <select class="form-control js-states" name="state_id">
+                                    <option value="-1">Select gender</option>
+                                    <option value="F">F</option>
+                                    <option value="M">M</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-1 col-md-offset-1">
+                                <button type="submit" class="btn btn-primary">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
@@ -121,6 +188,8 @@
                                     <th>Address</th>
                                     <th>Salary</th>
                                     <th>Gender</th>
+                                    <th>Dependents</th>
+                                    <th>Projects</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -134,6 +203,14 @@
                                         <td>{{$employee->address}}</td>
                                         <td>{{$employee->salary}}</td>
                                         <td>{{$employee->gender}}</td>
+                                        <td>
+                                            <!-- Need unique IDs for each button -->
+                                            <button type="button" class="btn btn-link">View dependents</button>
+                                        </td>
+                                        <td>
+                                            <!-- Need unique IDs for each button -->
+                                            <button type="button" class="btn btn-link">View projects</button>
+                                        </td>
                                         <td>
                                             <!-- Need unique IDs for each button -->
                                             <button type="button" id="btn-update" class="btn btn-warning">Update</button>
