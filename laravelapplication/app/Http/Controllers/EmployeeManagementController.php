@@ -8,6 +8,18 @@ use function MongoDB\BSON\toJSON;
 class EmployeeManagementController extends Controller
 {
 
+    public function GetAllDepartments()
+    {
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
+        return view('departments')->with('departments', $departments);
+    }
+
+    public function GetAllProjects()
+    {
+        $projects = DB::connection('management')->select("SELECT * FROM project;");
+        return view('projects')->with('projects', $projects);
+    }
+
     public function GetAllEmployees()
     {
         $employees = DB::connection('management')->select("SELECT * FROM employee;");
@@ -55,6 +67,16 @@ class EmployeeManagementController extends Controller
     {
         $SIN = $request->input('SIN');
         DB::connection('management')->delete("DELETE FROM employee WHERE SIN = $SIN;");
+    }
+
+    public function CreateDepartment()
+    {
+        return view('departments-create');
+    }
+
+    public function CreateProject()
+    {
+        return view('projects-create');
     }
 
     public function UpdateEmployee(Request $request) {

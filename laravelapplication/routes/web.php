@@ -26,6 +26,10 @@ Route::get('projects', function () {
 
 Route::get('employees', 'EmployeeManagementController@GetAllEmployees');
 
+Route::get('departments', 'EmployeeManagementController@GetAllDepartments');
+
+Route::get('projects', 'EmployeeManagementController@GetAllProjects');
+
 Route::get('getEmployee', 'EmployeeManagementController@GetEmployeeBySIN');
 
 Route::post('createEmployee', 'EmployeeManagementController@CreateEmployee')->name("createEmployee");
@@ -33,6 +37,10 @@ Route::post('createEmployee', 'EmployeeManagementController@CreateEmployee')->na
 Route::get('employees-create', function () {
     return view('employees-create');
 });
+
+Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
+
+Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee');
 
