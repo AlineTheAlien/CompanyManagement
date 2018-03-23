@@ -32,6 +32,8 @@ Route::get('createEmployee', 'EmployeeManagementController@CreateEmployee');
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee');
 
+Route::POST('destroyEmployee', 'EmployeeManagementController@DestroyEmployee');
+
 Route::get('dashboard', function () {
     return view('home');
 });

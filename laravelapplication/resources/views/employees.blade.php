@@ -214,9 +214,21 @@
                                             <button type="button" class="btn btn-link">View projects</button>
                                         </td>
                                         <td>
-                                            <!-- Need unique IDs for each button -->
-                                            <button type="button" id="btn-update" class="btn btn-warning">Update</button>
-                                            <button type="button" id="btn-delete" class="btn btn-danger">Delete</button>
+                                            {{--
+                                            route doesn't work...
+                                            <form class="row" method="POST" action="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" onsubmit = "return confirm('Are you sure?')">
+                                            <a href="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" class="btn btn-warning">
+                                               --}}
+                                            <form method="POST" action="" onsubmit = "return confirm('Are you sure?')">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <a href="updateEmployee" class="btn btn-warning">
+                                                    Update
+                                                </a>
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
