@@ -22,28 +22,33 @@ class EmployeeManagementController extends Controller
         //return View('employees')->with('employees', $employees);
     }
 
-    public function CreateEmployee()
+    public function CreateEmployee(Request $request)
     {
-        return view('employees-create');
-//        DB::connection('management')->select("INSERT INTO employee
-//                (`SIN`,
-//                `name`,
-//                `birthDate`,
-//                `phoneNumber`,
-//                `address`,
-//                `salary`,
-//                `gender`)
-//                VALUES
-//                (123432432,
-//                'Test',
-//                '1990-12-14',
-//                '911',
-//                '1234',
-//                '5',
-//                'M');
-//                ;");
-//        $employees = DB::connection('management')->select("SELECT * FROM employee;");
-//        return view('employees')->with('employees', $employees);
+        $SIN = $request->input('sin');
+        $name= $request->input('nname');
+        $birthDate= $request->input('birthdate');
+        $phoneNumber = $request->input('phonenumber');
+        $address = $request->input('address');
+        $salary= $request->input('salary');
+        $gender= $request->input('gender');
+
+        DB::connection('management')->insert("INSERT INTO employee
+                (`SIN`,
+                `name`,
+                `birthDate`,
+                `phoneNumber`,
+                `address`,
+                `salary`,
+                `gender`)
+                VALUES
+                ($SIN,
+                '$name',
+                '$birthDate',
+                '$phoneNumber',
+                '$address',
+                '$salary',
+                '$gender');");
+        return redirect('employees');
     }
 
     public function UpdateEmployee(Request $request) {

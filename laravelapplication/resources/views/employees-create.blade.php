@@ -10,7 +10,7 @@
                         {{--
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['sin' => $employee->sin]) }}" enctype="multipart/form-data">
                         --}}
-                        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{route('createEmployee')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">SIN</label>
@@ -40,11 +40,11 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="nname" value="{{ old('nname') }}" required autofocus>
+                                    <input id="nname" type="text" class="form-control" name="nname" value="{{ old('nname') }}" required autofocus>
 
-                                    @if ($errors->has('name'))
+                                    @if ($errors->has('nname'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('nname') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -102,7 +102,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Gender</label>
                                 <div class="col-md-6">
-                                    <select class="form-control js-states" name="state_id">
+                                    <select class="form-control js-states" name="gender" id = "gender">
                                         <option value="-1">Select gender</option>
                                             <option value="F">F</option>
                                             <option value="M">M</option>
