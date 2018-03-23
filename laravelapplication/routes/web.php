@@ -26,9 +26,17 @@ Route::get('projects', function () {
 
 Route::get('employees', 'EmployeeManagementController@GetAllEmployees');
 
+Route::get('departments', 'EmployeeManagementController@GetAllDepartments');
+
+Route::get('projects', 'EmployeeManagementController@GetAllProjects');
+
 Route::get('getEmployee', 'EmployeeManagementController@GetEmployeeBySIN');
 
 Route::get('createEmployee', 'EmployeeManagementController@CreateEmployee');
+
+Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
+
+Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee');
 
