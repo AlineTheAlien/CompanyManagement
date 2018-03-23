@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Startmin - Bootstrap Admin Theme</title>
+    <title>COMPANY</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -77,20 +77,19 @@
                     </li>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="departments"><i class="fa fa-table fa-fw"></i>Department Management</a>
+                            <a href="departments"><i class="fa fa-table fa-fw"></i> Department Management</a>
                         </li>
                         <li>
-                            <a href="employees" class="active"><i class="fa fa-table fa-fw"></i>Employee Management</a>
+                            <a href="employees" class="active"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                         </li>
                         <li>
-                            <a href="projects"><i class="fa fa-table fa-fw"></i>Project Management</a>
+                            <a href="projects"><i class="fa fa-table fa-fw"></i> Project Management</a>
                         </li>
                     </ul>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -103,8 +102,12 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        DataTables Advanced Tables
+                        List of employees
                     </div>
+                    <div class="panel-body" align="right">
+                        <button type="button" id="new-employee" href="home" class="btn btn-success">Add new employee</button>
+                    </div>
+
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
@@ -118,6 +121,7 @@
                                     <th>Address</th>
                                     <th>Salary</th>
                                     <th>Gender</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -130,6 +134,11 @@
                                         <td>{{$employee->address}}</td>
                                         <td>{{$employee->salary}}</td>
                                         <td>{{$employee->gender}}</td>
+                                        <td>
+                                            <!-- Need unique IDs for each button -->
+                                            <button type="button" id="btn-update" class="btn btn-warning">Update</button>
+                                            <button type="button" id="btn-delete" class="btn btn-danger">Delete</button>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -176,7 +185,7 @@
             $.ajax({
                 type:'GET',
                 url:'getEmployee',
-                data:{SIN: '123456'},
+                data:{SIN: '4321'},
                 success:function(employees){
                     $('#dataTables-example tbody > tr').remove();
                     $.each(employees, function(index, employee) {
@@ -193,6 +202,15 @@
                 }
             });
         });
+
+        $('#new-employee').click(function(){
+            $.ajax({
+                type: 'GET',
+                url:'createEmployee'
+            });
+        });
+
+
     });
 </script>
 

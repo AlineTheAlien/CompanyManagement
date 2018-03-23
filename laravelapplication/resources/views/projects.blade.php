@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Startmin - Bootstrap Admin Theme</title>
+    <title>COMPANY</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -77,13 +77,13 @@
                     </li>
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="departments"><i class="fa fa-table fa-fw"></i>Department Management</a>
+                            <a href="departments"><i class="fa fa-table fa-fw"></i> Department Management</a>
                         </li>
                         <li>
-                            <a href="employees"><i class="fa fa-table fa-fw"></i>Employee Management</a>
+                            <a href="employees"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                         </li>
                         <li>
-                            <a href="projects" class="active"><i class="fa fa-table fa-fw"></i>Project Management</a>
+                            <a href="projects" class="active"><i class="fa fa-table fa-fw"></i> Project Management</a>
                         </li>
                     </ul>
                 </ul>

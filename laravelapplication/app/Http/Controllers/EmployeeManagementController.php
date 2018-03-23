@@ -22,4 +22,28 @@ class EmployeeManagementController extends Controller
         //return View('employees')->with('employees', $employees);
     }
 
+    public function CreateEmployee()
+    {
+        return view('employees-create');
+//        DB::connection('management')->select("INSERT INTO employee
+//                (`SIN`,
+//                `name`,
+//                `birthDate`,
+//                `phoneNumber`,
+//                `address`,
+//                `salary`,
+//                `gender`)
+//                VALUES
+//                (123432432,
+//                'Test',
+//                '1990-12-14',
+//                '911',
+//                '1234',
+//                '5',
+//                'M');
+//                ;");
+//        $employees = DB::connection('management')->select("SELECT * FROM employee;");
+//        return view('employees')->with('employees', $employees);
+    }
+
 }

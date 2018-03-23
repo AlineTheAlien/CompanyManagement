@@ -28,6 +28,8 @@ Route::get('employees', 'EmployeeManagementController@GetAllEmployees');
 
 Route::get('getEmployee', 'EmployeeManagementController@GetEmployeeBySIN');
 
+Route::get('createEmployee', 'EmployeeManagementController@CreateEmployee');
+
 Route::get('dashboard', function () {
     return view('home');
 });
