@@ -44,6 +44,10 @@ Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->name("updateEmployee");
 
+Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->name("searchEmployee");
+
+Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
+
 Route::get('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
 
 Route::get('dashboard', function () {

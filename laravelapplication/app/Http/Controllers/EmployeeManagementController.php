@@ -33,10 +33,50 @@ class EmployeeManagementController extends Controller
         return response()->json($employees);
     }
 
+    public function SearchEmployee(Request $request)
+    {
+        $SIN = $request->input('sin');
+        $name= $request->input('name');
+        $salary= $request->input('salary');
+        $gender= $request->input('gender');
+
+        $query = "SELECT * FROM employee WHERE ";
+
+        if ($SIN != null)
+            $query = $query . "SIN = '$SIN' ";
+
+        if ($name != null)
+            if (strpos($query, 'SIN') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "name = '$name' ";
+
+        if ($salary != null)
+            if(strpos($query, 'AND') !== false)
+                $query = $query . "AND salary = '$salary' ";
+            else
+                $query = $query . "salary = '$salary' ";
+
+        if ($gender != null)
+            if (strpos($query, 'AND') !== false)
+                $query = $query . "AND gender = '$gender' ";
+            else
+                $query = $query . "gender = '$gender' ";
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $employees = DB::connection('management')->select($query);
+            return view('employees')->with('employees', $employees);
+        }
+        else
+            return view('employees');
+    }
+
     public function CreateEmployee(Request $request)
     {
         $SIN = $request->input('sin');
-        $name= $request->input('nname');
+        $name= $request->input('name');
         $birthDate= $request->input('birthdate');
         $phoneNumber = $request->input('phonenumber');
         $address = $request->input('address');
@@ -82,5 +122,25 @@ class EmployeeManagementController extends Controller
         $SIN = $request->input('SIN');
         $employees = DB::connection('management')->select("SELECT * FROM employee WHERE SIN = $SIN;");
         return view('employees-update')->with('employee', $employees[0]);
+    }
+
+    public function UpdateEmployeeInDatabase(Request $request) {
+        $SIN = $request->input('sin');
+        $name= $request->input('name');
+        $birthDate= $request->input('birthdate');
+        $phoneNumber = $request->input('phonenumber');
+        $address = $request->input('address');
+        $salary= $request->input('salary');
+        $gender= $request->input('gender');
+
+        DB::connection('management')->update("UPDATE employee SET 
+                                              name = '$name',
+                                              birthDate = '$birthDate',
+                                              phoneNumber = '$phoneNumber',
+                                              address = '$address',
+                                              salary = '$salary',
+                                              gender = '$gender'
+                                              WHERE SIN = '$SIN';");
+        return redirect('employees');
     }
 }

@@ -110,7 +110,7 @@
                         </a>
                     </div>
 
-                    <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" method="GET" action="{{route('searchEmployee')}}" enctype="multipart/form-data">
                         <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
                             <label class="col-md-1 control-label">SIN</label>
 
@@ -138,7 +138,7 @@
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-1 control-label">Name</label>
                             <div class="col-md-2">
-                                <input id="name" type="text" class="form-control" name="nname" value="{{ old('nname') }}" autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">

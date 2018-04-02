@@ -10,7 +10,7 @@
                         {{--
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['sin' => $employee->sin]) }}" enctype="multipart/form-data">
                         --}}
-                        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{route('updateEmployeeInDatabase')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">SIN</label>
@@ -40,7 +40,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="nname" value="{{ $employee->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $employee->name }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
