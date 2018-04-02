@@ -9,12 +9,12 @@
                     List of departments
                 </div>
                 <div class="panel-body" align="right">
-                    <a href="createDepartment">
+                    <a href="departments-create">
                         <button type="button" id="new-department" class="btn btn-success">Add new department</button>
                     </a>
                 </div>
 
-                <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="GET" action = "{{route('searchDepartment')}}" enctype="multipart/form-data">
                     <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                         <label class="col-md-1 control-label">Id</label>
 

@@ -38,13 +38,19 @@ Route::get('employees-create', function () {
     return view('employees-create');
 });
 
-Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
+Route::get('departments-create', function () {
+    return view('departments-create');
+});
+
+Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')->name("createDepartment");
 
 Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->name("updateEmployee");
 
 Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->name("searchEmployee");
+
+Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')->name("searchDepartment");
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
 

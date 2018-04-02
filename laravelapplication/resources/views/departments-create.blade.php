@@ -10,7 +10,7 @@
                         {{--
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['sin' => $department->id]) }}" enctype="multipart/form-data">
                         --}}
-                        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action = "{{route('createDepartment')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Id</label>

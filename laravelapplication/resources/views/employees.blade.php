@@ -162,7 +162,7 @@
                         <div class="form-group">
                             <label class="col-md-1 control-label">Gender</label>
                             <div class="col-md-2">
-                                <select class="form-control js-states" name="state_id">
+                                <select class="form-control js-states" name="gender" id = "gender">
                                     <option value="-1">Select gender</option>
                                     <option value="F">F</option>
                                     <option value="M">M</option>

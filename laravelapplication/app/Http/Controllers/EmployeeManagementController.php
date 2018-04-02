@@ -108,9 +108,48 @@ class EmployeeManagementController extends Controller
         DB::connection('management')->delete("DELETE FROM employee WHERE SIN = $SIN;");
     }
 
-    public function CreateDepartment()
+    public function CreateDepartment(Request $request)
     {
-        return view('departments-create');
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $manager = $request->input('manager');
+
+        DB::connection('management')->insert("INSERT INTO department
+                (`id`,`name`)
+                VALUES
+                ('$id','$name');");
+
+        return redirect('departments');
+    }
+
+    public function SearchDepartment(Request $request)
+    {
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $managerSIN = $request->input('employeesin');
+
+        $query = "SELECT department.id, department.name FROM department ";
+
+        if ($managerSIN != null)
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID";
+        if ($id != null)
+            $query = $query . "WHERE department.id = '$id' ";
+
+        if ($name != null)
+            if (strpos($query, 'id') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "WHERE name = '$name' ";
+
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $departments = DB::connection('management')->select($query);
+            return view('departments')->with('departments', $departments);
+        }
+        else
+            return view('employees');
     }
 
     public function CreateProject()
