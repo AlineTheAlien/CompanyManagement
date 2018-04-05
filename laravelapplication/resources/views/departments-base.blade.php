@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>COMPANY</title>
 
@@ -127,6 +128,41 @@
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
             responsive: true
+        });
+
+        $('.btn-danger').on('click', function (){
+            if (confirm('Are you sure?')){
+                var url = '{{route('deleteDepartment')}}';
+                var clickedButton = $(this);
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'POST',
+                    url: url,
+                    data:{id: id},
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success:function(data){
+                        clickedButton.parent().parent().remove();
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            }
+        });
+
+        $('.btn-warning').on('click', function(){
+            var id = $(this).parent().siblings('.id').text();
+            $.ajax({
+                type:'GET',
+                url: 'updateDepartment',
+                data:{id: id},
+                success:function(data){
+                    $('html').html(data);
+                },
+                error:function (jqXHR, textStatus, errorThrown) {
+                    alert(JSON.stringify(jqXHR, null, 2));
+                }
+            });
         });
     });
 </script>

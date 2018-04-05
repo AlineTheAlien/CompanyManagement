@@ -75,25 +75,14 @@
                             <tbody>
                             @foreach($departments as $department)
                                 <tr>
-                                    <td>{{$department->id}}</td>
+                                    <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link">View manager</button>
                                     </td>
                                     <td>
-                                        {{--
-                                        route doesn't work...
-                                        <form class="row" method="POST" action="{{ route('destroyDepartment', ['sin' => $employee->SIN]) }}" onsubmit = "return confirm('Are you sure?')">
-                                        <a href="{{ route('destroyEmployee', ['id' => $department->id]) }}" class="btn btn-warning">
-                                           --}}
-                                        <form method="POST" action="" onsubmit = "return confirm('Are you sure?')">
-                                            <a href="updateDepartment" class="btn btn-warning">
-                                                Update
-                                            </a>
-                                            <button type="submit" class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-warning"> Update </button>
+                                        <button class="btn btn-danger"> Delete </button>
                                     </td>
                                 </tr>
                             @endforeach

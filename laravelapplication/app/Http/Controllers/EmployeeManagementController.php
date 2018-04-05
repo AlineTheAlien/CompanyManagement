@@ -57,7 +57,7 @@ class EmployeeManagementController extends Controller
             else
                 $query = $query . "salary = '$salary' ";
 
-        if ($gender != null)
+        if ($gender != -1)
             if (strpos($query, 'AND') !== false)
                 $query = $query . "AND gender = '$gender' ";
             else
@@ -108,6 +108,12 @@ class EmployeeManagementController extends Controller
         DB::connection('management')->delete("DELETE FROM employee WHERE SIN = $SIN;");
     }
 
+    public function DeleteDepartment(Request $request)
+    {
+        $id = $request->input('id');
+        DB::connection('management')->delete("DELETE FROM department WHERE id = $id;");
+    }
+
     public function CreateDepartment(Request $request)
     {
         $id = $request->input('id');
@@ -136,7 +142,7 @@ class EmployeeManagementController extends Controller
             $query = $query . "WHERE department.id = '$id' ";
 
         if ($name != null)
-            if (strpos($query, 'id') !== false)
+            if (strpos($query, 'WHERE department.id') !== false)
                 $query = $query . "AND name = '$name' ";
             else
                 $query = $query . "WHERE name = '$name' ";

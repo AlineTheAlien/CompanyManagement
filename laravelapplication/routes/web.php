@@ -54,7 +54,9 @@ Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')-
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
 
-Route::get('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
+Route::post('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
+
+Route::post('deleteDepartment', 'EmployeeManagementController@DeleteDepartment')->name("deleteDepartment");
 
 Route::get('dashboard', function () {
     return view('home');
