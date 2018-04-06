@@ -9,12 +9,12 @@
                     List of departments
                 </div>
                 <div class="panel-body" align="right">
-                    <a href="createDepartment">
+                    <a href="departments-create">
                         <button type="button" id="new-department" class="btn btn-success">Add new department</button>
                     </a>
                 </div>
 
-                <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="GET" action = "{{route('searchDepartment')}}" enctype="multipart/form-data">
                     <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                         <label class="col-md-1 control-label">Id</label>
 
@@ -75,25 +75,14 @@
                             <tbody>
                             @foreach($departments as $department)
                                 <tr>
-                                    <td>{{$department->id}}</td>
+                                    <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
                                     <td>
                                         <button type="button" class="btn btn-link">View manager</button>
                                     </td>
                                     <td>
-                                        {{--
-                                        route doesn't work...
-                                        <form class="row" method="POST" action="{{ route('destroyDepartment', ['sin' => $employee->SIN]) }}" onsubmit = "return confirm('Are you sure?')">
-                                        <a href="{{ route('destroyEmployee', ['id' => $department->id]) }}" class="btn btn-warning">
-                                           --}}
-                                        <form method="POST" action="" onsubmit = "return confirm('Are you sure?')">
-                                            <a href="updateDepartment" class="btn btn-warning">
-                                                Update
-                                            </a>
-                                            <button type="submit" class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </form>
+                                        <button class="btn btn-warning"> Update </button>
+                                        <button class="btn btn-danger"> Delete </button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -14,7 +14,7 @@
                 </a>
             </div>
 
-            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="GET" action="{{route('searchEmployee')}}" enctype="multipart/form-data">
                 <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
                     <label class="col-md-1 control-label">SIN</label>
 
@@ -23,8 +23,8 @@
 
                         @if ($errors->has('sin'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('sin') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('sin') }}</strong>
+                                    </span>
                         @endif
                     </div>
                 </div>
@@ -42,12 +42,12 @@
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-1 control-label">Name</label>
                     <div class="col-md-2">
-                        <input id="name" type="text" class="form-control" name="nname" value="{{ old('nname') }}" autofocus>
+                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                         @if ($errors->has('name'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
                         @endif
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label class="col-md-1 control-label">Gender</label>
                     <div class="col-md-2">
-                        <select class="form-control js-states" name="state_id">
+                        <select class="form-control js-states" name="gender" id = "gender">
                             <option value="-1">Select gender</option>
                             <option value="F">F</option>
                             <option value="M">M</option>
@@ -137,68 +137,71 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
 
-        $('.btn-danger').on('click', function (){
-            if (confirm('Are you sure?')){
-                var url = '{{route('deleteEmployee')}}';
-                var clickedButton = $(this);
+            $('.btn-danger').on('click', function (){
+                if (confirm('Are you sure?')){
+                    var url = '{{route('deleteEmployee')}}';
+                    var clickedButton = $(this);
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    $.ajax({
+                        type:'POST',
+                        url: url,
+                        data:{"SIN": SIN},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: "text",
+                        success:function(data){
+                            clickedButton.parent().parent().remove();
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+            });
+
+            $('.btn-warning').on('click', function(){
                 var SIN = $(this).parent().siblings('.SIN').text();
                 $.ajax({
                     type:'GET',
-                    url: url,
+                    url: 'updateEmployee',
                     data:{SIN: SIN},
                     success:function(data){
-                        clickedButton.parent().parent().remove();
+                        $('html').html(data);
                     },
                     error:function (jqXHR, textStatus, errorThrown) {
                         alert(JSON.stringify(jqXHR, null, 2));
                     }
                 });
-            }
-        });
-
-        $('.btn-warning').on('click', function(){
-            var SIN = $(this).parent().siblings('.SIN').text();
-            $.ajax({
-                type:'GET',
-                url: 'updateEmployee',
-                data:{SIN: SIN},
-                success:function(data){
-                        $('html').html(data);
-                },
-                error:function (jqXHR, textStatus, errorThrown) {
-                    alert(JSON.stringify(jqXHR, null, 2));
-                }
             });
-        });
 
-        $('#testButton').click(function(){
-            $.ajax({
-                type:'GET',
-                url:'getEmployee',
-                data:{SIN: '4321'},
-                success:function(employees){
-                    $('#dataTables-example tbody > tr').remove();
-                    $.each(employees, function(index, employee) {
-                        //alert(JSON.stringify(employee));
-                        $("#dataTables-example tbody").append(
-                            "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
-                            + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                            + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
-                        )
-                    });
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert(JSON.stringify(jqXHR).toString());
-                }
+            $('#testButton').click(function(){
+                $.ajax({
+                    type:'GET',
+                    url:'getEmployee',
+                    data:{SIN: '4321'},
+                    success:function(employees){
+                        $('#dataTables-example tbody > tr').remove();
+                        $.each(employees, function(index, employee) {
+                            //alert(JSON.stringify(employee));
+                            $("#dataTables-example tbody").append(
+                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                            )
+                        });
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR).toString());
+                    }
+                });
             });
-        });
 
-    });
-</script>
+        });
+    </script>
+
 @endsection
