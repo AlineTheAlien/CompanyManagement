@@ -83,4 +83,24 @@ class EmployeeManagementController extends Controller
         $employees = DB::connection('management')->select("SELECT * FROM employee WHERE SIN = $SIN;");
         return view('employees-update')->with('employee', $employees[0]);
     }
+
+    // Dependents
+
+    public function DeleteDependent(Request $request)
+    {
+        $SIN = $request->input('dependentSIN');
+        DB::connection('management')->delete("DELETE FROM employee WHERE dependentSIN = $SIN;");
+    }
+
+    public function UpdateDependent(Request $request) {
+        $SIN = $request->input('dependentSIN');
+        $dependents = DB::connection('management')->select("SELECT * FROM dependents WHERE dependentSIN = $SIN;");
+        return view('dependents-update')->with('dependent', $dependents[0]);
+    }
+
+    public function GetAllDependents()
+    {
+        $projects = DB::connection('management')->select("SELECT * FROM dependents;");
+        return view('dependents')->with('dependents', $projects);
+    }
 }

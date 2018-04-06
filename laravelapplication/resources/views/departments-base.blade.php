@@ -80,6 +80,9 @@
                             <a href="departments" class="active"><i class="fa fa-table fa-fw"></i> Department Management</a>
                         </li>
                         <li>
+                            <a href="dependents"><i class="fa fa-table fa-fw"></i> Dependent Management</a>
+                        </li>
+                        <li>
                             <a href="employees"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                         </li>
                         <li>
@@ -97,9 +100,8 @@
                 <h1 class="page-header">Department Management</h1>
             </div>
             <!-- /.col-lg-12 -->
-            @yield('action-content')
         </div>
-
+        @yield('action-content')
     </div>
     <!-- /#page-wrapper -->
 
@@ -122,7 +124,8 @@
 <!-- Custom Theme JavaScript -->
 <script src="js/startmin.js"></script>
 
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+@yield('scripts')
+
 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({

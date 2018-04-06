@@ -35,8 +35,10 @@
     <![endif]-->
 </head>
 <body>
+
 <div id="wrapper">
 
+    <!-- Navigation -->
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
@@ -64,10 +66,10 @@
                         <div class="input-group custom-search-form">
                             <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
                         </div>
                     </li>
                     <li>
@@ -78,10 +80,10 @@
                             <a href="departments"><i class="fa fa-table fa-fw"></i> Department Management</a>
                         </li>
                         <li>
-                            <a href="dependents"><i class="fa fa-table fa-fw"></i> Dependent Management</a>
+                            <a href="dependents" class="active"><i class="fa fa-table fa-fw"></i> Dependent Management</a>
                         </li>
                         <li>
-                            <a href="employees" class="active"><i class="fa fa-table fa-fw"></i> Employee Management</a>
+                            <a href="employees"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                         </li>
                         <li>
                             <a href="projects"><i class="fa fa-table fa-fw"></i> Project Management</a>
@@ -91,16 +93,15 @@
             </div>
         </div>
     </nav>
-<!-- test -->
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Employee Management</h1>
+                <h1 class="page-header">Dependent Management</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         @yield('action-content')
-
     </div>
     <!-- /#page-wrapper -->
 

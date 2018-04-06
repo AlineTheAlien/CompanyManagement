@@ -85,6 +85,9 @@
                         <a href="departments"><i class="fa fa-table fa-fw"></i> Department Management</a>
                     </li>
                     <li>
+                        <a href="dependents"><i class="fa fa-table fa-fw"></i> Dependent Management</a>
+                    </li>
+                    <li>
                         <a href="employees"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                     </li>
                     <li>

@@ -7,9 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Update employee</div>
                     <div class="panel-body">
-                        {{--
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['sin' => $employee->sin]) }}" enctype="multipart/form-data">
-                        --}}
                         <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
@@ -30,9 +27,6 @@
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="department_id">
                                         <option value="-1">Select department</option>
-                                        {{--  @foreach ($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
-                                        @endforeach  --}}
                                     </select>
                                 </div>
                             </div>

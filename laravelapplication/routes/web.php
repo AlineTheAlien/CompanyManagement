@@ -24,9 +24,15 @@ Route::get('projects', function () {
     return view('projects');
 });
 
+Route::get('dependents', function () {
+    return view('dependents');
+});
+
 Route::get('employees', 'EmployeeManagementController@GetAllEmployees');
 
 Route::get('departments', 'EmployeeManagementController@GetAllDepartments');
+
+Route::get('dependents', 'EmployeeManagementController@GetAllDependents');
 
 Route::get('projects', 'EmployeeManagementController@GetAllProjects');
 
@@ -42,7 +48,11 @@ Route::get('createDepartment', 'EmployeeManagementController@CreateDepartment');
 
 Route::get('createProject', 'EmployeeManagementController@CreateProject');
 
+Route::get('updateDependent', 'EmployeeManagementController@UpdateDependent')->name("updateDependent");
+
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->name("updateEmployee");
+
+Route::get('deleteDependent', 'EmployeeManagementController@DeleteDependent')->name("deleteDependent");
 
 Route::get('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
 
