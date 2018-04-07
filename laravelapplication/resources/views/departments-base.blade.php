@@ -133,7 +133,7 @@
             responsive: true
         });
 
-        $('.btn-danger').on('click', function (){
+        $('#dataTables-example').on('click','.btn-danger', function (){
             if (confirm('Are you sure?')){
                 var url = '{{route('deleteDepartment')}}';
                 var clickedButton = $(this);
@@ -153,7 +153,7 @@
             }
         });
 
-        $('.btn-warning').on('click', function(){
+        $('#dataTables-example').on('click', '.btn-warning', function(){
             var id = $(this).parent().siblings('.id').text();
             $.ajax({
                 type:'GET',
@@ -168,7 +168,7 @@
             });
         });
 
-        $('.btn-link').on('click', function(){
+        $('#dataTables-example').on('click', '.btn-link', function(){
             var id = $(this).parent().siblings('.id').text();
             $.ajax({
                 type:'GET',
