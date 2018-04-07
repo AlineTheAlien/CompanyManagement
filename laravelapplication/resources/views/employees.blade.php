@@ -211,13 +211,13 @@
                     type:'GET',
                     url: 'getDependents',
                     data:{SIN: SIN},
-                    success:function(employees){
+                    success:function(dependents){
 
                         $("#viewDependentTable").show();
                         $("#viewProjectTable").hide();
                         $("#viewDependentTable td").remove();
                         $("#viewDependentCaption").text("Dependents for Employee ID = " + SIN);
-                        $.each(employees, function(index, dependent) {
+                        $.each(dependents, function(index, dependent) {
                             $("#viewDependentTable tbody").append(
                                 "<tr><td>" + dependent.dependentSIN + "</td><td>" + dependent.name + "</td><td>" + dependent.gender
                                 + "</td><td>" + dependent.birthDate + "</td></tr>"
@@ -236,13 +236,13 @@
                     type:'GET',
                     url: 'getProjects',
                     data:{SIN: SIN},
-                    success:function(employees){
+                    success:function(projects){
 
                         $("#viewProjectTable").show();
                         $("#viewDependentTable").hide();
                         $("#viewProjectTable td").remove();
                         $("#viewProjectCaption").text("Projects for Employee ID = " + SIN);
-                        $.each(employees, function(index, project) {
+                        $.each(projects, function(index, project) {
                             $("#viewProjectTable tbody").append(
                                 "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
                                 + project.hours + "</td></tr>"
