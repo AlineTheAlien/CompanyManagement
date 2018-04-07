@@ -74,7 +74,7 @@ Route::post('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->na
 
 Route::post('deleteDepartment', 'EmployeeManagementController@DeleteDepartment')->name("deleteDepartment");
 
-Route::post('deleteDependent', 'EmployeeManagementController@DeleteDependant')->name("deleteDependent");
+Route::post('deleteDependent', 'EmployeeManagementController@DeleteDependent')->name("deleteDependent");
 
 Route::get('dashboard', function () {
     return view('home');

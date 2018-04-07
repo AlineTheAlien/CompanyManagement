@@ -238,9 +238,7 @@ class EmployeeManagementController extends Controller
                 '$employeeSIN',
                 '$name',
                 '$gender',
-                '$birthDate',
-                '$phoneNumber',
-                '$address');");
+                '$birthDate');");
         return redirect('dependents');
     }
 
@@ -258,9 +256,7 @@ class EmployeeManagementController extends Controller
                                               employeeSIN = '$employeeSIN',
                                               name = '$name',
                                               gender = '$gender',
-                                              birthDate = '$birthDate',
-                                              phoneNumber = '$phoneNumber',
-                                              address = '$address'
+                                              birthDate = '$birthDate'
                                               WHERE dependentSIN = '$dependentSIN';");
         return redirect('dependents');
     }

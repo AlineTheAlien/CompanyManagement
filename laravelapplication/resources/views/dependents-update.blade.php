@@ -76,34 +76,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Phone Number</label>
-
-                                <div class="col-md-6">
-                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ $dependent->phoneNumber }}" required>
-
-                                    @if ($errors->has('phonenumber'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('phonenumber') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                <label for="address" class="col-md-4 control-label">Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address" value="{{ $dependent->address }}" required>
-
-                                    @if ($errors->has('address'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

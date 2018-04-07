@@ -93,8 +93,6 @@
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>BirthDate</th>
-                                <th>Phone Number</th>
-                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -106,8 +104,6 @@
                                     <td>{{$dependent->name}}</td>
                                     <td>{{$dependent->gender}}</td>
                                     <td>{{$dependent->birthDate}}</td>
-                                    <td>{{$dependent->phoneNumber}}</td>
-                                    <td>{{$dependent->address}}</td>
                                     <td>
                                         <button class="btn btn-warning"> Update </button>
                                         <button class="btn btn-danger"> Delete </button>
@@ -140,9 +136,11 @@
                     var clickedButton = $(this);
                     var SIN = $(this).parent().siblings('.dependentSIN').text();
                     $.ajax({
-                        type:'GET',
+                        type:'POST',
                         url: url,
-                        data:{dependentSIN: SIN},
+                        data:{"dependentSIN": SIN},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: "text",
                         success:function(data){
                             clickedButton.parent().parent().remove();
                         },
