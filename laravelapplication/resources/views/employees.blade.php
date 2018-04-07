@@ -84,6 +84,32 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">
+                    <table class="table table-striped table-bordered table-hover" id="viewDependentTable" style="display:none">
+                        <caption id = "viewDependentCaption">Test</caption>
+                        <thead>
+                        <tr>
+                            <th>Dependent SIN</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>BirthDate</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-hover" id="viewProjectTable" style="display:none">
+                        <caption id = "viewProjectCaption">Test</caption>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Hours</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
@@ -109,11 +135,11 @@
                                 <td>{{$employee->address}}</td>
                                 <td>{{$employee->salary}}</td>
                                 <td>{{$employee->gender}}</td>
-                                <td>
+                                <td id="dependents">
                                     <!-- Need unique IDs for each button -->
                                     <button type="button" class="btn btn-link">View dependents</button>
                                 </td>
-                                <td>
+                                <td id="projects">
                                     <!-- Need unique IDs for each button -->
                                     <button type="button" class="btn btn-link">View projects</button>
                                 </td>
@@ -143,7 +169,7 @@
                 responsive: true
             });
 
-            $('.btn-danger').on('click', function (){
+            $('#dataTables-example').on('click', '.btn-danger', function (){
                 if (confirm('Are you sure?')){
                     var url = '{{route('deleteEmployee')}}';
                     var clickedButton = $(this);
@@ -164,7 +190,7 @@
                 }
             });
 
-            $('.btn-warning').on('click', function(){
+            $('#dataTables-example').on('click', '.btn-warning', function(){
                 var SIN = $(this).parent().siblings('.SIN').text();
                 $.ajax({
                     type:'GET',
@@ -179,28 +205,55 @@
                 });
             });
 
-            $('#testButton').click(function(){
+            $('#dataTables-example').on('click', '#dependents .btn-link', function(){
+                var SIN = $(this).parent().siblings('.SIN').text();
                 $.ajax({
                     type:'GET',
-                    url:'getEmployee',
-                    data:{SIN: '4321'},
+                    url: 'getDependents',
+                    data:{SIN: SIN},
                     success:function(employees){
-                        $('#dataTables-example tbody > tr').remove();
-                        $.each(employees, function(index, employee) {
-                            //alert(JSON.stringify(employee));
-                            $("#dataTables-example tbody").append(
-                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
-                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+
+                        $("#viewDependentTable").show();
+                        $("#viewProjectTable").hide();
+                        $("#viewDependentTable td").remove();
+                        $("#viewDependentCaption").text("Dependents for Employee ID = " + SIN);
+                        $.each(employees, function(index, dependent) {
+                            $("#viewDependentTable tbody").append(
+                                "<tr><td>" + dependent.dependentSIN + "</td><td>" + dependent.name + "</td><td>" + dependent.gender
+                                + "</td><td>" + dependent.birthDate + "</td></tr>"
                             )
                         });
                     },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR).toString());
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
                     }
                 });
             });
 
+            $('#dataTables-example').on('click', '#projects .btn-link', function(){
+                var SIN = $(this).parent().siblings('.SIN').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'getProjects',
+                    data:{SIN: SIN},
+                    success:function(employees){
+
+                        $("#viewProjectTable").show();
+                        $("#viewDependentTable").hide();
+                        $("#viewProjectTable td").remove();
+                        $("#viewProjectCaption").text("Projects for Employee ID = " + SIN);
+                        $.each(employees, function(index, project) {
+                            $("#viewProjectTable tbody").append(
+                                "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
+                                + project.hours + "</td></tr>"
+                            )
+                        });
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
         });
     </script>
 

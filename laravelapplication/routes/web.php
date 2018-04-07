@@ -69,6 +69,10 @@ Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')-
 
 Route::get('getManager', 'EmployeeManagementController@GetManager')->name("getManager");
 
+Route::get('getDependents', 'EmployeeManagementController@GetDependents')->name("getDependents");
+
+Route::get('getProjects', 'EmployeeManagementController@GetProjects')->name("getProjects");
+
 Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");

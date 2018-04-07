@@ -43,6 +43,24 @@ class EmployeeManagementController extends Controller
         return response()->json($employees);
     }
 
+    public function GetDependents(Request $request)
+    {
+        $SIN = $request->input('SIN');
+        $query = "SELECT dependent.name, dependent.gender, dependent.birthDate, dependent.dependentSIN
+                  FROM dependent LEFT JOIN employee ON employee.SIN = dependent.employeeSIN WHERE dependent.employeeSIN = $SIN;";
+        $dependents = DB::connection('management')->select($query);
+        return response()->json($dependents);
+    }
+
+    public function GetProjects(Request $request)
+    {
+        $SIN = $request->input('SIN');
+        $query = "SELECT project.id, project.name, project.location, works_on.hours
+                  FROM project LEFT JOIN works_on ON project.id = works_on.projectID WHERE works_on.employeeSIN = $SIN;";
+        $projects = DB::connection('management')->select($query);
+        return response()->json($projects);
+    }
+
     public function SearchEmployee(Request $request)
     {
         $SIN = $request->input('sin');
