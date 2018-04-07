@@ -189,22 +189,80 @@ class EmployeeManagementController extends Controller
         return redirect('employees');
     }
 
+
+
+
+
+
+
+
     // Dependents
     public function DeleteDependent(Request $request)
     {
         $SIN = $request->input('dependentSIN');
-        DB::connection('management')->delete("DELETE FROM employee WHERE dependentSIN = $SIN;");
+        DB::connection('management')->delete("DELETE FROM dependent WHERE dependentSIN = $SIN;");
     }
 
     public function UpdateDependent(Request $request) {
         $SIN = $request->input('dependentSIN');
-        $dependents = DB::connection('management')->select("SELECT * FROM dependents WHERE dependentSIN = $SIN;");
+        $dependents = DB::connection('management')->select("SELECT * FROM dependent WHERE dependentSIN = $SIN;");
         return view('dependents-update')->with('dependent', $dependents[0]);
     }
 
     public function GetAllDependents()
     {
-        $projects = DB::connection('management')->select("SELECT * FROM dependents;");
+        $projects = DB::connection('management')->select("SELECT * FROM dependent;");
         return view('dependents')->with('dependents', $projects);
     }
+
+    public function CreateDependent(Request $request)
+    {
+        $dependentSIN = $request->input('dependentsin');
+        $employeeSIN = $request->input('employeesin');
+        $name= $request->input('name');
+        $birthDate= $request->input('birthdate');
+        $phoneNumber = $request->input('phonenumber');
+        $address = $request->input('address');
+        $gender= $request->input('gender');
+
+        DB::connection('management')->insert("INSERT INTO dependent
+                (`dependentSIN`,
+                `employeeSIN`,
+                `name`,
+                `gender`,
+                `birthDate`,
+                `phoneNumber`,
+                `address`)
+                VALUES
+                ('$dependentSIN',
+                '$employeeSIN',
+                '$name',
+                '$gender',
+                '$birthDate',
+                '$phoneNumber',
+                '$address');");
+        return redirect('dependents');
+    }
+
+    public function UpdateDependentInDatabase(Request $request) {
+        $dependentSIN = $request->input('dependentsin');
+        $employeeSIN = $request->input('employeesin');
+        $name= $request->input('name');
+        $gender= $request->input('gender');
+        $birthDate= $request->input('birthdate');
+        $phoneNumber = $request->input('phonenumber');
+        $address = $request->input('address');
+
+        DB::connection('management')->update("UPDATE dependent SET 
+                                              dependentSIN = '$dependentSIN',
+                                              employeeSIN = '$employeeSIN',
+                                              name = '$name',
+                                              gender = '$gender',
+                                              birthDate = '$birthDate',
+                                              phoneNumber = '$phoneNumber',
+                                              address = '$address'
+                                              WHERE dependentSIN = '$dependentSIN';");
+        return redirect('dependents');
+    }
+
 }

@@ -38,7 +38,13 @@ Route::get('projects', 'EmployeeManagementController@GetAllProjects');
 
 Route::get('getEmployee', 'EmployeeManagementController@GetEmployeeBySIN');
 
+Route::post('createDependent', 'EmployeeManagementController@CreateDependent')->name("createDependent");
+
 Route::post('createEmployee', 'EmployeeManagementController@CreateEmployee')->name("createEmployee");
+
+Route::get('dependents-create', function () {
+    return view('dependents-create');
+});
 
 Route::get('employees-create', function () {
     return view('employees-create');
@@ -59,6 +65,8 @@ Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->nam
 Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->name("searchEmployee");
 
 Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')->name("searchDepartment");
+
+Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
 

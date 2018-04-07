@@ -9,17 +9,17 @@
                     List of dependents
                 </div>
                 <div class="panel-body" align="right">
-                    <a href="createDependent">
+                    <a href="dependents-create">
                         <button type="button" id="new-dependent" class="btn btn-success">Add new dependent</button>
                     </a>
                 </div>
 
-                <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="POST"  enctype="multipart/form-data">
                     <div class="form-group{{ $errors->has('dependentsin') ? ' has-error' : '' }}">
                         <label class="col-md-1 control-label">Dependent SIN</label>
 
                         <div class="col-md-1">
-                            <input id="sin" type="text" class="form-control" name="dependentsin" value="{{ old('dependentsin') }}">
+                            <input id="sin" type="text" class="form-control" name="dependentsin">
 
                             @if ($errors->has('dependentsin'))
                                 <span class="help-block">
@@ -32,7 +32,7 @@
                         <label class="col-md-1 control-label">Employee SIN</label>
 
                         <div class="col-md-1">
-                            <input id="sin" type="text" class="form-control" name="employeesin" value="{{ old('employeesin') }}">
+                            <input id="sin" type="text" class="form-control" name="employeesin">
 
                             @if ($errors->has('employeesin'))
                                 <span class="help-block">
@@ -44,7 +44,7 @@
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-1 control-label">Name</label>
                         <div class="col-md-2">
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
+                            <input id="name" type="text" class="form-control" name="name">
 
                             @if ($errors->has('name'))
                                 <span class="help-block">
@@ -70,7 +70,7 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" name="birthdate" class="form-control pull-right" id="birthDate">
+                                <input type="text" name="birthdate" class="form-control pull-right" id="birthdate">
                             </div>
                         </div>
                     </div>
@@ -91,8 +91,10 @@
                                 <th>Dependent SIN</th>
                                 <th>Employee SIN</th>
                                 <th>Name</th>
-                                <th>Gender/th>
+                                <th>Gender</th>
                                 <th>BirthDate</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -104,6 +106,8 @@
                                     <td>{{$dependent->name}}</td>
                                     <td>{{$dependent->gender}}</td>
                                     <td>{{$dependent->birthDate}}</td>
+                                    <td>{{$dependent->phoneNumber}}</td>
+                                    <td>{{$dependent->address}}</td>
                                     <td>
                                         <button class="btn btn-warning"> Update </button>
                                         <button class="btn btn-danger"> Delete </button>

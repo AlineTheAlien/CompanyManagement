@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Update dependent</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{route('updateDependentInDatabase')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('dependentsin') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Dependent SIN</label>
@@ -39,7 +39,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="nname" value="{{ $dependent->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $dependent->name }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -71,10 +71,39 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" value="{{ $dependent->birthDate }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
+                                        <input type="text" value="{{ $dependent->birthDate }}" name="birthdate" class="form-control pull-right" id="birthdate" required>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Phone Number</label>
+
+                                <div class="col-md-6">
+                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ $dependent->phoneNumber }}" required>
+
+                                    @if ($errors->has('phonenumber'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('phonenumber') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                                <label for="address" class="col-md-4 control-label">Address</label>
+
+                                <div class="col-md-6">
+                                    <input id="address" type="text" class="form-control" name="address" value="{{ $dependent->address }}" required>
+
+                                    @if ($errors->has('address'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
