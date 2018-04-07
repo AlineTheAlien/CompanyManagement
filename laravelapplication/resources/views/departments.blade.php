@@ -63,6 +63,28 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
+
+                        <table id="viewManagerTable" class="table table-striped table-bordered table-hover" style="display:none">
+                            <caption id = "viewManagerCaption"> Test</caption>
+                            <thead>
+                            <tr>
+                                <th>SIN</th>
+                                <th>Name</th>
+                                <th>Birth Date</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Salary</th>
+                                <th>Gender</th>
+                                {{--<th>Dependents</th> --}}
+                                {{--<th>Projects</th> --}}
+                                {{--<th>Action</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>

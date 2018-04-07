@@ -23,7 +23,9 @@ class EmployeeManagementController extends Controller
     public function GetAllEmployees()
     {
         $employees = DB::connection('management')->select("SELECT * FROM employee;");
-        return view('employees')->with('employees', $employees);
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
+        return view('employees')->with('employees', $employees)
+                                     ->with('departments', $departments);
     }
 
     public function GetEmployeeBySIN(Request $request)
@@ -33,11 +35,20 @@ class EmployeeManagementController extends Controller
         return response()->json($employees);
     }
 
+    public function GetManager(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "SELECT * FROM employee LEFT JOIN manages ON employee.SIN = manages.employeeSIN WHERE manages.departmentID = $id;";
+        $employees = DB::connection('management')->select($query);
+        return response()->json($employees);
+    }
+
     public function SearchEmployee(Request $request)
     {
         $SIN = $request->input('sin');
         $name= $request->input('name');
         $salary= $request->input('salary');
+        $departmentID = $request->input('department_id');
         $gender= $request->input('gender');
 
         $query = "SELECT * FROM employee WHERE ";
@@ -57,6 +68,12 @@ class EmployeeManagementController extends Controller
             else
                 $query = $query . "salary = '$salary' ";
 
+        if ($departmentID != -1)
+            if(strpos($query, 'AND') !== false)
+                $query = $query . "AND departmentID = '$departmentID' ";
+            else
+                $query = $query . "departmentID = '$departmentID' ";
+
         if ($gender != -1)
             if (strpos($query, 'AND') !== false)
                 $query = $query . "AND gender = '$gender' ";
@@ -65,9 +82,13 @@ class EmployeeManagementController extends Controller
 
         $query = $query . ";";
 
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
+
+
         if (strpos($query, '=')){
             $employees = DB::connection('management')->select($query);
-            return view('employees')->with('employees', $employees);
+            return view('employees')->with('employees', $employees)
+                                         ->with('departments', $departments);
         }
         else
             return view('employees');
@@ -79,6 +100,7 @@ class EmployeeManagementController extends Controller
         $name= $request->input('name');
         $birthDate= $request->input('birthdate');
         $phoneNumber = $request->input('phonenumber');
+        $departmentID = $request->input ('department_id');
         $address = $request->input('address');
         $salary= $request->input('salary');
         $gender= $request->input('gender');
@@ -88,6 +110,7 @@ class EmployeeManagementController extends Controller
                 `name`,
                 `birthDate`,
                 `phoneNumber`,
+                `departmentID`,
                 `address`,
                 `salary`,
                 `gender`)
@@ -96,6 +119,7 @@ class EmployeeManagementController extends Controller
                 '$name',
                 '$birthDate',
                 '$phoneNumber',
+                '$departmentID',
                 '$address',
                 '$salary',
                 '$gender');");

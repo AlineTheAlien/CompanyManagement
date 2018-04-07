@@ -47,7 +47,8 @@ Route::get('dependents-create', function () {
 });
 
 Route::get('employees-create', function () {
-    return view('employees-create');
+    $departments = DB::connection('management')->select("SELECT * FROM department;");
+    return view('employees-create')->with('departments', $departments);
 });
 
 Route::get('departments-create', function () {
@@ -65,6 +66,8 @@ Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->nam
 Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->name("searchEmployee");
 
 Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')->name("searchDepartment");
+
+Route::get('getManager', 'EmployeeManagementController@GetManager')->name("getManager");
 
 Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 

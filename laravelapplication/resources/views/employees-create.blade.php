@@ -30,9 +30,9 @@
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="department_id">
                                         <option value="-1">Select department</option>
-                                        {{--  @foreach ($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
-                                        @endforeach  --}}
+                                          @foreach ($departments as $department)
+                                            <option value="{{$department->id}}" name="department" id="department">{{$department->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

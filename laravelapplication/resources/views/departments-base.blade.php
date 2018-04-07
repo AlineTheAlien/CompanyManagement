@@ -167,6 +167,31 @@
                 }
             });
         });
+
+        $('.btn-link').on('click', function(){
+            var id = $(this).parent().siblings('.id').text();
+            $.ajax({
+                type:'GET',
+                url: 'getManager',
+                data:{id: id},
+                success:function(employees){
+
+                    $("#viewManagerTable").show();
+                    $("#viewManagerTable td").remove();
+                    $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                    $.each(employees, function(index, employee) {
+                        $("#viewManagerTable tbody").append(
+                            "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                            + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                            + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                        )
+                    });
+                },
+                error:function (jqXHR, textStatus, errorThrown) {
+                    alert(JSON.stringify(jqXHR, null, 2));
+                }
+            });
+        });
     });
 </script>
 
