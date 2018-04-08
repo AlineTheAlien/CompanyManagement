@@ -130,7 +130,7 @@
                 responsive: true
             });
 
-            $('.btn-danger').on('click', function (){
+            $('#dataTables-example').on('click', '.btn-danger', function (){
                 if (confirm('Are you sure?')){
                     var url = '{{route('deleteDependent')}}';
                     var clickedButton = $(this);
@@ -151,7 +151,7 @@
                 }
             });
 
-            $('.btn-warning').on('click', function(){
+            $('#dataTables-example').on('click', '.btn-warning', function(){
                 var SIN = $(this).parent().siblings('.dependentSIN').text();
                 $.ajax({
                     type:'GET',

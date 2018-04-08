@@ -11,9 +11,7 @@ class EmployeeManagementController extends Controller
     public function GetAllDepartments()
     {
         $departments = DB::connection('management')->select("SELECT * FROM department;");
-        $manages = DB::connection('management')->select("SELECT * FROM manages;");
-        return view('departments')->with('departments', $departments)
-                                        ->with('managers', $manages);
+        return view('departments')->with('departments', $departments);
     }
 
     public function GetAllProjects()
@@ -237,9 +235,13 @@ class EmployeeManagementController extends Controller
     public function UpdateDepartment(Request $request) {
         $id = $request->input('id');
         $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
-        $manager = DB::connection('management')->select("SELECT employeeSIN FROM manages WHERE departmentID = $id;");
-        return view('departments-update')->with('department', $departments[0])
-                                                ->with('manager',$manager[0]);
+        $manages = DB::connection('management')->select("SELECT employeeSIN FROM manages WHERE departmentID = $id;");
+        if ($manages != null) {
+            return view('departments-update')->with('department', $departments[0])
+                ->with('manager', $manages[0]);
+        }
+        else
+            return view('departments-update')->with('department', $departments[0]);
     }
 
     public function UpdateDepartmentInDatabase(Request $request) {
@@ -248,7 +250,7 @@ class EmployeeManagementController extends Controller
         $managerSIN= $request->input('employeeSIN');
 
         DB::connection('management')->update("UPDATE department SET 
-                                              name = '$name',
+                                              name = '$name'
                                               WHERE id = '$id';");
 
         return redirect('departments');

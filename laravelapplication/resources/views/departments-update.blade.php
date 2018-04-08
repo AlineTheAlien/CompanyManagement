@@ -10,10 +10,10 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{route('updateDepartmentInDatabase')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
-                                <label class="col-md-1 control-label">Id</label>
+                                <label class="col-md-4 control-label">Id</label>
 
-                                <div class="col-md-1">
-                                    <input id="id" type="text" class="form-control" name="id" value="{{$department->id}}">
+                                <div class="col-md-6">
+                                    <input id="id" type="text" class="form-control" name="id" value="{{ $department->id }}">
 
                                     @if ($errors->has('id'))
                                         <span class="help-block">
@@ -27,7 +27,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $department->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $department->name }}">
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -38,9 +38,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('employeesin') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-1 control-label">Manager SIN</label>
-                                <div class="col-md-2">
-                                    <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ $manages->employeeSIN }}" autofocus>
+                                <label for="name" class="col-md-4 control-label">Manager SIN</label>
+                                <div class="col-md-6">
+                                    <input id="employeesin" type="text" class="form-control" name="employeesin" >
 
                                     @if ($errors->has('employeesin'))
                                         <span class="help-block">

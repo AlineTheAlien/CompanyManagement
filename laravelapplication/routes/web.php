@@ -63,7 +63,7 @@ Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')
 
 Route::post('createProject', 'EmployeeManagementController@CreateProject')->name("createProject");
 
-Route::get('updateDependent', 'EmployeeManagementController@UpdateDepartment')->name("updateDepartment");
+Route::get('updateDepartment', 'EmployeeManagementController@UpdateDepartment')->name("updateDepartment");
 
 Route::get('updateDependent', 'EmployeeManagementController@UpdateDependent')->name("updateDependent");
 
@@ -83,7 +83,7 @@ Route::get('getProjects', 'EmployeeManagementController@GetProjects')->name("get
 
 Route::get('getEmployeesAssignedOnProject', 'EmployeeManagementController@GetEmployeesAssignedOnProject')->name("getEmployeesAssignedOnProject");
 
-Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDepartmentInDatabase')->name("updateDepartmentInDatabase");
+Route::post('updateDepartmentInDatabase', 'EmployeeManagementController@UpdateDepartmentInDatabase')->name("updateDepartmentInDatabase");
 
 Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 
