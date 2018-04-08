@@ -290,8 +290,6 @@ class EmployeeManagementController extends Controller
         $name= $request->input('name');
         $gender= $request->input('gender');
         $birthDate= $request->input('birthdate');
-        $phoneNumber = $request->input('phonenumber');
-        $address = $request->input('address');
 
         DB::connection('management')->update("UPDATE dependent SET 
                                               dependentSIN = '$dependentSIN',
@@ -303,4 +301,50 @@ class EmployeeManagementController extends Controller
         return redirect('dependents');
     }
 
+    public function SearchDependent(Request $request)
+    {
+        $dependentSIN = $request->input('dependentsin');
+        $employeeSIN = $request->input('employeesin');
+        $name= $request->input('name');
+        $gender= $request->input('gender');
+        $birthDate= $request->input('birthdate');
+
+        $query = "SELECT * FROM dependent WHERE ";
+
+        if ($dependentSIN != null)
+            $query = $query . "dependentSIN = '$dependentSIN' ";
+
+        if ($employeeSIN != null)
+            if (strpos($query, 'dependentSIN') !== false)
+                $query = $query . "AND employeeSIN = '$employeeSIN' ";
+            else
+                $query = $query . "employeeSIN = '$employeeSIN' ";
+
+        if ($name != null)
+            if (strpos($query, 'AND') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "name = '$name' ";
+
+        if ($gender != -1)
+            if (strpos($query, 'AND') !== false)
+                $query = $query . "AND gender = '$gender' ";
+            else
+                $query = $query . "gender = '$gender' ";
+
+        if ($birthDate != null)
+            if(strpos($query, 'AND') !== false)
+                $query = $query . "AND birthDate = '$birthDate' ";
+            else
+                $query = $query . "birthDate = '$birthDate' ";
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $dependents = DB::connection('management')->select($query);
+            return view('dependents')->with('dependents', $dependents);
+        }
+        else
+            return view('dependents');
+    }
 }

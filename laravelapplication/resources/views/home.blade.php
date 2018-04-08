@@ -91,7 +91,7 @@
                         <a href="employees"><i class="fa fa-table fa-fw"></i> Employee Management</a>
                     </li>
                     <li>
-                        <a href="tables"><i class="fa fa-table fa-fw"></i> Project Management</a>
+                        <a href="projects"><i class="fa fa-table fa-fw"></i> Project Management</a>
                     </li>
                 </ul>
                 </ul>

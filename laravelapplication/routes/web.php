@@ -67,6 +67,8 @@ Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->nam
 
 Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')->name("searchDepartment");
 
+Route::get('searchDependent', 'EmployeeManagementController@SearchDependent')->name("searchDependent");
+
 Route::get('getManager', 'EmployeeManagementController@GetManager')->name("getManager");
 
 Route::get('getDependents', 'EmployeeManagementController@GetDependents')->name("getDependents");
