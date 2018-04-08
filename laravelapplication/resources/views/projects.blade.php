@@ -171,20 +171,20 @@
                 }
             });
 
-            // $('#dataTables-example').on('click', '.btn-warning', function(){
-            //     var SIN = $(this).parent().siblings('.SIN').text();
-            //     $.ajax({
-            //         type:'GET',
-            //         url: 'updateEmployee',
-            //         data:{SIN: SIN},
-            //         success:function(data){
-            //             $('html').html(data);
-            //         },
-            //         error:function (jqXHR, textStatus, errorThrown) {
-            //             alert(JSON.stringify(jqXHR, null, 2));
-            //         }
-            //     });
-            // });
+            $('#dataTables-example').on('click', '.btn-warning', function(){
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'updateProject',
+                    data:{id: id},
+                    success:function(data){
+                        $('html').html(data);
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
 
             $('#dataTables-example').on('click', '.btn-link', function(){
                 var id = $(this).parent().siblings('.id').text();

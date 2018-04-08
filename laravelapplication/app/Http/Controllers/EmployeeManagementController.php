@@ -268,7 +268,6 @@ class EmployeeManagementController extends Controller
     public function UpdateDepartment(Request $request) {
         $id = $request->input('id');
         $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
-        $manages = DB::connection('management')->select("SELECT employeeSIN FROM manages WHERE departmentID = $id;");
         return view('departments-update')->with('department', $departments[0]);
     }
 
@@ -332,6 +331,16 @@ class EmployeeManagementController extends Controller
         return redirect('departments');
     }
 
+    public function UpdateProject(Request $request) {
+        $id = $request->input('id');
+        $projects = DB::connection('management')->select("SELECT * FROM project WHERE id = $id;");
+        return view('projects-update')->with('project', $projects[0]);
+    }
+
+    public function UpdateProjectInDatabase(Request $request) {
+
+        return redirect('projects');
+    }
 
     // Dependents
     public function DeleteDependent(Request $request)
