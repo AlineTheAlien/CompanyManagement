@@ -55,9 +55,13 @@ Route::get('departments-create', function () {
     return view('departments-create');
 });
 
+Route::get('projects-create', function () {
+    return view('projects-create');
+});
+
 Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')->name("createDepartment");
 
-Route::get('createProject', 'EmployeeManagementController@CreateProject');
+Route::post('createProject', 'EmployeeManagementController@CreateProject')->name("createProject");
 
 Route::get('updateDependent', 'EmployeeManagementController@UpdateDependent')->name("updateDependent");
 
@@ -73,6 +77,8 @@ Route::get('getDependents', 'EmployeeManagementController@GetDependents')->name(
 
 Route::get('getProjects', 'EmployeeManagementController@GetProjects')->name("getProjects");
 
+Route::get('getEmployeesAssignedOnProject', 'EmployeeManagementController@GetEmployeesAssignedOnProject')->name("getEmployeesAssignedOnProject");
+
 Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
@@ -82,6 +88,8 @@ Route::post('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->na
 Route::post('deleteDepartment', 'EmployeeManagementController@DeleteDepartment')->name("deleteDepartment");
 
 Route::post('deleteDependent', 'EmployeeManagementController@DeleteDependent')->name("deleteDependent");
+
+Route::post('deleteProject', 'EmployeeManagementController@DeleteProject')->name("deleteProject");
 
 Route::get('dashboard', function () {
     return view('home');
