@@ -26,7 +26,7 @@
                                 <label class="col-md-4 control-label">Employee SIN</label>
 
                                 <div class="col-md-6">
-                                    <input id="sin" type="text" class="form-control" name="employeesin" value="{{$dependent->employeeSIN}}" required>
+                                    <input id="sin" type="text" class="form-control" name="employeesin" value="{{$dependent->employeeSIN}}" readonly>
 
                                     @if ($errors->has('employeesin'))
                                         <span class="help-block">
