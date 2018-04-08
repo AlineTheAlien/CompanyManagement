@@ -68,6 +68,7 @@
                             <caption id = "viewManagerCaption"> Test</caption>
                             <thead>
                             <tr>
+                                <th>Department Id</th>
                                 <th>Start Date</th>
                                 <th>SIN</th>
                                 <th>Name</th>
@@ -172,13 +173,12 @@
                     url: 'getManager',
                     data:{id: id},
                     success:function(employees){
-
                         $("#viewManagerTable").show();
                         $("#viewManagerTable td").remove();
                         $("#viewManagerCaption").text("Manager for Department ID = " + id);
                         $.each(employees, function(index, employee) {
                             $("#viewManagerTable tbody").append(
-                                "<tr><td class = \"id\">" + id + "</td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                 + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
                                 + "</td><td>" + employee.salary + "</td><td>" + employee.gender
                                 + "</td><td><button type=\"button\" class=\"btn btn-success\"> Update Manager </button></td></tr>"
