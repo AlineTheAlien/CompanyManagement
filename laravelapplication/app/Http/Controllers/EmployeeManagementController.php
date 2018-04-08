@@ -185,6 +185,26 @@ class EmployeeManagementController extends Controller
         return redirect('departments');
     }
 
+    public function CreateDepartmentManager(Request $request) {
+        $id = $request->input('id');
+        $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
+        return view('departments-create-manager')->with('department', $departments[0]);
+    }
+
+    public function CreateDepartmentManagerInDatabase(Request $request)
+    {
+        $id = $request->input('id');
+        $employeeSIN = $request->input('employeesin');
+        $startDate = $request->input('startdate');
+
+        DB::connection('management')->insert("INSERT INTO manages
+                (`employeeSIN`,`departmentID`,`startDate`)
+                VALUES
+                ('$employeeSIN','$id','$startDate');");
+
+        return redirect('departments');
+    }
+
     public function SearchDepartment(Request $request)
     {
         $id = $request->input('id');

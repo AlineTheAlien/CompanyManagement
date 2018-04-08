@@ -173,17 +173,31 @@
                     url: 'getManager',
                     data:{id: id},
                     success:function(employees){
-                        $("#viewManagerTable").show();
-                        $("#viewManagerTable td").remove();
-                        $("#viewManagerCaption").text("Manager for Department ID = " + id);
-                        $.each(employees, function(index, employee) {
+                        if (!$.trim(employees)){
+                            $("#viewManagerTable").show();
+                            $("#viewManagerTable td").remove();
+                            $("#viewManagerCaption").text("Manager for Department ID = " + id);
                             $("#viewManagerTable tbody").append(
-                                "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
-                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender
-                                + "</td><td><button type=\"button\" class=\"btn btn-success\"> Update Manager </button></td></tr>"
+                                "<tr><td class = \"id\">" + id + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + ""
+                                + "</td><td>" + "" + "</td><td>" + ""
+                                + "</td><td>" + "" + "</td><td>" + ""
+                                + "</td><td><button type=\"button\" id='new_manager' class=\"btn btn-success\"> Add manager </button></td></tr>"
                             )
-                        });
+
+                        }
+                        else{
+                            $("#viewManagerTable").show();
+                            $("#viewManagerTable td").remove();
+                            $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                            $.each(employees, function(index, employee) {
+                                $("#viewManagerTable tbody").append(
+                                    "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender
+                                    + "</td><td><button type=\"button\" id='update_manager' class=\"btn btn-success\"> Update Manager </button></td></tr>"
+                                )
+                            });
+                        }
                     },
                     error:function (jqXHR, textStatus, errorThrown) {
                         alert(JSON.stringify(jqXHR, null, 2));
@@ -191,11 +205,26 @@
                 });
             });
 
-            $('#viewManagerTable').on('click', '.btn-success', function(){
+            $('#viewManagerTable').on('click', '#update_manager.btn-success', function(){
                 var id = $(this).parent().siblings('.id').text();
                 $.ajax({
                     type:'GET',
                     url: 'updateDepartmentManager',
+                    data:{id: id},
+                    success:function(data){
+                        $('html').html(data);
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+
+            $('#viewManagerTable').on('click', '#new_manager.btn-success', function(){
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'createDepartmentManager',
                     data:{id: id},
                     success:function(data){
                         $('html').html(data);

@@ -55,11 +55,20 @@ Route::get('departments-create', function () {
     return view('departments-create');
 });
 
+Route::get('departments-create', function () {
+    return view('departments-create');
+});
+
+
 Route::get('projects-create', function () {
     return view('projects-create');
 });
 
 Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')->name("createDepartment");
+
+Route::get('createDepartmentManager', 'EmployeeManagementController@CreateDepartmentManager')->name("createDepartmentManager");
+
+Route::post('createDepartmentManagerInDatabase', 'EmployeeManagementController@CreateDepartmentManagerInDatabase')->name("createDepartmentManagerInDatabase");
 
 Route::post('createProject', 'EmployeeManagementController@CreateProject')->name("createProject");
 
