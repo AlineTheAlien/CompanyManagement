@@ -193,16 +193,29 @@ class EmployeeManagementController extends Controller
 
         $query = "SELECT department.id, department.name FROM department ";
 
-        if ($managerSIN != null)
-            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID";
-        if ($id != null)
-            $query = $query . "WHERE department.id = '$id' ";
-
-        if ($name != null)
-            if (strpos($query, 'WHERE department.id') !== false)
-                $query = $query . "AND name = '$name' ";
-            else
-                $query = $query . "WHERE name = '$name' ";
+        if ($managerSIN != null && $id != null && $name != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE department.id = '$id' AND department.name = '$name' AND manages.employeeSIN = '$managerSIN'";
+        }
+        else if ($managerSIN != null && $name != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN' AND department.name = '$name'";
+        }
+        else if ($managerSIN != null && $id != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN' AND department.id = '$id' ";
+        }
+        else if ($name != null && $id != null) {
+            $query = $query . "WHERE department.name = '$name' AND department.id = '$id' ";
+        }
+        else if ($name != null)
+            $query = $query . "WHERE name = '$name'";
+        else if ($id != null)
+            $query = $query . "WHERE department.id = '$id'";
+        else if ($managerSIN != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN'";
+        }
 
 
         $query = $query . ";";

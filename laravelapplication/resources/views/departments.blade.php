@@ -31,7 +31,7 @@
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-1 control-label">Name</label>
                         <div class="col-md-2">
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
 
                             @if ($errors->has('name'))
                                 <span class="help-block">
@@ -43,7 +43,7 @@
                     <div class="form-group{{ $errors->has('employeesin') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-1 control-label">Manager SIN</label>
                         <div class="col-md-2">
-                            <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ old('employeesin') }}" autofocus>
+                            <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ old('employeesin') }}">
 
                             @if ($errors->has('employeesin'))
                                 <span class="help-block">
