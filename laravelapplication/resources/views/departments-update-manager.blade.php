@@ -26,7 +26,7 @@
                             <div class="form-group{{ $errors->has('employeesin') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Manager SIN</label>
                                 <div class="col-md-6">
-                                    <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ $manages->employeeSIN }}">
+                                    <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ $manages->employeeSIN }}" required>
 
                                     @if ($errors->has('employeesin'))
                                         <span class="help-block">
@@ -42,7 +42,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" value="{{ $manages->startDate }}" name="startDate" class="form-control pull-right" id="startDate">
+                                        <input type="text" value="{{ $manages->startDate }}" name="startDate" class="form-control pull-right" id="startDate" required>
                                     </div>
                                 </div>
                             </div>

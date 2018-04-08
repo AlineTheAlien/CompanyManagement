@@ -13,7 +13,7 @@
                                 <label class="col-md-4 control-label">Id</label>
 
                                 <div class="col-md-6">
-                                    <input id="id" type="text" class="form-control" name="id" value="{{ $department->id }}">
+                                    <input id="id" type="text" class="form-control" name="id" value="{{ $department->id }}" required>
 
                                     @if ($errors->has('id'))
                                         <span class="help-block">
@@ -27,7 +27,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $department->name }}">
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $department->name }}" required>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
