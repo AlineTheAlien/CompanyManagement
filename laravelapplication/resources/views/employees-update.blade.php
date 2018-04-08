@@ -13,7 +13,7 @@
                                 <label class="col-md-4 control-label">SIN</label>
 
                                 <div class="col-md-6">
-                                    <input id="sin" type="text" class="form-control" name="sin" value="{{$employee->SIN}}" required>
+                                    <input id="sin" type="text" class="form-control" name="sin" value="{{$employee->SIN}}" readonly>
 
                                     @if ($errors->has('sin'))
                                         <span class="help-block">
