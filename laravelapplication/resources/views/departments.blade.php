@@ -68,6 +68,7 @@
                             <caption id = "viewManagerCaption"> Test</caption>
                             <thead>
                             <tr>
+                                <th>Start Date</th>
                                 <th>SIN</th>
                                 <th>Name</th>
                                 <th>Birth Date</th>
@@ -75,6 +76,7 @@
                                 <th>Address</th>
                                 <th>Salary</th>
                                 <th>Gender</th>
+                                <th>Action</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
                                 {{--<th>Action</th>--}}
@@ -100,7 +102,7 @@
                                     <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-link">View manager</button>
+                                        <button type="button" class="btn btn-link"> View manager </button>
                                     </td>
                                     <td>
                                         <button class="btn btn-warning"> Update </button>
@@ -176,9 +178,10 @@
                         $("#viewManagerCaption").text("Manager for Department ID = " + id);
                         $.each(employees, function(index, employee) {
                             $("#viewManagerTable tbody").append(
-                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                "<tr><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                 + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender
+                                + "</td><td><button type=\"button\" class=\"btn btn-success\"> Update Manager </button></td></tr>"
                             )
                         });
                     },

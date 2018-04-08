@@ -37,18 +37,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('employeesin') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Manager SIN</label>
-                                <div class="col-md-6">
-                                    <input id="employeesin" type="text" class="form-control" name="employeesin" >
-
-                                    @if ($errors->has('employeesin'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('employeesin') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
