@@ -81,19 +81,19 @@ class EmployeeManagementController extends Controller
                 $query = $query . "name = '$name' ";
 
         if ($salary != null)
-            if(strpos($query, 'AND') !== false)
+            if(strpos($query, 'name') !== false || strpos($query, 'SIN') !== false)
                 $query = $query . "AND salary = '$salary' ";
             else
                 $query = $query . "salary = '$salary' ";
 
         if ($departmentID != -1)
-            if(strpos($query, 'AND') !== false)
+            if(strpos($query, 'name') !== false || strpos($query, 'SIN') !== false || strpos($query, 'salary') !== false)
                 $query = $query . "AND departmentID = '$departmentID' ";
             else
                 $query = $query . "departmentID = '$departmentID' ";
 
         if ($gender != -1)
-            if (strpos($query, 'AND') !== false)
+            if (strpos($query, 'name') !== false || strpos($query, 'SIN') !== false || strpos($query, 'salary') !== false || strpos($query, 'department') !== false)
                 $query = $query . "AND gender = '$gender' ";
             else
                 $query = $query . "gender = '$gender' ";
