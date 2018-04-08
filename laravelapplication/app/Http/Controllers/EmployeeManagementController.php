@@ -236,12 +236,7 @@ class EmployeeManagementController extends Controller
         $id = $request->input('id');
         $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
         $manages = DB::connection('management')->select("SELECT employeeSIN FROM manages WHERE departmentID = $id;");
-        if ($manages != null) {
-            return view('departments-update')->with('department', $departments[0])
-                ->with('manager', $manages[0]);
-        }
-        else
-            return view('departments-update')->with('department', $departments[0]);
+        return view('departments-update')->with('department', $departments[0]);
     }
 
     public function UpdateDepartmentInDatabase(Request $request) {
@@ -283,11 +278,26 @@ class EmployeeManagementController extends Controller
         return redirect('employees');
     }
 
+    public function UpdateDepartmentManager(Request $request) {
+        $id = $request->input('id');
+        $manages = DB::connection('management')->select("SELECT * FROM manages WHERE departmentID = $id;");
+        if ($manages != null) {
+            return view('departments-update-manager')->with('manages', $manages[0]);
+        }
+    }
 
+    public function UpdateDepartmentManagerInDatabase(Request $request) {
+        $id = $request->input('id');
+        $managerSIN= $request->input('employeeSIN');
+        $startDate= $request->input('startDate');
 
+        DB::connection('management')->update("UPDATE manages SET 
+                                              employeeSIN = $managerSIN,
+                                              startDate = $startDate
+                                              WHERE id = '$id';");
 
-
-
+        return redirect('departments');
+    }
 
 
     // Dependents
