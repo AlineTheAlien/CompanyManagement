@@ -99,6 +99,7 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Department ID</th>
                                 <th>Name</th>
                                 <th>Location</th>
                                 <th>Employees assigned</th>
@@ -109,6 +110,7 @@
                             @foreach($projects as $project)
                                 <tr>
                                     <td class="id">{{$project->id}}</td>
+                                    <td>{{$project->departmentID}}</td>
                                     <td>{{$project->name}}</td>
                                     <td>{{$project->location}}</td>
                                     <td>

@@ -120,6 +120,7 @@
                             <th>Address</th>
                             <th>Salary</th>
                             <th>Gender</th>
+                            <th>Department ID</th>
                             <th>Dependents</th>
                             <th>Projects</th>
                             <th>Action</th>
@@ -135,6 +136,7 @@
                                 <td>{{$employee->address}}</td>
                                 <td>{{$employee->salary}}</td>
                                 <td>{{$employee->gender}}</td>
+                                <td>{{$employee->departmentID}}</td>
                                 <td id="dependents">
                                     <!-- Need unique IDs for each button -->
                                     <button type="button" class="btn btn-link">View dependents</button>
