@@ -10,7 +10,7 @@
                         {{--
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['id' => $project->id]) }}" enctype="multipart/form-data">
                         --}}
-                        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="POST" action="{{route('createProject')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Id</label>
@@ -23,17 +23,6 @@
                                         <strong>{{ $errors->first('id') }}</strong>
                                     </span>
                                     @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Department</label>
-                                <div class="col-md-6">
-                                    <select class="form-control js-states" name="department_id">
-                                        <option value="-1">Select department</option>
-                                        {{--  @foreach ($departments as $department)
-                                            <option value="{{$department->id}}">{{$department->name}}</option>
-                                        @endforeach  --}}
-                                    </select>
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

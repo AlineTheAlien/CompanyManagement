@@ -61,6 +61,15 @@ class EmployeeManagementController extends Controller
         return response()->json($projects);
     }
 
+    public function GetEmployeesAssignedOnProject(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "SELECT * FROM employee 
+                  LEFT JOIN works_on ON employee.SIN = works_on.employeeSIN WHERE works_on.projectID = $id;";
+        $employees = DB::connection('management')->select($query);
+        return response()->json($employees);
+    }
+
     public function SearchEmployee(Request $request)
     {
         $SIN = $request->input('sin');
@@ -156,6 +165,12 @@ class EmployeeManagementController extends Controller
         DB::connection('management')->delete("DELETE FROM department WHERE id = $id;");
     }
 
+    public function DeleteProject(Request $request)
+    {
+        $id = $request->input('id');
+        DB::connection('management')->delete("DELETE FROM project WHERE id = $id;");
+    }
+
     public function CreateDepartment(Request $request)
     {
         $id = $request->input('id');
@@ -170,6 +185,26 @@ class EmployeeManagementController extends Controller
         return redirect('departments');
     }
 
+    public function CreateDepartmentManager(Request $request) {
+        $id = $request->input('id');
+        $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
+        return view('departments-create-manager')->with('department', $departments[0]);
+    }
+
+    public function CreateDepartmentManagerInDatabase(Request $request)
+    {
+        $id = $request->input('id');
+        $employeeSIN = $request->input('employeesin');
+        $startDate = $request->input('startdate');
+
+        DB::connection('management')->insert("INSERT INTO manages
+                (`employeeSIN`,`departmentID`,`startDate`)
+                VALUES
+                ('$employeeSIN','$id','$startDate');");
+
+        return redirect('departments');
+    }
+
     public function SearchDepartment(Request $request)
     {
         $id = $request->input('id');
@@ -178,16 +213,29 @@ class EmployeeManagementController extends Controller
 
         $query = "SELECT department.id, department.name FROM department ";
 
-        if ($managerSIN != null)
-            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID";
-        if ($id != null)
-            $query = $query . "WHERE department.id = '$id' ";
-
-        if ($name != null)
-            if (strpos($query, 'WHERE department.id') !== false)
-                $query = $query . "AND name = '$name' ";
-            else
-                $query = $query . "WHERE name = '$name' ";
+        if ($managerSIN != null && $id != null && $name != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE department.id = '$id' AND department.name = '$name' AND manages.employeeSIN = '$managerSIN'";
+        }
+        else if ($managerSIN != null && $name != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN' AND department.name = '$name'";
+        }
+        else if ($managerSIN != null && $id != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN' AND department.id = '$id' ";
+        }
+        else if ($name != null && $id != null) {
+            $query = $query . "WHERE department.name = '$name' AND department.id = '$id' ";
+        }
+        else if ($name != null)
+            $query = $query . "WHERE name = '$name'";
+        else if ($id != null)
+            $query = $query . "WHERE department.id = '$id'";
+        else if ($managerSIN != null) {
+            $query = $query . "LEFT JOIN manages ON department.id = manages.departmentID ";
+            $query = $query . "WHERE manages.employeeSIN = '$managerSIN'";
+        }
 
 
         $query = $query . ";";
@@ -200,10 +248,42 @@ class EmployeeManagementController extends Controller
             return view('employees');
     }
 
-    public function CreateProject()
+    public function CreateProject(Request $request)
     {
-        return view('projects-create');
+        $id = $request->input('id');
+        $location = $request->input('location');
+        $name= $request->input('name');
+
+        DB::connection('management')->insert("INSERT INTO project
+                (`id`, 
+                `location`,
+                `name`)
+                VALUES
+                ($id,
+                '$location',
+                '$name');");
+        return redirect('projects');
     }
+
+    public function UpdateDepartment(Request $request) {
+        $id = $request->input('id');
+        $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
+        $manages = DB::connection('management')->select("SELECT employeeSIN FROM manages WHERE departmentID = $id;");
+        return view('departments-update')->with('department', $departments[0]);
+    }
+
+    public function UpdateDepartmentInDatabase(Request $request) {
+        $id = $request->input('id');
+        $name= $request->input('name');
+        $managerSIN= $request->input('employeeSIN');
+
+        DB::connection('management')->update("UPDATE department SET 
+                                              name = '$name'
+                                              WHERE id = '$id';");
+
+        return redirect('departments');
+    }
+
 
     public function UpdateEmployee(Request $request) {
         $SIN = $request->input('SIN');
@@ -231,11 +311,26 @@ class EmployeeManagementController extends Controller
         return redirect('employees');
     }
 
+    public function UpdateDepartmentManager(Request $request) {
+        $id = $request->input('id');
+        $manages = DB::connection('management')->select("SELECT * FROM manages WHERE departmentID = $id;");
+        if ($manages != null) {
+            return view('departments-update-manager')->with('manages', $manages[0]);
+        }
+    }
 
+    public function UpdateDepartmentManagerInDatabase(Request $request) {
+        $id = $request->input('id');
+        $managerSIN= $request->input('employeeSIN');
+        $startDate= $request->input('startDate');
 
+        DB::connection('management')->update("UPDATE manages SET 
+                                              employeeSIN = $managerSIN,
+                                              startDate = $startDate
+                                              WHERE id = '$id';");
 
-
-
+        return redirect('departments');
+    }
 
 
     // Dependents
@@ -290,8 +385,6 @@ class EmployeeManagementController extends Controller
         $name= $request->input('name');
         $gender= $request->input('gender');
         $birthDate= $request->input('birthdate');
-        $phoneNumber = $request->input('phonenumber');
-        $address = $request->input('address');
 
         DB::connection('management')->update("UPDATE dependent SET 
                                               dependentSIN = '$dependentSIN',
@@ -303,4 +396,50 @@ class EmployeeManagementController extends Controller
         return redirect('dependents');
     }
 
+    public function SearchDependent(Request $request)
+    {
+        $dependentSIN = $request->input('dependentsin');
+        $employeeSIN = $request->input('employeesin');
+        $name= $request->input('name');
+        $gender= $request->input('gender');
+        $birthDate= $request->input('birthdate');
+
+        $query = "SELECT * FROM dependent WHERE ";
+
+        if ($dependentSIN != null)
+            $query = $query . "dependentSIN = '$dependentSIN' ";
+
+        if ($employeeSIN != null)
+            if (strpos($query, 'dependentSIN') !== false)
+                $query = $query . "AND employeeSIN = '$employeeSIN' ";
+            else
+                $query = $query . "employeeSIN = '$employeeSIN' ";
+
+        if ($name != null)
+            if (strpos($query, 'AND') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "name = '$name' ";
+
+        if ($gender != -1)
+            if (strpos($query, 'AND') !== false)
+                $query = $query . "AND gender = '$gender' ";
+            else
+                $query = $query . "gender = '$gender' ";
+
+        if ($birthDate != null)
+            if(strpos($query, 'AND') !== false)
+                $query = $query . "AND birthDate = '$birthDate' ";
+            else
+                $query = $query . "birthDate = '$birthDate' ";
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $dependents = DB::connection('management')->select($query);
+            return view('dependents')->with('dependents', $dependents);
+        }
+        else
+            return view('dependents');
+    }
 }

@@ -55,17 +55,36 @@ Route::get('departments-create', function () {
     return view('departments-create');
 });
 
+Route::get('departments-create', function () {
+    return view('departments-create');
+});
+
+
+Route::get('projects-create', function () {
+    return view('projects-create');
+});
+
 Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')->name("createDepartment");
 
-Route::get('createProject', 'EmployeeManagementController@CreateProject');
+Route::get('createDepartmentManager', 'EmployeeManagementController@CreateDepartmentManager')->name("createDepartmentManager");
+
+Route::post('createDepartmentManagerInDatabase', 'EmployeeManagementController@CreateDepartmentManagerInDatabase')->name("createDepartmentManagerInDatabase");
+
+Route::post('createProject', 'EmployeeManagementController@CreateProject')->name("createProject");
+
+Route::get('updateDepartment', 'EmployeeManagementController@UpdateDepartment')->name("updateDepartment");
 
 Route::get('updateDependent', 'EmployeeManagementController@UpdateDependent')->name("updateDependent");
 
 Route::get('updateEmployee', 'EmployeeManagementController@UpdateEmployee')->name("updateEmployee");
 
+Route::get('updateDepartmentManager', 'EmployeeManagementController@UpdateDepartmentManager')->name("updateDepartmentManager");
+
 Route::get('searchEmployee', 'EmployeeManagementController@SearchEmployee')->name("searchEmployee");
 
 Route::get('searchDepartment', 'EmployeeManagementController@SearchDepartment')->name("searchDepartment");
+
+Route::get('searchDependent', 'EmployeeManagementController@SearchDependent')->name("searchDependent");
 
 Route::get('getManager', 'EmployeeManagementController@GetManager')->name("getManager");
 
@@ -73,15 +92,23 @@ Route::get('getDependents', 'EmployeeManagementController@GetDependents')->name(
 
 Route::get('getProjects', 'EmployeeManagementController@GetProjects')->name("getProjects");
 
+Route::get('getEmployeesAssignedOnProject', 'EmployeeManagementController@GetEmployeesAssignedOnProject')->name("getEmployeesAssignedOnProject");
+
+Route::post('updateDepartmentInDatabase', 'EmployeeManagementController@UpdateDepartmentInDatabase')->name("updateDepartmentInDatabase");
+
 Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDependentInDatabase')->name("updateDependentInDatabase");
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
+
+Route::post('updateDepartmentManagerInDatabase', 'EmployeeManagementController@UpdateDepartmentManagerInDatabase')->name("updateDepartmentManagerInDatabase");
 
 Route::post('deleteEmployee', 'EmployeeManagementController@DeleteEmployee')->name("deleteEmployee");
 
 Route::post('deleteDepartment', 'EmployeeManagementController@DeleteDepartment')->name("deleteDepartment");
 
 Route::post('deleteDependent', 'EmployeeManagementController@DeleteDependent')->name("deleteDependent");
+
+Route::post('deleteProject', 'EmployeeManagementController@DeleteProject')->name("deleteProject");
 
 Route::get('dashboard', function () {
     return view('home');

@@ -9,7 +9,7 @@
                     List of projects
                 </div>
                 <div class="panel-body" align="right">
-                    <a href="createProject">
+                    <a href="projects-create">
                         <button type="button" id="new-project" class="btn btn-success">Add new project</button>
                     </a>
                 </div>
@@ -74,11 +74,31 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
+                        <table id="viewEmployeesTable" class="table table-striped table-bordered table-hover" style="display:none">
+                            <caption id = "viewEmployeesCaption"> Test</caption>
+                            <thead>
+                            <tr>
+                                <th>SIN</th>
+                                <th>Name</th>
+                                <th>Birth Date</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Salary</th>
+                                <th>Gender</th>
+                                {{--<th>Dependents</th> --}}
+                                {{--<th>Projects</th> --}}
+                                {{--<th>Action</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Department</th>
                                 <th>Name</th>
                                 <th>Location</th>
                                 <th>Employees assigned</th>
@@ -88,8 +108,7 @@
                             <tbody>
                             @foreach($projects as $project)
                                 <tr>
-                                    <td>{{$project->id}}</td>
-                                    <td>{{$project->departmentId}}</td>
+                                    <td class="id">{{$project->id}}</td>
                                     <td>{{$project->name}}</td>
                                     <td>{{$project->location}}</td>
                                     <td>
@@ -97,19 +116,12 @@
                                         <button type="button" class="btn btn-link">View employees</button>
                                     </td>
                                     <td>
-                                        {{--
-                                        route doesn't work...
-                                        <form class="row" method="POST" action="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" onsubmit = "return confirm('Are you sure?')">
-                                        <a href="{{ route('destroyEmployee', ['sin' => $employee->SIN]) }}" class="btn btn-warning">
-                                           --}}
-                                        <form method="POST" action="" onsubmit = "return confirm('Are you sure?')">
-                                            <a href="updateProject" class="btn btn-warning">
+                                            <button class="btn btn-warning">
                                                 Update
-                                            </a>
-                                            <button type="submit" class="btn btn-danger">
+                                            </button>
+                                            <button class="btn btn-danger">
                                                 Delete
                                             </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -129,4 +141,101 @@
 
     </div>
     <!-- /#wrapper -->
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+
+            $('#dataTables-example').on('click', '.btn-danger', function (){
+                if (confirm('Are you sure?')){
+                    var url = '{{route('deleteProject')}}';
+                    var clickedButton = $(this);
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'POST',
+                        url: url,
+                        data:{"id": id},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: "text",
+                        success:function(data){
+                            clickedButton.parent().parent().remove();
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+            });
+
+            // $('#dataTables-example').on('click', '.btn-warning', function(){
+            //     var SIN = $(this).parent().siblings('.SIN').text();
+            //     $.ajax({
+            //         type:'GET',
+            //         url: 'updateEmployee',
+            //         data:{SIN: SIN},
+            //         success:function(data){
+            //             $('html').html(data);
+            //         },
+            //         error:function (jqXHR, textStatus, errorThrown) {
+            //             alert(JSON.stringify(jqXHR, null, 2));
+            //         }
+            //     });
+            // });
+
+            $('#dataTables-example').on('click', '.btn-link', function(){
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'getEmployeesAssignedOnProject',
+                    data:{id: id},
+                    success:function(employees){
+
+                        $("#viewEmployeesTable").show();
+                        $("#viewEmployeesTable td").remove();
+                        $("#viewEmployeesCaption").text("Employees working on ProjectID = " + id);
+                        $.each(employees, function(index, employee) {
+                            $("#viewEmployeesTable tbody").append(
+                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                            )
+                        });
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+
+            $('#dataTables-example').on('click', '#projects .btn-link', function(){
+                var SIN = $(this).parent().siblings('.SIN').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'getProjects',
+                    data:{SIN: SIN},
+                    success:function(projects){
+
+                        $("#viewProjectTable").show();
+                        $("#viewDependentTable").hide();
+                        $("#viewProjectTable td").remove();
+                        $("#viewProjectCaption").text("Projects for Employee ID = " + SIN);
+                        $.each(projects, function(index, project) {
+                            $("#viewProjectTable tbody").append(
+                                "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
+                                + project.hours + "</td></tr>"
+                            )
+                        });
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
