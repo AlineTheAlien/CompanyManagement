@@ -287,7 +287,9 @@ class EmployeeManagementController extends Controller
     public function UpdateEmployee(Request $request) {
         $SIN = $request->input('SIN');
         $employees = DB::connection('management')->select("SELECT * FROM employee WHERE SIN = $SIN;");
-        return view('employees-update')->with('employee', $employees[0]);
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
+        return view('employees-update')->with('employee', $employees[0])
+                                                ->with('departments', $departments);
     }
 
     public function UpdateEmployeeInDatabase(Request $request) {

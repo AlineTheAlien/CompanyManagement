@@ -7,16 +7,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add new employee</div>
                     <div class="panel-body">
-                        {{--
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['sin' => $employee->sin]) }}" enctype="multipart/form-data">
-                        --}}
                         <form class="form-horizontal" role="form" method="POST" action="{{route('createEmployee')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('sin') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">SIN</label>
 
                                 <div class="col-md-6">
-                                    <input id="sin" type="text" class="form-control" name="sin" value="{{ old('sin') }}" required>
+                                    <input id="sin" type="text" class="form-control" name="sin" required>
 
                                     @if ($errors->has('sin'))
                                         <span class="help-block">
@@ -40,7 +37,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" required>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -56,7 +53,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" value="{{ old('birthdate') }}" name="birthdate" class="form-control pull-right" id="birthDate" required>
+                                        <input type="text" name="birthdate" class="form-control pull-right" id="birthDate" required>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +61,7 @@
                                 <label class="col-md-4 control-label">Phone Number</label>
 
                                 <div class="col-md-6">
-                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" required>
+                                    <input id="phonenumber" type="text" class="form-control" name="phonenumber" required>
 
                                     @if ($errors->has('phonenumber'))
                                         <span class="help-block">
@@ -77,7 +74,7 @@
                                 <label for="address" class="col-md-4 control-label">Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>
+                                    <input id="address" type="text" class="form-control" name="address" required>
 
                                     @if ($errors->has('address'))
                                         <span class="help-block">
@@ -90,7 +87,7 @@
                                 <label class="col-md-4 control-label">Salary</label>
 
                                 <div class="col-md-6">
-                                    <input id="salary" type="text" class="form-control" name="salary" value="{{ old('salary') }}" required>
+                                    <input id="salary" type="text" class="form-control" name="salary" required>
 
                                     @if ($errors->has('salary'))
                                         <span class="help-block">
