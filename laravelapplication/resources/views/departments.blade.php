@@ -121,3 +121,72 @@
     <!-- /.row -->
 
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+
+            $('#dataTables-example').on('click', '.btn-danger', function (){
+                if (confirm('Are you sure?')){
+                    var url = '{{route('deleteDepartment')}}';
+                    var clickedButton = $(this);
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'POST',
+                        url: url,
+                        data:{id: id},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success:function(data){
+                            clickedButton.parent().parent().remove();
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+            });
+
+            $('#dataTables-example').on('click', '.btn-warning', function(){
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'updateDepartment',
+                    data:{id: id},
+                    success:function(data){
+                        $('html').html(data);
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+
+            $('.btn-link').on('click', function(){
+                var id = $(this).parent().siblings('.id').text();
+                $.ajax({
+                    type:'GET',
+                    url: 'getManager',
+                    data:{id: id},
+                    success:function(employees){
+
+                        $("#viewManagerTable").show();
+                        $("#viewManagerTable td").remove();
+                        $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                        $.each(employees, function(index, employee) {
+                            $("#viewManagerTable tbody").append(
+                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                            )
+                        });
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
