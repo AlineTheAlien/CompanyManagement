@@ -102,7 +102,7 @@
                                 <tr>
                                     <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
-                                    <td>
+                                    <td id="managers">
                                         <button type="button" class="btn btn-link"> View manager </button>
                                     </td>
                                     <td>
@@ -166,7 +166,7 @@
                 });
             });
 
-            $('.btn-link').on('click', function(){
+            $('#dataTables-example').on('click', '#managers .btn-link', function(){
                 var id = $(this).parent().siblings('.id').text();
                 $.ajax({
                     type:'GET',
