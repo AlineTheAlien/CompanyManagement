@@ -61,6 +61,15 @@ class EmployeeManagementController extends Controller
         return response()->json($projects);
     }
 
+    public function GetEmployeesAssignedOnProject(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "SELECT * FROM employee 
+                  LEFT JOIN works_on ON employee.SIN = works_on.employeeSIN WHERE works_on.projectID = $id;";
+        $employees = DB::connection('management')->select($query);
+        return response()->json($employees);
+    }
+
     public function SearchEmployee(Request $request)
     {
         $SIN = $request->input('sin');
@@ -156,6 +165,12 @@ class EmployeeManagementController extends Controller
         DB::connection('management')->delete("DELETE FROM department WHERE id = $id;");
     }
 
+    public function DeleteProject(Request $request)
+    {
+        $id = $request->input('id');
+        DB::connection('management')->delete("DELETE FROM project WHERE id = $id;");
+    }
+
     public function CreateDepartment(Request $request)
     {
         $id = $request->input('id');
@@ -200,9 +215,21 @@ class EmployeeManagementController extends Controller
             return view('employees');
     }
 
-    public function CreateProject()
+    public function CreateProject(Request $request)
     {
-        return view('projects-create');
+        $id = $request->input('id');
+        $location = $request->input('location');
+        $name= $request->input('name');
+
+        DB::connection('management')->insert("INSERT INTO project
+                (`id`, 
+                `location`,
+                `name`)
+                VALUES
+                ($id,
+                '$location',
+                '$name');");
+        return redirect('projects');
     }
 
     public function UpdateEmployee(Request $request) {
