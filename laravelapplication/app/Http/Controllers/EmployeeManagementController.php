@@ -175,7 +175,6 @@ class EmployeeManagementController extends Controller
     {
         $id = $request->input('id');
         $name = $request->input('name');
-        $manager = $request->input('manager');
 
         DB::connection('management')->insert("INSERT INTO department
                 (`id`,`name`)
@@ -274,7 +273,6 @@ class EmployeeManagementController extends Controller
     public function UpdateDepartmentInDatabase(Request $request) {
         $id = $request->input('id');
         $name= $request->input('name');
-        $managerSIN= $request->input('employeeSIN');
 
         DB::connection('management')->update("UPDATE department SET 
                                               name = '$name'
@@ -294,6 +292,7 @@ class EmployeeManagementController extends Controller
 
     public function UpdateEmployeeInDatabase(Request $request) {
         $SIN = $request->input('sin');
+        $departmentID = $request->input('department_id');
         $name= $request->input('name');
         $birthDate= $request->input('birthdate');
         $phoneNumber = $request->input('phonenumber');
@@ -307,7 +306,8 @@ class EmployeeManagementController extends Controller
                                               phoneNumber = '$phoneNumber',
                                               address = '$address',
                                               salary = '$salary',
-                                              gender = '$gender'
+                                              gender = '$gender',
+                                              departmentID = '$departmentID'
                                               WHERE SIN = '$SIN';");
         return redirect('employees');
     }
@@ -322,13 +322,13 @@ class EmployeeManagementController extends Controller
 
     public function UpdateDepartmentManagerInDatabase(Request $request) {
         $id = $request->input('id');
-        $managerSIN= $request->input('employeeSIN');
-        $startDate= $request->input('startDate');
+        $managerSIN= $request->input('employeesin');
+        $startDate= $request->input('startdate');
 
         DB::connection('management')->update("UPDATE manages SET 
-                                              employeeSIN = $managerSIN,
-                                              startDate = $startDate
-                                              WHERE id = '$id';");
+                                              employeeSIN = '$managerSIN',
+                                              startDate = '$startDate'
+                                              WHERE departmentID = '$id';");
 
         return redirect('departments');
     }
@@ -359,8 +359,8 @@ class EmployeeManagementController extends Controller
 
     public function GetAllDependents()
     {
-        $projects = DB::connection('management')->select("SELECT * FROM dependent;");
-        return view('dependents')->with('dependents', $projects);
+        $dependents = DB::connection('management')->select("SELECT * FROM dependent;");
+        return view('dependents')->with('dependents', $dependents);
     }
 
     public function CreateDependent(Request $request)

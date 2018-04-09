@@ -11,7 +11,6 @@
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Id</label>
-
                                 <div class="col-md-6">
                                     <input id="id" type="text" class="form-control" name="id" value="{{ $manages->departmentID }}" readonly>
 
@@ -27,7 +26,6 @@
                                 <label for="name" class="col-md-4 control-label">Manager SIN</label>
                                 <div class="col-md-6">
                                     <input id="employeesin" type="text" class="form-control" name="employeesin" value="{{ $manages->employeeSIN }}" required>
-
                                     @if ($errors->has('employeesin'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('employeesin') }}</strong>
@@ -35,6 +33,7 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Start Date</label>
                                 <div class="col-md-6">
@@ -42,7 +41,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" value="{{ $manages->startDate }}" name="startDate" class="form-control pull-right" id="startDate" required>
+                                        <input type="text" value="{{ $manages->startDate }}" name="startdate" class="form-control pull-right" id="startdate" required>
                                     </div>
                                 </div>
                             </div>
