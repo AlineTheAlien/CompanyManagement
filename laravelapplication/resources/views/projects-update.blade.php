@@ -86,19 +86,6 @@
                                 </div>
                             </div>
 
-                            {{--<div class="form-group">--}}
-                                {{--<label class="col-md-1 control-label">Stage</label>--}}
-                                {{--<div class="col-md-2">--}}
-                                    {{--<select class="form-control js-states" name="stage">--}}
-                                        {{--<option value="-1">Select stage</option>--}}
-                                        {{--<option value="preliminary">Preliminary</option>--}}
-                                        {{--<option value="intermediate">Intermediate</option>--}}
-                                        {{--<option value="advanced">Advanced</option>--}}
-                                        {{--<option value="complete">Complete</option>--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
