@@ -18,7 +18,8 @@ class EmployeeManagementController extends Controller
     {
         $projects = DB::connection('management')->select("SELECT * FROM project;");
         $employees = DB::connection('management')->select("SELECT * FROM employee;");
-        return view('projects')->with('projects', $projects)->with('employees', $employees);
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
+        return view('projects')->with('projects', $projects)->with('employees', $employees)->with('departments', $departments);
     }
 
     public function GetAllEmployees()

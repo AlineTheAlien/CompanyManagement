@@ -64,6 +64,23 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('stage') ? ' has-error' : '' }}">
+                                <label for="stage" class="col-md-4 control-label">Stage</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control js-states" name="stage">
+                                        <option value="preliminary">Preliminary</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                        <option value="complete">Complete</option>
+                                    </select>
+                                    @if ($errors->has('stage'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('stage') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

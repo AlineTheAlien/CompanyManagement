@@ -32,10 +32,9 @@
                         <label class="col-md-1 control-label">Department</label>
                         <div class="col-md-2">
                             <select class="form-control js-states" name="department_id">
-                                <option value="-1">Select department</option>
-                                {{--  @foreach ($departments as $department)
+                                  @foreach ($departments as $department)
                                     <option value="{{$department->id}}">{{$department->name}}</option>
-                                @endforeach  --}}
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -63,16 +62,15 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group{{ $errors->has('stage') ? ' has-error' : '' }}">
-                        <label for="stage" class="col-md-1 control-label">Stage</label>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label">Stage</label>
                         <div class="col-md-2">
-                            <input id="stage" type="text" class="form-control" name="stage" value="{{ old('stage') }}" autofocus>
-
-                            @if ($errors->has('stage'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('stage') }}</strong>
-                                    </span>
-                            @endif
+                            <select class="form-control js-states" name="stage">
+                                <option value="preliminary">Preliminary</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="complete">Complete</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
