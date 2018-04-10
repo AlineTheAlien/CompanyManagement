@@ -63,6 +63,18 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group{{ $errors->has('stage') ? ' has-error' : '' }}">
+                        <label for="stage" class="col-md-1 control-label">Stage</label>
+                        <div class="col-md-2">
+                            <input id="stage" type="text" class="form-control" name="stage" value="{{ old('stage') }}" autofocus>
+
+                            @if ($errors->has('stage'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('stage') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-1 col-md-offset-1">
                             <button type="submit" class="btn btn-primary">
@@ -119,6 +131,7 @@
                                 <th>Department ID</th>
                                 <th>Name</th>
                                 <th>Location</th>
+                                <th>Stage</th>
                                 <th>Employees assigned</th>
                                 <th>Action</th>
                             </tr>
@@ -130,6 +143,7 @@
                                     <td>{{$project->departmentID}}</td>
                                     <td>{{$project->name}}</td>
                                     <td>{{$project->location}}</td>
+                                    <td>{{$project->stage}}</td>
                                     <td>
                                         <!-- Need unique IDs for each button -->
                                         <button type="button" class="btn btn-link">View employees</button> <br/>
