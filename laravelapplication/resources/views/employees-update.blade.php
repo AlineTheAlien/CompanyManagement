@@ -26,7 +26,7 @@
                                 <label class="col-md-4 control-label">Department</label>
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="department_id">
-                                        <option value="-1">{{$employee->departmentName}}</option>
+                                        <option value="{{$employee->departmentID}}">{{$employee->departmentName}}</option>
                                         @foreach ($departments as $department)
                                             <option value="{{$department->id}}" name="department" id="department">{{$department->name}}</option>
                                         @endforeach
