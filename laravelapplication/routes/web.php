@@ -121,8 +121,9 @@ Route::post('addEmployeeToProject', 'EmployeeManagementController@AddEmployeeToP
 
 Route::post('updateEmployeeHours', 'EmployeeManagementController@UpdateEmployeeHours')->name("updateEmployeeHours");
 
-
 Route::post('removeEmployeeFromProject', 'EmployeeManagementController@RemoveEmployeeFromProject')->name("removeEmployeeFromProject");
+
+Route::get('getDepartmentEmployees', 'EmployeeManagementController@GetDepartmentEmployees')->name("getDepartmentEmployees");
 
 
 Route::get('dashboard', function () {

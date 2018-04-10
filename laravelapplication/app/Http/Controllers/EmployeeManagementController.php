@@ -398,6 +398,13 @@ class EmployeeManagementController extends Controller
         return view('dependents')->with('dependents', $dependents);
     }
 
+    public function GetDepartmentEmployees(Request $request)
+    {
+        $id = $request->input('id');
+        $employees = DB::connection('management')->select("SELECT * FROM employee WHERE departmentID = $id;");
+        return response()->json($employees);
+    }
+
     public function CreateDependent(Request $request)
     {
         $dependentSIN = $request->input('dependentsin');

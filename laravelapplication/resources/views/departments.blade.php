@@ -103,7 +103,8 @@
                                     <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
                                     <td id="managers">
-                                        <button type="button" class="btn btn-link"> View manager </button>
+                                        <button type="button" class="btn btn-link"> View manager </button> <br/>
+                                        <button type="button" class="btn btn-link"> View employees </button>
                                     </td>
                                     <td>
                                         <button class="btn btn-warning"> Update </button>
@@ -167,42 +168,70 @@
             });
 
             $('#dataTables-example').on('click', '#managers .btn-link', function(){
-                var id = $(this).parent().siblings('.id').text();
-                $.ajax({
-                    type:'GET',
-                    url: 'getManager',
-                    data:{id: id},
-                    success:function(employees){
-                        if (!$.trim(employees)){
+                if ($(this).text() == " View employees "){
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getDepartmentEmployees',
+                        data:{id: id},
+                        success:function(employees){
                             $("#viewManagerTable").show();
                             $("#viewManagerTable td").remove();
-                            $("#viewManagerCaption").text("Manager for Department ID = " + id);
-                            $("#viewManagerTable tbody").append(
-                                "<tr><td class = \"id\">" + id + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + ""
-                                + "</td><td>" + "" + "</td><td>" + ""
-                                + "</td><td>" + "" + "</td><td>" + ""
-                                + "</td><td><button type=\"button\" id='new_manager' class=\"btn btn-success\"> Add manager </button></td></tr>"
-                            )
-
-                        }
-                        else{
-                            $("#viewManagerTable").show();
-                            $("#viewManagerTable td").remove();
-                            $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                            $("#viewManagerCaption").text("Employees for Department ID = " + id);
                             $.each(employees, function(index, employee) {
                                 $("#viewManagerTable tbody").append(
                                     "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                     + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender
-                                    + "</td><td><button type=\"button\" id='update_manager' class=\"btn btn-success\"> Update Manager </button></td></tr>"
-                                )
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td><td>"
+                                    + "</td></tr>"
+                                );
                             });
+
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
                         }
-                    },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
-                    }
-                });
+                    });
+                }
+
+                if ($(this).text() == " View manager "){
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getManager',
+                        data:{id: id},
+                        success:function(employees){
+                            if (!$.trim(employees)){
+                                $("#viewManagerTable").show();
+                                $("#viewManagerTable td").remove();
+                                $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                                $("#viewManagerTable tbody").append(
+                                    "<tr><td class = \"id\">" + id + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + "" + "</td><td>" + ""
+                                    + "</td><td>" + "" + "</td><td>" + ""
+                                    + "</td><td>" + "" + "</td><td>" + ""
+                                    + "</td><td><button type=\"button\" id='new_manager' class=\"btn btn-success\"> Add manager </button></td></tr>"
+                                );
+
+                            }
+                            else{
+                                $("#viewManagerTable").show();
+                                $("#viewManagerTable td").remove();
+                                $("#viewManagerCaption").text("Manager for Department ID = " + id);
+                                $.each(employees, function(index, employee) {
+                                    $("#viewManagerTable tbody").append(
+                                        "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                        + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                        + "</td><td>" + employee.salary + "</td><td>" + employee.gender
+                                        + "</td><td><button type=\"button\" id='update_manager' class=\"btn btn-success\"> Update Manager </button></td></tr>"
+                                    );
+                                });
+                            }
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
             });
 
             $('#viewManagerTable').on('click', '#update_manager.btn-success', function(){
