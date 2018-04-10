@@ -125,6 +125,18 @@ Route::post('removeEmployeeFromProject', 'EmployeeManagementController@RemoveEmp
 
 Route::get('getDepartmentEmployees', 'EmployeeManagementController@GetDepartmentEmployees')->name("getDepartmentEmployees");
 
+Route::get('getSupervisor', 'EmployeeManagementController@GetSupervisor')->name("getSupervisor");
+
+Route::get('getSubordinates', 'EmployeeManagementController@GetSubordinates')->name("getSubordinates");
+
+Route::post('removeSupervisor', 'EmployeeManagementController@RemoveSupervisor')->name("removeSupervisor");
+
+Route::post('removeSubordinate', 'EmployeeManagementController@RemoveSubordinate')->name("removeSubordinate");
+
+Route::post('addSubordinate', 'EmployeeManagementController@AddSubordinate')->name("addSubordinate");
+
+Route::post('addSupervisor', 'EmployeeManagementController@AddSupervisor')->name("addSupervisor");
+
 
 Route::get('dashboard', function () {
     return view('home');

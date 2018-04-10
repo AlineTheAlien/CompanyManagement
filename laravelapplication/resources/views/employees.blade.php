@@ -110,6 +110,26 @@
                         <tbody>
                         </tbody>
                     </table>
+
+                    <table class="table table-striped table-bordered table-hover" id="viewSupervisorTable" style="display:none">
+                        <caption id = "viewSupervisorCaption">Test</caption>
+                        <thead>
+                        <tr>
+                            <th>SIN</th>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                            <th>Salary</th>
+                            <th>Gender</th>
+                            <th>Department ID</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                         <tr>
@@ -121,8 +141,7 @@
                             <th>Salary</th>
                             <th>Gender</th>
                             <th>Department ID</th>
-                            <th>Dependents</th>
-                            <th>Projects</th>
+                            <th>Other</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -140,9 +159,8 @@
                                 <td id="dependents">
                                     <!-- Need unique IDs for each button -->
                                     <button type="button" class="btn btn-link">View dependents</button>
-                                </td>
-                                <td id="projects">
-                                    <!-- Need unique IDs for each button -->
+                                    <button type="button" class="btn btn-link">View supervisor</button>
+                                    <button type="button" class="btn btn-link">View subordinates</button>
                                     <button type="button" class="btn btn-link">View projects</button>
                                 </td>
                                 <td>
@@ -207,54 +225,229 @@
                 });
             });
 
-            $('#dataTables-example').on('click', '#dependents .btn-link', function(){
-                var SIN = $(this).parent().siblings('.SIN').text();
-                $.ajax({
-                    type:'GET',
-                    url: 'getDependents',
-                    data:{SIN: SIN},
-                    success:function(dependents){
+            $('#viewSupervisorTable').on('click', '.btn-success', function(){
+                if ($(this).text() == "Add Subordinate")
+                {
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    var SIN = $("#viewSupervisorCaption").text().replace("Subordinates for Employee ID = ", "");
+                    var subordinateSIN = $('#viewSupervisorTable .js-states option:selected').val();
+                    $.ajax({
+                        type:'POST',
+                        url: 'addSubordinate',
+                        data:{SIN: SIN, subordinateSIN:subordinateSIN},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: "text",
+                        success:function(data){
+                            alert("Successfully added subordinate" );
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
 
-                        $("#viewDependentTable").show();
-                        $("#viewProjectTable").hide();
-                        $("#viewDependentTable td").remove();
-                        $("#viewDependentCaption").text("Dependents for Employee ID = " + SIN);
-                        $.each(dependents, function(index, dependent) {
-                            $("#viewDependentTable tbody").append(
-                                "<tr><td>" + dependent.dependentSIN + "</td><td>" + dependent.name + "</td><td>" + dependent.gender
-                                + "</td><td>" + dependent.birthDate + "</td></tr>"
-                            )
-                        });
-                    },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
-                    }
-                });
+                if ($(this).text() == "Add Supervisor")
+                {
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    var SIN = $("#viewSupervisorCaption").text().replace("Supervisor for Employee ID = ", "");
+                    var supervisorSIN = $('#viewSupervisorTable .js-states option:selected').val();
+                    $.ajax({
+                        type:'POST',
+                        url: 'addSupervisor',
+                        data:{SIN: SIN, supervisorSIN:supervisorSIN},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        dataType: "text",
+                        success:function(data){
+                            alert("Successfully added supervisor" );
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
             });
 
-            $('#dataTables-example').on('click', '#projects .btn-link', function(){
-                var SIN = $(this).parent().siblings('.SIN').text();
-                $.ajax({
-                    type:'GET',
-                    url: 'getProjects',
-                    data:{SIN: SIN},
-                    success:function(projects){
-
-                        $("#viewProjectTable").show();
-                        $("#viewDependentTable").hide();
-                        $("#viewProjectTable td").remove();
-                        $("#viewProjectCaption").text("Projects for Employee ID = " + SIN);
-                        $.each(projects, function(index, project) {
-                            $("#viewProjectTable tbody").append(
-                                "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
-                                + project.hours + "</td></tr>"
-                            )
+            $('#viewSupervisorTable').on('click', '.btn-danger', function(){
+                if ($(this).text() == "Remove supervisor"){
+                    if (confirm('Are you sure?')){
+                        var clickedButton = $(this);
+                        var SIN = $(this).parent().siblings('.SIN').text();
+                        var subordinateSIN = $("#viewSupervisorCaption").text().replace("Supervisor for Employee ID = ", "");
+                        $.ajax({
+                            type:'POST',
+                            url: 'removeSupervisor',
+                            data:{SIN: SIN, subordinateSIN:subordinateSIN},
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            dataType: "text",
+                            success:function(data){
+                                clickedButton.parent().parent().remove();
+                            },
+                            error:function (jqXHR, textStatus, errorThrown) {
+                                alert(JSON.stringify(jqXHR, null, 2));
+                            }
                         });
-                    },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
                     }
-                });
+                }
+
+                if ($(this).text() == "Remove subordinate"){
+                    if (confirm('Are you sure?')){
+                        var clickedButton = $(this);
+                        var SIN = $(this).parent().siblings('.SIN').text();
+                        var supervisorSIN = $("#viewSupervisorCaption").text().replace("Subordinates for Employee ID = ", "");
+                        $.ajax({
+                            type:'POST',
+                            url: 'removeSubordinate',
+                            data:{SIN: SIN, supervisorSIN:supervisorSIN},
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            dataType: "text",
+                            success:function(data){
+                                clickedButton.parent().parent().remove();
+                            },
+                            error:function (jqXHR, textStatus, errorThrown) {
+                                alert(JSON.stringify(jqXHR, null, 2));
+                            }
+                        });
+                    }
+                }
+            });
+
+            $('#dataTables-example').on('click', '#dependents .btn-link', function(){
+                if ($(this).text() == "View dependents"){
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getDependents',
+                        data:{SIN: SIN},
+                        success:function(dependents){
+
+                            $("#viewDependentTable").show();
+                            $("#viewProjectTable").hide();
+                            $("#viewSupervisorTable").show();
+                            $("#viewDependentTable td").remove();
+                            $("#viewDependentCaption").text("Dependents for Employee ID = " + SIN);
+                            $.each(dependents, function(index, dependent) {
+                                $("#viewDependentTable tbody").append(
+                                    "<tr><td>" + dependent.dependentSIN + "</td><td>" + dependent.name + "</td><td>" + dependent.gender
+                                    + "</td><td>" + dependent.birthDate + "</td></tr>"
+                                )
+                            });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
+                if ($(this).text() == "View supervisor"){
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getSupervisor',
+                        data:{SIN: SIN},
+                        success:function(employees){
+
+                            $("#viewSupervisorTable").show();
+                            $("#viewDependentTable").hide();
+                            $("#viewProjectTable").hide();
+                            $("#viewSupervisorTable td").remove();
+                            $("#viewSupervisorCaption").text("Supervisor for Employee ID = " + SIN);
+                            if (!employees[0]) {
+                                $("#viewSupervisorTable tbody").append(
+                                    "<tr><td class='SIN'>"  + "</td><td>" + "</td><td>"
+                                    + "</td><td>" + "</td><td>"
+                                    + "</td><td>" + "</td><td>" + "</td><td>"
+                                    + "</td><td> <select class='form-control js-states' name='employee_id'>"
+                                    + "<option value='-1'>Select employee</option>"
+                                    + "@foreach ($employees as $employee)"
+                                    + "<option value='{{$employee->SIN}}''>{{$employee->name}}</option>"
+                                    + "@endforeach"
+                                    +  "</select>"
+                                    + "<button class='btn btn-success'>Add Supervisor</button></td></tr>"
+                                );
+                            }
+                            $.each(employees, function(index, employee) {
+                                $("#viewSupervisorTable tbody").append(
+                                    "<tr><td class='SIN'>"  + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender  + "</td><td>" + employee.departmentID
+                                    + "</td><td><button type=\"button\" id='remove_supervisor' class=\"btn btn-danger\">Remove supervisor</button></td></tr>"
+                                )
+                            });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
+                if ($(this).text() == "View subordinates"){
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getSubordinates',
+                        data:{SIN: SIN},
+                        success:function(employees){
+
+                            $("#viewSupervisorTable").show();
+                            $("#viewDependentTable").hide();
+                            $("#viewProjectTable").hide();
+                            $("#viewSupervisorTable td").remove();
+                            $("#viewSupervisorCaption").text("Subordinates for Employee ID = " + SIN);
+                            if (!employees[0]) {
+                                $("#viewSupervisorTable tbody").append(
+                                    "<tr><td class='SIN'>"  + "</td><td>" + "</td><td>"
+                                    + "</td><td>" + "</td><td>"
+                                    + "</td><td>" + "</td><td>" + "</td><td>"
+                                    + "</td><td> <select class='form-control js-states' name='employee_id'>"
+                                    + "<option value='-1'>Select employee</option>"
+                                    + "@foreach ($employees as $employee)"
+                                    + "<option value='{{$employee->SIN}}''>{{$employee->name}}</option>"
+                                    + "@endforeach"
+                                    +  "</select>"
+                                    + "<button class='btn btn-success'>Add Subordinate</button></td></tr>"
+                                );
+                            }
+                            $.each(employees, function(index, employee) {
+                                $("#viewSupervisorTable tbody").append(
+                                    "<tr><td class='SIN'>"  + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender  + "</td><td>" + employee.departmentID
+                                    + "</td><td><button type=\"button\" id='remove_subordinate' class=\"btn btn-danger\">Remove subordinate</button></td></tr>"
+                                )
+                            });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
+                if ($(this).text() == "View projects"){
+                    var SIN = $(this).parent().siblings('.SIN').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getProjects',
+                        data:{SIN: SIN},
+                        success:function(projects){
+
+                            $("#viewProjectTable").show();
+                            $("#viewDependentTable").hide();
+                            $("#viewSupervisorTable").hide();
+                            $("#viewProjectTable td").remove();
+                            $("#viewProjectCaption").text("Projects for Employee ID = " + SIN);
+                            $.each(projects, function(index, project) {
+                                $("#viewProjectTable tbody").append(
+                                    "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
+                                    + project.hours + "</td></tr>"
+                                )
+                            });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
             });
         });
     </script>

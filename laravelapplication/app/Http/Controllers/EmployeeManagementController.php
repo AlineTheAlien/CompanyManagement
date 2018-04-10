@@ -36,6 +36,20 @@ class EmployeeManagementController extends Controller
         return response()->json($employees);
     }
 
+    public function GetSupervisor(Request $request)
+    {
+        $SIN = $request->input('SIN');
+        $employees = DB::connection('management')->select("SELECT * FROM employee LEFT JOIN supervisor_subordinate ON supervisorSIN = SIN WHERE subordinateSIN = $SIN;");
+        return response()->json($employees);
+    }
+
+    public function GetSubordinates(Request $request)
+    {
+        $SIN = $request->input('SIN');
+        $employees = DB::connection('management')->select("SELECT * FROM employee LEFT JOIN supervisor_subordinate ON subordinateSIN = SIN WHERE supervisorSIN = $SIN;");
+        return response()->json($employees);
+    }
+
     public function GetManager(Request $request)
     {
         $id = $request->input('id');
@@ -202,6 +216,24 @@ class EmployeeManagementController extends Controller
         return view('departments-create-manager')->with('department', $departments[0]);
     }
 
+    public function AddSubordinate(Request $request) {
+        $SIN = $request->input('SIN');
+        $subordinateSIN = $request->input('subordinateSIN');
+        DB::connection('management')->insert("INSERT INTO supervisor_subordinate
+                (`supervisorSIN`,`subordinateSIN`)
+                VALUES
+                ('$SIN','$subordinateSIN');");
+    }
+
+    public function AddSupervisor(Request $request) {
+        $SIN = $request->input('SIN');
+        $supervisorSIN = $request->input('supervisorSIN');
+        DB::connection('management')->insert("INSERT INTO supervisor_subordinate
+                (`supervisorSIN`,`subordinateSIN`)
+                VALUES
+                ('$supervisorSIN','$SIN');");
+    }
+
     public function AddEmployeeToProject(Request $request) {
         $id = $request->input('id');
         $sin = $request->input('sin');
@@ -214,6 +246,18 @@ class EmployeeManagementController extends Controller
     public function RemoveEmployeeFromProject(Request $request) {
         $sin = $request->input('sin');
         DB::connection('management')->delete("DELETE FROM works_on WHERE employeeSIN = $sin");
+    }
+
+    public function RemoveSupervisor(Request $request) {
+        $SIN = $request->input('SIN');
+        $subordinateSIN = $request->input('subordinateSIN');
+        DB::connection('management')->delete("DELETE FROM supervisor_subordinate WHERE subordinateSIN = $subordinateSIN AND supervisorSIN = $SIN");
+    }
+
+    public function RemoveSubordinate(Request $request) {
+        $SIN = $request->input('SIN');
+        $supervisorSIN = $request->input('supervisorSIN');
+        DB::connection('management')->delete("DELETE FROM supervisor_subordinate WHERE supervisorSIN = $supervisorSIN AND subordinateSIN = $SIN");
     }
 
     public function CreateDepartmentManagerInDatabase(Request $request)
