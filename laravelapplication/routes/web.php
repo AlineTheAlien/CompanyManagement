@@ -119,6 +119,9 @@ Route::post('deleteProject', 'EmployeeManagementController@DeleteProject')->name
 
 Route::post('addEmployeeToProject', 'EmployeeManagementController@AddEmployeeToProject')->name("addEmployeeToProject");
 
+Route::post('updateEmployeeHours', 'EmployeeManagementController@UpdateEmployeeHours')->name("updateEmployeeHours");
+
+
 Route::post('removeEmployeeFromProject', 'EmployeeManagementController@RemoveEmployeeFromProject')->name("removeEmployeeFromProject");
 
 

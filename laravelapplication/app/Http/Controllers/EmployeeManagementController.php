@@ -307,6 +307,15 @@ class EmployeeManagementController extends Controller
         return redirect('departments');
     }
 
+    public function UpdateEmployeeHours(Request $request) {
+        $SIN = $request->input('SIN');
+        $hours = $request->input('hours');
+
+        DB::connection('management')->update("UPDATE works_on SET 
+                                              hours = '$hours'
+                                              WHERE employeeSIN = '$SIN';");
+    }
+
 
     public function UpdateEmployee(Request $request) {
         $SIN = $request->input('SIN');

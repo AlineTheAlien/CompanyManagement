@@ -104,7 +104,7 @@
                                 <th>Hours</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
-                                {{--<th>Action</th>--}}
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -294,7 +294,11 @@
                             $("#viewTotalHoursCaption").text("Total hours working on ProjectID = " + id);
                             $.each(results[0], function(index, project) {
                                 $("#viewTotalHoursTable tbody").append(
-                                    "<tr><td>" + project.employeeSIN + "</td><td>" + project.hours + "</td></tr>"
+                                    "<tr><td class='SIN'>" + project.employeeSIN + "</td><td class='hours'>" + project.hours
+                                    + "</td><td>"
+                                    + "<input id='id' type='text' class='hoursUpdate' name='hours'> "
+                                    + "  <button class='btn btn-success'>Update hours</button>"
+                                    + "</td></tr>"
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
@@ -307,6 +311,24 @@
                     });
                 }
 
+            });
+
+            $('#viewTotalHoursTable').on('click', '.btn-success', function(){
+                var SIN = $(this).parent().siblings('.SIN').text();
+                var hours = $(this).siblings('.hoursUpdate').val();
+                var button = $(this);
+                $.ajax({
+                    type:'post',
+                    url: 'updateEmployeeHours',
+                    data:{SIN: SIN, hours: hours},
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success:function(data){
+                        button.parent().siblings('.hours').text(hours);
+                    },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
             });
 
             $('#dataTables-example').on('click', '#projects .btn-link', function(){
