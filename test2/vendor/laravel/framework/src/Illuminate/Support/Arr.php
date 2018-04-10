@@ -67,7 +67,7 @@ class Arr
      * @param  array  ...$arrays
      * @return array
      */
-    public static function crossJoin(...$arrays)
+    public static function crossJoin($arrays)
     {
         $results = [[]];
 

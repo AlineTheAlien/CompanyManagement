@@ -521,7 +521,7 @@ if (! function_exists('dd')) {
      * @param  mixed
      * @return void
      */
-    function dd(...$args)
+    function dd($args)
     {
         foreach ($args as $x) {
             (new Dumper)->dump($x);
