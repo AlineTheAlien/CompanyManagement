@@ -97,6 +97,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if ($dependents !== null)
                             @foreach($dependents as $dependent)
                                 <tr>
                                     <td class="dependentSIN">{{$dependent->dependentSIN}}</td>
@@ -110,6 +111,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -144,8 +144,10 @@ class EmployeeManagementController extends Controller
             return view('employees')->with('employees', $employees)
                                          ->with('departments', $departments);
         }
-        else
-            return view('employees');
+        else{
+            $employees = null;
+            return view('employees')->with('departments', $departments)->with('employees', $employees);
+        }
     }
 
     public function CreateEmployee(Request $request)
@@ -319,8 +321,10 @@ class EmployeeManagementController extends Controller
             $departments = DB::connection('management')->select($query);
             return view('departments')->with('departments', $departments);
         }
-        else
-            return view('employees');
+        else{
+            $departments = null;
+            return view('departments')->with('departments', $departments);
+        }
     }
 
     public function CreateProject(Request $request)
@@ -420,22 +424,26 @@ class EmployeeManagementController extends Controller
 
     public function UpdateProject(Request $request) {
         $id = $request->input('id');
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
 
         $projects = DB::connection('management')->select("SELECT * FROM project WHERE id = $id;");
-        return view('projects-update')->with('project', $projects[0]);
+        return view('projects-update')->with('project', $projects[0])->with('departments', $departments);
     }
 
     public function UpdateProjectInDatabase(Request $request) {
         $id = $request->input('id');
-        $departmentID = $request->input('departmentID');
+        $departmentID = $request->input('department_id');
         $location = $request->input('location');
         $name = $request->input('name');
+        $stage = $request->input('stage');
 
         DB::connection('management')->update("UPDATE project SET 
                                               departmentID = '$departmentID',
                                               location = '$location',
-                                              name = '$name'
+                                              name = '$name',
+                                              stage = '$stage'
                                               WHERE id = '$id';");
+        return redirect('projects');
     }
 
     // Dependents
@@ -528,19 +536,19 @@ class EmployeeManagementController extends Controller
                 $query = $query . "employeeSIN = '$employeeSIN' ";
 
         if ($name != null)
-            if (strpos($query, 'AND') !== false)
+            if (strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false)
                 $query = $query . "AND name = '$name' ";
             else
                 $query = $query . "name = '$name' ";
 
         if ($gender != -1)
-            if (strpos($query, 'AND') !== false)
+            if (strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false ||strpos($query, 'name') !== false)
                 $query = $query . "AND gender = '$gender' ";
             else
                 $query = $query . "gender = '$gender' ";
 
         if ($birthDate != null)
-            if(strpos($query, 'AND') !== false)
+            if(strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false ||strpos($query, 'name') !== false||strpos($query, 'gender') !== false)
                 $query = $query . "AND birthDate = '$birthDate' ";
             else
                 $query = $query . "birthDate = '$birthDate' ";
@@ -551,7 +559,60 @@ class EmployeeManagementController extends Controller
             $dependents = DB::connection('management')->select($query);
             return view('dependents')->with('dependents', $dependents);
         }
+        else{
+            $dependents = null;
+            return view('dependents')->with('dependents', $dependents);
+        }
+    }
+
+    public function SearchProject(Request $request)
+    {
+        $projectID = $request->input('id');
+        $departmentID = $request->input('department_id');
+        $location= $request->input('location');
+        $name= $request->input('name');
+        $stage= $request->input('stage');
+
+        $query = "SELECT * FROM project WHERE ";
+
+        if ($projectID != null)
+            $query = $query . "id = '$projectID' ";
+
+        if ($departmentID != -1)
+            if (strpos($query, 'id') !== false)
+                $query = $query . "AND departmentID = '$departmentID' ";
+            else
+                $query = $query . "departmentID = '$departmentID' ";
+
+        if ($name != null)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "name = '$name' ";
+
+        if ($stage != -1)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false ||
+                strpos($query, 'name') !== false)
+                $query = $query . "AND stage = '$stage' ";
+            else
+                $query = $query . "stage = '$stage' ";
+
+        if ($location != null)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false ||
+                strpos($query, 'name') !== false || strpos($query, 'stage') !== false)
+                $query = $query . "AND location = '$location' ";
+            else
+                $query = $query . "location = '$location' ";
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $projects = DB::connection('management')->select($query);
+            $departments = DB::connection('management')->select("SELECT * FROM department;");
+            $employees = DB::connection('management')->select("SELECT * FROM employee;");
+            return view('projects')->with('projects', $projects)->with('departments', $departments)->with('employees', $employees);
+        }
         else
-            return view('dependents');
+            return view('projects');
     }
 }

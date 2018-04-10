@@ -48,6 +48,44 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Department</label>
+                                <div class="col-md-6">
+                                    <select class="form-control js-states" name="department_id">
+                                        @foreach ($departments as $department)
+                                            @if($department->id == $project->departmentID)
+                                                <option value="{{$department->id}}" name="department" id="department">{{$department->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach ($departments as $department)
+                                            <option value="{{$department->id}}" name="department" id="department">{{$department->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('stage') ? ' has-error' : '' }}">
+                                <label for="stage" class="col-md-4 control-label">Stage</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control js-states" name="stage">
+
+                                        <option value="{{$project->stage}}">{{$project->stage}}</option>
+                                        <option value="preliminary">preliminary</option>
+                                        <option value="intermediate">intermediate</option>
+                                        <option value="advanced">advanced</option>
+                                        <option value="complete">complete</option>
+                                    </select>
+
+                                    @if ($errors->has('stage'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('stage') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

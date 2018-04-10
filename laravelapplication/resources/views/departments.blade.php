@@ -98,6 +98,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if($departments !== null)
                             @foreach($departments as $department)
                                 <tr>
                                     <td class = "id">{{$department->id}}</td>
@@ -112,6 +113,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

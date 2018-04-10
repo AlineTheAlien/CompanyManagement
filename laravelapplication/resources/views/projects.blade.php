@@ -14,7 +14,7 @@
                     </a>
                 </div>
 
-                <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" method="GET" action="{{route('searchProject')}}" enctype="multipart/form-data">
                     <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
                         <label class="col-md-1 control-label">Id</label>
 
@@ -33,9 +33,9 @@
                         <div class="col-md-2">
                             <select class="form-control js-states" name="department_id">
                                 <option value="-1">Select department</option>
-                                {{--  @foreach ($departments as $department)
+                                  @foreach ($departments as $department)
                                     <option value="{{$department->id}}">{{$department->name}}</option>
-                                @endforeach  --}}
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -68,10 +68,10 @@
                         <div class="col-md-2">
                             <select class="form-control js-states" name="stage">
                                 <option value="-1">Select stage</option>
-                                <option value="preliminary">Preliminary</option>
-                                <option value="intermediate">Intermediate</option>
-                                <option value="advanced">Advanced</option>
-                                <option value="complete">Complete</option>
+                                <option value="preliminary">preliminary</option>
+                                <option value="intermediate">intermediate</option>
+                                <option value="advanced">advanced</option>
+                                <option value="complete">complete</option>
                             </select>
                         </div>
                     </div>
