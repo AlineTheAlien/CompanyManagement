@@ -323,7 +323,7 @@
 
                             $("#viewDependentTable").show();
                             $("#viewProjectTable").hide();
-                            $("#viewSupervisorTable").show();
+                            $("#viewSupervisorTable").hide();
                             $("#viewDependentTable td").remove();
                             $("#viewDependentCaption").text("Dependents for Employee ID = " + SIN);
                             $.each(dependents, function(index, dependent) {
