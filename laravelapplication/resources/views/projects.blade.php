@@ -302,7 +302,7 @@
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
-                                "<tr><td><b> Total Hours </b></td><td>" + results[1][0].totalHours + "</td></tr>"
+                                "<tr class='totalHoursRow'><td><b> Total Hours </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td></tr>"
                             )
                         },
                         error:function (jqXHR, textStatus, errorThrown) {
@@ -317,6 +317,7 @@
                 var SIN = $(this).parent().siblings('.SIN').text();
                 var hours = $(this).siblings('.hoursUpdate').val();
                 var button = $(this);
+                var currentHours = button.parent().siblings('.hours').text();
                 $.ajax({
                     type:'post',
                     url: 'updateEmployeeHours',
@@ -324,6 +325,9 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success:function(data){
                         button.parent().siblings('.hours').text(hours);
+                        var total = button.parent().parent().siblings('.totalHoursRow').children('.totalHours').text();
+                        var difference = parseInt(total) + (parseInt(hours) - parseInt(currentHours));
+                        button.parent().parent().siblings('.totalHoursRow').children('.totalHours').text(difference);
                     },
                     error:function (jqXHR, textStatus, errorThrown) {
                         alert(JSON.stringify(jqXHR, null, 2));
