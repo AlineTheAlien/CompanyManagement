@@ -32,9 +32,10 @@
                         <label class="col-md-1 control-label">Department</label>
                         <div class="col-md-2">
                             <select class="form-control js-states" name="department_id">
-                                  @foreach ($departments as $department)
+                                <option value="-1">Select department</option>
+                                {{--  @foreach ($departments as $department)
                                     <option value="{{$department->id}}">{{$department->name}}</option>
-                                @endforeach
+                                @endforeach  --}}
                             </select>
                         </div>
                     </div>
@@ -66,6 +67,7 @@
                         <label class="col-md-1 control-label">Stage</label>
                         <div class="col-md-2">
                             <select class="form-control js-states" name="stage">
+                                <option value="-1">Select stage</option>
                                 <option value="preliminary">Preliminary</option>
                                 <option value="intermediate">Intermediate</option>
                                 <option value="advanced">Advanced</option>

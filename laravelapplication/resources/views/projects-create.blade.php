@@ -69,6 +69,7 @@
 
                                 <div class="col-md-6">
                                     <select class="form-control js-states" name="stage">
+                                        <option value="-1">Select stage</option>
                                         <option value="preliminary">Preliminary</option>
                                         <option value="intermediate">Intermediate</option>
                                         <option value="advanced">Advanced</option>
