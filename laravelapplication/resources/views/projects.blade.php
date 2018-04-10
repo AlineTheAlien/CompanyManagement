@@ -287,8 +287,6 @@
                         data:{id: id},
                         dataType: "json",
                         success:function(projects){
-                            alert(JSON.stringify(projects, null, 2));
-
                             var results = JSON.parse(projects);
                             $("#viewEmployeesTable").hide();
                             $("#viewTotalHoursTable").show();
@@ -300,7 +298,7 @@
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
-                                "<tr><td><b> Total Hours </b></td><td>" + results[1].totalHours + "</td></tr>"
+                                "<tr><td><b> Total Hours </b></td><td>" + results[1][0].totalHours + "</td></tr>"
                             )
                         },
                         error:function (jqXHR, textStatus, errorThrown) {
