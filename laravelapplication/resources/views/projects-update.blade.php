@@ -72,10 +72,10 @@
                                     <select class="form-control js-states" name="stage">
 
                                         <option value="{{$project->stage}}">{{$project->stage}}</option>
-                                        <option value="preliminary">Preliminary</option>
-                                        <option value="intermediate">Intermediate</option>
-                                        <option value="advanced">Advanced</option>
-                                        <option value="complete">Complete</option>
+                                        <option value="preliminary">preliminary</option>
+                                        <option value="intermediate">intermediate</option>
+                                        <option value="advanced">advanced</option>
+                                        <option value="complete">complete</option>
                                     </select>
 
                                     @if ($errors->has('stage'))
