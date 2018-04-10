@@ -285,19 +285,22 @@
                         type:'GET',
                         url: 'getProjectTotalHours',
                         data:{id: id},
+                        dataType: "json",
                         success:function(projects){
+                            alert(JSON.stringify(projects, null, 2));
 
+                            var results = JSON.parse(projects);
                             $("#viewEmployeesTable").hide();
                             $("#viewTotalHoursTable").show();
                             $("#viewTotalHoursTable td").remove();
                             $("#viewTotalHoursCaption").text("Total hours working on ProjectID = " + id);
-                            $.each(projects, function(index, project) {
+                            $.each(results[0], function(index, project) {
                                 $("#viewTotalHoursTable tbody").append(
                                     "<tr><td>" + project.employeeSIN + "</td><td>" + project.hours + "</td></tr>"
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
-                                "<tr><td><b> Total Hours </b></td><td>" + projects[0].totalHours + "</td></tr>"
+                                "<tr><td><b> Total Hours </b></td><td>" + results[1].totalHours + "</td></tr>"
                             )
                         },
                         error:function (jqXHR, textStatus, errorThrown) {

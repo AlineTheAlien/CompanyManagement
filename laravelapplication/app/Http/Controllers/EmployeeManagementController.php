@@ -65,9 +65,11 @@ class EmployeeManagementController extends Controller
     public function GetProjectTotalHours(Request $request)
     {
         $id = $request->input('id');
-        $query = "SELECT *, SUM(hours) AS totalHours FROM works_on WHERE projectID = $id GROUP BY employeeSIN, projectID ";
+        $query = "SELECT * FROM works_on WHERE projectID = $id;";
+        $query2 = "SELECT SUM(hours) AS totalHours FROM works_on WHERE projectID = $id";
         $projects = DB::connection('management')->select($query);
-        return response()->json($projects);
+        $totalHours = DB::connection('management')->select($query2);
+        return response()->json(json_encode(array($projects, $totalHours)));
     }
 
 
