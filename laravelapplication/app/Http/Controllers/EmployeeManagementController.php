@@ -217,6 +217,11 @@ class EmployeeManagementController extends Controller
         return view('departments-create-manager')->with('department', $departments[0]);
     }
 
+    public function RemoveDepartmentManager(Request $request) {
+        $id = $request->input('id');
+        DB::connection('management')->delete("DELETE FROM manages WHERE departmentID = $id;");
+    }
+
     public function AddSubordinate(Request $request) {
         $SIN = $request->input('SIN');
         $subordinateSIN = $request->input('subordinateSIN');

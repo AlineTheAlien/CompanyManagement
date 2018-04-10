@@ -69,6 +69,8 @@ Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')
 
 Route::get('createDepartmentManager', 'EmployeeManagementController@CreateDepartmentManager')->name("createDepartmentManager");
 
+Route::post('removeDepartmentManager', 'EmployeeManagementController@RemoveDepartmentManager')->name("removeDepartmentManager");
+
 Route::post('createDepartmentManagerInDatabase', 'EmployeeManagementController@CreateDepartmentManagerInDatabase')->name("createDepartmentManagerInDatabase");
 
 Route::post('createProject', 'EmployeeManagementController@CreateProject')->name("createProject");

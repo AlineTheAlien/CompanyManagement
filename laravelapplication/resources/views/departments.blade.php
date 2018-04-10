@@ -222,7 +222,8 @@
                                         "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                         + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
                                         + "</td><td>" + employee.salary + "</td><td>" + employee.gender
-                                        + "</td><td><button type=\"button\" id='update_manager' class=\"btn btn-success\"> Update Manager </button></td></tr>"
+                                        + "</td><td><button type=\"button\" id='update_manager' class=\"btn btn-warning\"> Update Manager </button><br/><br/>"
+                                        + "<button type=\"button\" id='remove_manager' class=\"btn btn-danger\"> Remove manager </td></tr>"
                                     );
                                 });
                             }
@@ -234,7 +235,7 @@
                 }
             });
 
-            $('#viewManagerTable').on('click', '#update_manager.btn-success', function(){
+            $('#viewManagerTable').on('click', '#update_manager.btn-warning', function(){
                 var id = $(this).parent().siblings('.id').text();
                 $.ajax({
                     type:'GET',
@@ -263,6 +264,26 @@
                     }
                 });
             });
+
+            $('#viewManagerTable').on('click', '#remove_manager.btn-danger', function(){
+                if (confirm('Are you sure?')) {
+                    var clickedButton = $(this);
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'POST',
+                        url: 'removeDepartmentManager',
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: {id: id},
+                        success:function(data){
+                            clickedButton.parent().parent().remove();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+            });
+
         });
     </script>
 @endsection
