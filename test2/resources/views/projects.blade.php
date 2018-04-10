@@ -88,7 +88,7 @@
                                 <th>Gender</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
-                                <th>Action</th>
+                                {{--<th>Action</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -104,7 +104,7 @@
                                 <th>Hours</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
-                                <th>Action</th>
+                                {{--<th>Action</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -142,16 +142,7 @@
                                             </button>
                                             <button class="btn btn-danger">
                                                 Delete
-                                            </button> <br /> <br/>
-                                        <button class="btn btn-success">
-                                            Add Employee
-                                        </button>
-                                        <select class="form-control js-states" name="employee_id">
-                                            <option value="-1">Select employee</option>
-                                              @foreach ($employees as $employee)
-                                                <option value="{{$employee->SIN}}">{{$employee->name}}</option>
-                                            @endforeach
-                                        </select>
+                                            </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -216,43 +207,6 @@
                 });
             });
 
-            $('#dataTables-example').on('click', '.btn-success', function(){
-                var id = $(this).parent().siblings('.id').text();
-                var sin = $('#dataTables-example .js-states option:selected').val();
-                $.ajax({
-                    type:'POST',
-                    url: 'addEmployeeToProject',
-                    data:{id: id, sin: sin},
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    success:function(data){
-                        alert("Successfully added employee to project" );
-                        },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
-                    }
-                });
-            });
-
-            $("#viewEmployeesTable").on('click', '.btn-danger', function() {
-                if (confirm('Are you sure?')){
-                    var sin = $(this).parent().siblings('.sin').text();
-                    var clickedButton = $(this);
-                    $.ajax({
-                        type:'POST',
-                        url: 'removeEmployeeFromProject',
-                        data:{sin: sin},
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        success:function(data){
-                            clickedButton.parent().parent().remove();
-                        },
-                        error:function (jqXHR, textStatus, errorThrown) {
-                            alert(JSON.stringify(jqXHR, null, 2));
-                        }
-                    });
-                }
-
-            });
-
             $('#dataTables-example').on('click', '.btn-link', function(){
                 var id = $(this).parent().siblings('.id').text();
                 if ($(this).text() == "View employees"){
@@ -268,10 +222,9 @@
                             $("#viewEmployeesCaption").text("Employees working on ProjectID = " + id);
                             $.each(employees, function(index, employee) {
                                 $("#viewEmployeesTable tbody").append(
-                                    "<tr><td class='sin'>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                     + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender
-                                    + "</td><td>" + "<button class='btn btn-danger'>Remove</button>" + "</td></tr>"
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
                                 )
                             });
                         },
@@ -285,24 +238,19 @@
                         type:'GET',
                         url: 'getProjectTotalHours',
                         data:{id: id},
-                        dataType: "json",
                         success:function(projects){
-                            var results = JSON.parse(projects);
+
                             $("#viewEmployeesTable").hide();
                             $("#viewTotalHoursTable").show();
                             $("#viewTotalHoursTable td").remove();
                             $("#viewTotalHoursCaption").text("Total hours working on ProjectID = " + id);
-                            $.each(results[0], function(index, project) {
+                            $.each(projects, function(index, project) {
                                 $("#viewTotalHoursTable tbody").append(
-                                    "<tr><td class='SIN'>" + project.employeeSIN + "</td><td class='hours'>" + project.hours
-                                    + "</td><td>"
-                                    + "<input id='id' type='text' class='hoursUpdate' name='hours'> "
-                                    + "  <button class='btn btn-success'>Update hours</button>"
-                                    + "</td></tr>"
+                                    "<tr><td>" + project.employeeSIN + "</td><td>" + project.hours + "</td></tr>"
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
-                                "<tr class='totalHoursRow'><td><b> Total Hours </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td></tr>"
+                                "<tr><td><b> Total Hours </b></td><td>" + projects[0].totalHours + "</td></tr>"
                             )
                         },
                         error:function (jqXHR, textStatus, errorThrown) {
@@ -311,28 +259,6 @@
                     });
                 }
 
-            });
-
-            $('#viewTotalHoursTable').on('click', '.btn-success', function(){
-                var SIN = $(this).parent().siblings('.SIN').text();
-                var hours = $(this).siblings('.hoursUpdate').val();
-                var button = $(this);
-                var currentHours = button.parent().siblings('.hours').text();
-                $.ajax({
-                    type:'post',
-                    url: 'updateEmployeeHours',
-                    data:{SIN: SIN, hours: hours},
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    success:function(data){
-                        button.parent().siblings('.hours').text(hours);
-                        var total = button.parent().parent().siblings('.totalHoursRow').children('.totalHours').text();
-                        var difference = parseInt(total) + (parseInt(hours) - parseInt(currentHours));
-                        button.parent().parent().siblings('.totalHoursRow').children('.totalHours').text(difference);
-                    },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
-                    }
-                });
             });
 
             $('#dataTables-example').on('click', '#projects .btn-link', function(){

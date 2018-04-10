@@ -17,8 +17,7 @@ class EmployeeManagementController extends Controller
     public function GetAllProjects()
     {
         $projects = DB::connection('management')->select("SELECT * FROM project;");
-        $employees = DB::connection('management')->select("SELECT * FROM employee;");
-        return view('projects')->with('projects', $projects)->with('employees', $employees);
+        return view('projects')->with('projects', $projects);
     }
 
     public function GetAllEmployees()
@@ -65,11 +64,9 @@ class EmployeeManagementController extends Controller
     public function GetProjectTotalHours(Request $request)
     {
         $id = $request->input('id');
-        $query = "SELECT * FROM works_on WHERE projectID = $id;";
-        $query2 = "SELECT SUM(hours) AS totalHours FROM works_on WHERE projectID = $id";
+        $query = "SELECT *, SUM(hours) AS totalHours FROM works_on WHERE projectID = $id GROUP BY employeeSIN, projectID ";
         $projects = DB::connection('management')->select($query);
-        $totalHours = DB::connection('management')->select($query2);
-        return response()->json(json_encode(array($projects, $totalHours)));
+        return response()->json($projects);
     }
 
 
@@ -202,20 +199,6 @@ class EmployeeManagementController extends Controller
         return view('departments-create-manager')->with('department', $departments[0]);
     }
 
-    public function AddEmployeeToProject(Request $request) {
-        $id = $request->input('id');
-        $sin = $request->input('sin');
-        DB::connection('management')->insert("INSERT INTO works_on
-                (`employeeSIN`,`projectID`, `hours` )
-                VALUES
-                ('$sin','$id', '0');");
-    }
-
-    public function RemoveEmployeeFromProject(Request $request) {
-        $sin = $request->input('sin');
-        DB::connection('management')->delete("DELETE FROM works_on WHERE employeeSIN = $sin");
-    }
-
     public function CreateDepartmentManagerInDatabase(Request $request)
     {
         $id = $request->input('id');
@@ -307,15 +290,6 @@ class EmployeeManagementController extends Controller
         return redirect('departments');
     }
 
-    public function UpdateEmployeeHours(Request $request) {
-        $SIN = $request->input('SIN');
-        $hours = $request->input('hours');
-
-        DB::connection('management')->update("UPDATE works_on SET 
-                                              hours = '$hours'
-                                              WHERE employeeSIN = '$SIN';");
-    }
-
 
     public function UpdateEmployee(Request $request) {
         $SIN = $request->input('SIN');
@@ -396,13 +370,6 @@ class EmployeeManagementController extends Controller
     {
         $dependents = DB::connection('management')->select("SELECT * FROM dependent;");
         return view('dependents')->with('dependents', $dependents);
-    }
-
-    public function GetDepartmentEmployees(Request $request)
-    {
-        $id = $request->input('id');
-        $employees = DB::connection('management')->select("SELECT * FROM employee WHERE departmentID = $id;");
-        return response()->json($employees);
     }
 
     public function CreateDependent(Request $request)
