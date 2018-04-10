@@ -105,7 +105,7 @@ Route::post('updateDependentInDatabase', 'EmployeeManagementController@UpdateDep
 
 Route::post('updateEmployeeInDatabase', 'EmployeeManagementController@UpdateEmployeeInDatabase')->name("updateEmployeeInDatabase");
 
-Route::get('updateProjectInDatabase', 'EmployeeManagementController@UpdateProjectInDatabase')->name("updateProjectInDatabase");
+Route::post('updateProjectInDatabase', 'EmployeeManagementController@UpdateProjectInDatabase')->name("updateProjectInDatabase");
 
 Route::post('updateDepartmentManagerInDatabase', 'EmployeeManagementController@UpdateDepartmentManagerInDatabase')->name("updateDepartmentManagerInDatabase");
 

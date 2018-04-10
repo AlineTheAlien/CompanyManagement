@@ -415,22 +415,26 @@ class EmployeeManagementController extends Controller
 
     public function UpdateProject(Request $request) {
         $id = $request->input('id');
+        $departments = DB::connection('management')->select("SELECT * FROM department;");
 
         $projects = DB::connection('management')->select("SELECT * FROM project WHERE id = $id;");
-        return view('projects-update')->with('project', $projects[0]);
+        return view('projects-update')->with('project', $projects[0])->with('departments', $departments);
     }
 
     public function UpdateProjectInDatabase(Request $request) {
         $id = $request->input('id');
-        $departmentID = $request->input('departmentID');
+        $departmentID = $request->input('department_id');
         $location = $request->input('location');
         $name = $request->input('name');
+        $stage = $request->input('stage');
 
         DB::connection('management')->update("UPDATE project SET 
                                               departmentID = '$departmentID',
                                               location = '$location',
-                                              name = '$name'
+                                              name = '$name',
+                                              stage = '$stage'
                                               WHERE id = '$id';");
+        return redirect('projects');
     }
 
     // Dependents
