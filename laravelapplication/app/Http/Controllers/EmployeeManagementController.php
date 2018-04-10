@@ -17,7 +17,8 @@ class EmployeeManagementController extends Controller
     public function GetAllProjects()
     {
         $projects = DB::connection('management')->select("SELECT * FROM project;");
-        return view('projects')->with('projects', $projects);
+        $employees = DB::connection('management')->select("SELECT * FROM employee;");
+        return view('projects')->with('projects', $projects)->with('employees', $employees);
     }
 
     public function GetAllEmployees()
@@ -197,6 +198,20 @@ class EmployeeManagementController extends Controller
         $id = $request->input('id');
         $departments = DB::connection('management')->select("SELECT * FROM department WHERE id = $id;");
         return view('departments-create-manager')->with('department', $departments[0]);
+    }
+
+    public function AddEmployeeToProject(Request $request) {
+        $id = $request->input('id');
+        $sin = $request->input('sin');
+        DB::connection('management')->insert("INSERT INTO works_on
+                (`employeeSIN`,`projectID`, `hours` )
+                VALUES
+                ('$sin','$id', '0');");
+    }
+
+    public function RemoveEmployeeFromProject(Request $request) {
+        $sin = $request->input('sin');
+        DB::connection('management')->delete("DELETE FROM works_on WHERE employeeSIN = $sin");
     }
 
     public function CreateDepartmentManagerInDatabase(Request $request)

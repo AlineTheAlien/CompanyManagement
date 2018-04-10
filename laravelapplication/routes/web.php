@@ -21,7 +21,8 @@ Route::get('departments', function () {
 });
 
 Route::get('projects', function () {
-    return view('projects');
+    $employees = DB::connection('management')->select("SELECT * FROM employee;");
+    return view('projects')->with('employees', $employees);
 });
 
 Route::get('dependents', function () {
@@ -115,6 +116,11 @@ Route::post('deleteDepartment', 'EmployeeManagementController@DeleteDepartment')
 Route::post('deleteDependent', 'EmployeeManagementController@DeleteDependent')->name("deleteDependent");
 
 Route::post('deleteProject', 'EmployeeManagementController@DeleteProject')->name("deleteProject");
+
+Route::post('addEmployeeToProject', 'EmployeeManagementController@AddEmployeeToProject')->name("addEmployeeToProject");
+
+Route::post('removeEmployeeFromProject', 'EmployeeManagementController@RemoveEmployeeFromProject')->name("removeEmployeeFromProject");
+
 
 Route::get('dashboard', function () {
     return view('home');

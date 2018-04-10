@@ -88,7 +88,7 @@
                                 <th>Gender</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
-                                {{--<th>Action</th>--}}
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -142,7 +142,16 @@
                                             </button>
                                             <button class="btn btn-danger">
                                                 Delete
-                                            </button>
+                                            </button> <br /> <br/>
+                                        <button class="btn btn-success">
+                                            Add Employee
+                                        </button>
+                                        <select class="form-control js-states" name="employee_id">
+                                            <option value="-1">Select employee</option>
+                                              @foreach ($employees as $employee)
+                                                <option value="{{$employee->SIN}}">{{$employee->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                 </tr>
                             @endforeach
@@ -207,6 +216,43 @@
                 });
             });
 
+            $('#dataTables-example').on('click', '.btn-success', function(){
+                var id = $(this).parent().siblings('.id').text();
+                var sin = $('#dataTables-example .js-states option:selected').val();
+                $.ajax({
+                    type:'POST',
+                    url: 'addEmployeeToProject',
+                    data:{id: id, sin: sin},
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success:function(data){
+                        alert("Successfully added employee to project" );
+                        },
+                    error:function (jqXHR, textStatus, errorThrown) {
+                        alert(JSON.stringify(jqXHR, null, 2));
+                    }
+                });
+            });
+
+            $("#viewEmployeesTable").on('click', '.btn-danger', function() {
+                if (confirm('Are you sure?')){
+                    var sin = $(this).parent().siblings('.sin').text();
+                    var clickedButton = $(this);
+                    $.ajax({
+                        type:'POST',
+                        url: 'removeEmployeeFromProject',
+                        data:{sin: sin},
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        success:function(data){
+                            clickedButton.parent().parent().remove();
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
+            });
+
             $('#dataTables-example').on('click', '.btn-link', function(){
                 var id = $(this).parent().siblings('.id').text();
                 if ($(this).text() == "View employees"){
@@ -222,9 +268,10 @@
                             $("#viewEmployeesCaption").text("Employees working on ProjectID = " + id);
                             $.each(employees, function(index, employee) {
                                 $("#viewEmployeesTable tbody").append(
-                                    "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    "<tr><td class='sin'>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                     + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender
+                                    + "</td><td>" + "<button class='btn btn-danger'>Remove</button>" + "</td></tr>"
                                 )
                             });
                         },
