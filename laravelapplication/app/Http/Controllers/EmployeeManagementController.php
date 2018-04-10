@@ -553,4 +553,55 @@ class EmployeeManagementController extends Controller
         else
             return view('dependents');
     }
+
+    public function SearchProject(Request $request)
+    {
+        $projectID = $request->input('id');
+        $departmentID = $request->input('department_id');
+        $location= $request->input('location');
+        $name= $request->input('name');
+        $stage= $request->input('stage');
+
+        $query = "SELECT * FROM project WHERE ";
+
+        if ($projectID != null)
+            $query = $query . "id = '$projectID' ";
+
+        if ($departmentID != -1)
+            if (strpos($query, 'id') !== false)
+                $query = $query . "AND departmentID = '$departmentID' ";
+            else
+                $query = $query . "departmentID = '$departmentID' ";
+
+        if ($name != null)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false)
+                $query = $query . "AND name = '$name' ";
+            else
+                $query = $query . "name = '$name' ";
+
+        if ($stage != -1)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false ||
+                strpos($query, 'name') !== false)
+                $query = $query . "AND stage = '$stage' ";
+            else
+                $query = $query . "stage = '$stage' ";
+
+        if ($location != null)
+            if (strpos($query, 'departmentID') !== false || strpos($query, 'id') !== false ||
+                strpos($query, 'name') !== false || strpos($query, 'stage') !== false)
+                $query = $query . "AND location = '$location' ";
+            else
+                $query = $query . "location = '$location' ";
+
+        $query = $query . ";";
+
+        if (strpos($query, '=')){
+            $projects = DB::connection('management')->select($query);
+            $departments = DB::connection('management')->select("SELECT * FROM department;");
+            $employees = DB::connection('management')->select("SELECT * FROM employee;");
+            return view('projects')->with('projects', $projects)->with('departments', $departments)->with('employees', $employees);
+        }
+        else
+            return view('projects');
+    }
 }
