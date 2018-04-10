@@ -144,8 +144,10 @@ class EmployeeManagementController extends Controller
             return view('employees')->with('employees', $employees)
                                          ->with('departments', $departments);
         }
-        else
-            return view('employees');
+        else{
+            $employees = null;
+            return view('employees')->with('departments', $departments)->with('employees', $employees);
+        }
     }
 
     public function CreateEmployee(Request $request)
@@ -314,8 +316,10 @@ class EmployeeManagementController extends Controller
             $departments = DB::connection('management')->select($query);
             return view('departments')->with('departments', $departments);
         }
-        else
-            return view('employees');
+        else{
+            $departments = null;
+            return view('departments')->with('departments', $departments);
+        }
     }
 
     public function CreateProject(Request $request)
@@ -527,19 +531,19 @@ class EmployeeManagementController extends Controller
                 $query = $query . "employeeSIN = '$employeeSIN' ";
 
         if ($name != null)
-            if (strpos($query, 'AND') !== false)
+            if (strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false)
                 $query = $query . "AND name = '$name' ";
             else
                 $query = $query . "name = '$name' ";
 
         if ($gender != -1)
-            if (strpos($query, 'AND') !== false)
+            if (strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false ||strpos($query, 'name') !== false)
                 $query = $query . "AND gender = '$gender' ";
             else
                 $query = $query . "gender = '$gender' ";
 
         if ($birthDate != null)
-            if(strpos($query, 'AND') !== false)
+            if(strpos($query, 'dependentSIN') !== false || strpos($query, 'employeeSIN') !== false ||strpos($query, 'name') !== false||strpos($query, 'gender') !== false)
                 $query = $query . "AND birthDate = '$birthDate' ";
             else
                 $query = $query . "birthDate = '$birthDate' ";
@@ -550,8 +554,10 @@ class EmployeeManagementController extends Controller
             $dependents = DB::connection('management')->select($query);
             return view('dependents')->with('dependents', $dependents);
         }
-        else
-            return view('dependents');
+        else{
+            $dependents = null;
+            return view('dependents')->with('dependents', $dependents);
+        }
     }
 
     public function SearchProject(Request $request)

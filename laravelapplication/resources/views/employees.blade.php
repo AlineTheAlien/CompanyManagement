@@ -146,6 +146,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @if ($employees !== null)
                         @foreach($employees as $employee)
                             <tr>
                                 <td class="SIN">{{$employee->SIN}}</td>
@@ -169,6 +170,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -359,9 +361,11 @@
                                     + "</td><td>" + "</td><td>" + "</td><td>"
                                     + "</td><td> <select class='form-control js-states' name='employee_id'>"
                                     + "<option value='-1'>Select employee</option>"
+                                    +    "@if ($employees !== null)"
                                     + "@foreach ($employees as $employee)"
                                     + "<option value='{{$employee->SIN}}''>{{$employee->name}}</option>"
                                     + "@endforeach"
+                                    + "@endif"
                                     +  "</select>"
                                     + "<button class='btn btn-success'>Add Supervisor</button></td></tr>"
                                 );
@@ -401,9 +405,11 @@
                                     + "</td><td>" + "</td><td>" + "</td><td>"
                                     + "</td><td> <select class='form-control js-states' name='employee_id'>"
                                     + "<option value='-1'>Select employee</option>"
+                                    +    "@if ($employees !== null)"
                                     + "@foreach ($employees as $employee)"
                                     + "<option value='{{$employee->SIN}}''>{{$employee->name}}</option>"
                                     + "@endforeach"
+                                    + "@endif"
                                     +  "</select>"
                                     + "<button class='btn btn-success'>Add Subordinate</button></td></tr>"
                                 );
