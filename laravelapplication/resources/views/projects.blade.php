@@ -74,6 +74,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
+
                         <table id="viewEmployeesTable" class="table table-striped table-bordered table-hover" style="display:none">
                             <caption id = "viewEmployeesCaption"> Test</caption>
                             <thead>
@@ -85,6 +86,22 @@
                                 <th>Address</th>
                                 <th>Salary</th>
                                 <th>Gender</th>
+                                {{--<th>Dependents</th> --}}
+                                {{--<th>Projects</th> --}}
+                                {{--<th>Action</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+                        <table id="viewTotalHoursTable" class="table table-striped table-bordered table-hover" style="display:none">
+                            <caption id = "viewTotalHoursCaption"> Test</caption>
+                            <thead>
+                            <tr>
+                                <th>Employee SIN</th>
+                                <th>Hours</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
                                 {{--<th>Action</th>--}}
@@ -115,7 +132,9 @@
                                     <td>{{$project->location}}</td>
                                     <td>
                                         <!-- Need unique IDs for each button -->
-                                        <button type="button" class="btn btn-link">View employees</button>
+                                        <button type="button" class="btn btn-link">View employees</button> <br/>
+                                        <button type="button" class="btn btn-link">View total hours</button>
+
                                     </td>
                                     <td>
                                             <button class="btn btn-warning">
@@ -190,27 +209,56 @@
 
             $('#dataTables-example').on('click', '.btn-link', function(){
                 var id = $(this).parent().siblings('.id').text();
-                $.ajax({
-                    type:'GET',
-                    url: 'getEmployeesAssignedOnProject',
-                    data:{id: id},
-                    success:function(employees){
+                if ($(this).text() == "View employees"){
+                    $.ajax({
+                        type:'GET',
+                        url: 'getEmployeesAssignedOnProject',
+                        data:{id: id},
+                        success:function(employees){
 
-                        $("#viewEmployeesTable").show();
-                        $("#viewEmployeesTable td").remove();
-                        $("#viewEmployeesCaption").text("Employees working on ProjectID = " + id);
-                        $.each(employees, function(index, employee) {
-                            $("#viewEmployeesTable tbody").append(
-                                "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
-                                + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                            $("#viewEmployeesTable").show();
+                            $("#viewTotalHoursTable").hide();
+                            $("#viewEmployeesTable td").remove();
+                            $("#viewEmployeesCaption").text("Employees working on ProjectID = " + id);
+                            $.each(employees, function(index, employee) {
+                                $("#viewEmployeesTable tbody").append(
+                                    "<tr><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                    + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
+                                )
+                            });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+                if ($(this).text() == "View total hours"){
+                    $.ajax({
+                        type:'GET',
+                        url: 'getProjectTotalHours',
+                        data:{id: id},
+                        success:function(projects){
+
+                            $("#viewEmployeesTable").hide();
+                            $("#viewTotalHoursTable").show();
+                            $("#viewTotalHoursTable td").remove();
+                            $("#viewTotalHoursCaption").text("Total hours working on ProjectID = " + id);
+                            $.each(projects, function(index, project) {
+                                $("#viewTotalHoursTable tbody").append(
+                                    "<tr><td>" + project.employeeSIN + "</td><td>" + project.hours + "</td></tr>"
+                                )
+                            });
+                            $("#viewTotalHoursTable tbody").append(
+                                "<tr><td><b> Total Hours </b></td><td>" + projects[0].totalHours + "</td></tr>"
                             )
-                        });
-                    },
-                    error:function (jqXHR, textStatus, errorThrown) {
-                        alert(JSON.stringify(jqXHR, null, 2));
-                    }
-                });
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
             });
 
             $('#dataTables-example').on('click', '#projects .btn-link', function(){
