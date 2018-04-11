@@ -74,7 +74,7 @@
                         </div>
                     </li>
                     <li>
-                        <a href="dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="dashboard"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                     </li>
                     <ul class="nav" id="side-menu">
                         <li>
@@ -129,4 +129,5 @@
 
 
 </body>
+<footer id="footer" class="text text-center">Copyright &copy 2018 Aline Koftikian, Ideawin-Bunthy Koun, Nassim El-Sayed</footer>
 </html>
