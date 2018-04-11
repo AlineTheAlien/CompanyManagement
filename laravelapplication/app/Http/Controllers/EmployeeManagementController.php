@@ -85,10 +85,36 @@ class EmployeeManagementController extends Controller
                   WHERE project.departmentID = '$id'
                   GROUP BY project.id";
         $projects = DB::connection('management')->select($query);
-        return response()->json($projects);
+
+        $query2 = "SELECT SUM(employee.salary*works_on.hours) as totalPay
+        FROM project, employee, works_on
+        WHERE project.departmentID = '$id' AND project.id = works_on.projectID AND employee.SIN = works_on.employeeSIN;";
+
+        $totalPay = DB::connection('management')->select($query2);
+        return response()->json(json_encode(array($projects, $totalPay)));
     }
 
     public function GetProjectTotalHours(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "SELECT * FROM works_on WHERE projectID = $id;";
+        $query2 = "SELECT SUM(hours) AS totalHours FROM works_on WHERE projectID = $id";
+        $projects = DB::connection('management')->select($query);
+        $totalHours = DB::connection('management')->select($query2);
+        return response()->json(json_encode(array($projects, $totalHours)));
+    }
+
+    public function GetCompanyTotalPay(Request $request)
+    {
+        $id = $request->input('id');
+        $query = "SELECT * FROM works_on WHERE projectID = $id;";
+        $query2 = "SELECT SUM(hours) AS totalHours FROM works_on WHERE projectID = $id";
+        $projects = DB::connection('management')->select($query);
+        $totalHours = DB::connection('management')->select($query2);
+        return response()->json(json_encode(array($projects, $totalHours)));
+    }
+
+    public function GetProjectTotalPay(Request $request)
     {
         $id = $request->input('id');
         $query = "SELECT * FROM works_on WHERE projectID = $id;";

@@ -118,6 +118,17 @@
                             </tbody>
                         </table>
 
+                        <table class="table table-striped table-bordered table-hover" id="viewTotalPayTable" style="display:none">
+                            <caption id = "viewTotalPayCaption">Test</caption>
+                            <thead>
+                            <tr>
+                                <th>Total Pay</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
@@ -201,9 +212,6 @@
             });
 
             $('#dataTables-example').on('click', '#other .btn-link', function(){
-                $("#viewEmployeesTable").hide();
-                $("#viewManagerTable").hide();
-                $("#viewProjectsTable").hide();
                 if ($(this).text() == " View employees "){
                     var id = $(this).parent().siblings('.id').text();
                     $.ajax({
@@ -211,6 +219,8 @@
                         url: 'getDepartmentEmployees',
                         data:{id: id},
                         success:function(employees){
+                            $("#viewManagerTable").hide();
+                            $("#viewProjectsTable").hide();
                             $("#viewEmployeesTable").show();
                             $("#viewEmployeesTable td").remove();
                             $("#viewEmployeesCaption").text("Employees for Department ID = " + id);
@@ -238,6 +248,8 @@
                         success:function(employees){
                             if (!$.trim(employees)){
                                 $("#viewManagerTable").show();
+                                $("#viewEmployeesTable").hide();
+                                $("#viewProjectsTable").hide();
                                 $("#viewManagerTable td").remove();
                                 $("#viewManagerCaption").text("Manager for Department ID = " + id);
                                 $("#viewManagerTable tbody").append(
@@ -250,6 +262,8 @@
                             }
                             else{
                                 $("#viewManagerTable").show();
+                                $("#viewEmployeesTable").hide();
+                                $("#viewProjectsTable").hide();
                                 $("#viewManagerTable td").remove();
                                 $("#viewManagerCaption").text("Manager for Department ID = " + id);
                                 $.each(employees, function(index, employee) {
@@ -275,18 +289,25 @@
                         type:'GET',
                         url: 'getDepartmentProjects',
                         data:{id: id},
+                        dataType: "json",
                         success:function(projects){
+                            var results = JSON.parse(projects);
                             $("#viewProjectTable").show();
+                            $("#viewTotalPayTable").show();
+                            $("#viewEmployeesTable").hide();
+                            $("#viewManagerTable").hide();
+                            $("#viewTotalPayTable td").remove();
+                            $("#viewTotalPayCaption").remove();
                             $("#viewProjectTable td").remove();
                             $("#viewProjectCaption").text("Projects for Department ID = " + id);
-                            $.each(projects, function(index, project) {
+                            $.each(results[0], function(index, project) {
                                 $("#viewProjectTable tbody").append(
                                     "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
                                     + project.totalHours + "</td></tr>"
                                 )
                             });
                             $("#viewTotalPayTable tbody").append(
-                                "<tr class='totalHoursRow'><td><b> Total Pay </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td><td></td><td></td></tr>"
+                                "<tr><td>" + results[1][0].totalPay + "$</td></tr>"
                             )
                         },
                         error:function (jqXHR, textStatus, errorThrown) {
