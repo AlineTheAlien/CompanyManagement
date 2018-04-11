@@ -104,8 +104,8 @@
                             </tbody>
                         </table>
 
-                        <table class="table table-striped table-bordered table-hover" id="viewProjectTable" style="display:none">
-                            <caption id = "viewProjectCaption">Test</caption>
+                        <table id="viewProjectsTable" class="table table-striped table-bordered table-hover" style="display:none">
+                            <caption id = "viewProjectsCaption">Test</caption>
                             <thead>
                             <tr>
                                 <th>Id</th>
@@ -145,7 +145,7 @@
                                     <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
                                     <td id="other">
-                                        <button type="button" class="btn btn-link"> View manager </button> <br/>
+                                        <button type="button" class="btn btn-link"> View manager </button>
                                         <button type="button" class="btn btn-link"> View employees </button>
                                         <button type="button" class="btn btn-link"> View projects </button>
                                     </td>
@@ -219,9 +219,9 @@
                         url: 'getDepartmentEmployees',
                         data:{id: id},
                         success:function(employees){
+                            $("#viewEmployeesTable").show();
                             $("#viewManagerTable").hide();
                             $("#viewProjectsTable").hide();
-                            $("#viewEmployeesTable").show();
                             $("#viewEmployeesTable td").remove();
                             $("#viewEmployeesCaption").text("Employees for Department ID = " + id);
                             $.each(employees, function(index, employee) {
@@ -292,16 +292,16 @@
                         dataType: "json",
                         success:function(projects){
                             var results = JSON.parse(projects);
-                            $("#viewProjectTable").show();
+                            $("#viewProjectsTable").show();
                             $("#viewTotalPayTable").show();
                             $("#viewEmployeesTable").hide();
                             $("#viewManagerTable").hide();
                             $("#viewTotalPayTable td").remove();
                             $("#viewTotalPayCaption").remove();
-                            $("#viewProjectTable td").remove();
-                            $("#viewProjectCaption").text("Projects for Department ID = " + id);
+                            $("#viewProjectsTable td").remove();
+                            $("#viewProjectsCaption").text("Projects for Department ID = " + id);
                             $.each(results[0], function(index, project) {
-                                $("#viewProjectTable tbody").append(
+                                $("#viewProjectsTable tbody").append(
                                     "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
                                     + project.totalHours + "</td></tr>"
                                 )
