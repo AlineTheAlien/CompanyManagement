@@ -78,9 +78,25 @@
                                 <th>Salary</th>
                                 <th>Gender</th>
                                 <th>Action</th>
-                                {{--<th>Dependents</th> --}}
-                                {{--<th>Projects</th> --}}
-                                {{--<th>Action</th>--}}
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+
+                        <table id="viewEmployeesTable" class="table table-striped table-bordered table-hover" style="display:none">
+                            <caption id = "viewEmployeesCaption"> Test</caption>
+                            <thead>
+                            <tr>
+                                <th>Department Id</th>
+                                <th>SIN</th>
+                                <th>Name</th>
+                                <th>Birth Date</th>
+                                <th>Phone Number</th>
+                                <th>Address</th>
+                                <th>Salary</th>
+                                <th>Gender</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -177,15 +193,14 @@
                         url: 'getDepartmentEmployees',
                         data:{id: id},
                         success:function(employees){
-                            $("#viewManagerTable").show();
-                            $("#viewManagerTable td").remove();
-                            $("#viewManagerCaption").text("Employees for Department ID = " + id);
+                            $("#viewEmployeesTable").show();
+                            $("#viewEmployeesTable td").remove();
+                            $("#viewEmployeesCaption").text("Employees for Department ID = " + id);
                             $.each(employees, function(index, employee) {
-                                $("#viewManagerTable tbody").append(
-                                    "<tr><td class = \"id\">" + id + "</td><td>" + employee.startDate + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
+                                $("#viewEmployeesTable tbody").append(
+                                    "<tr><td class = \"id\">" + id + "</td><td>" + employee.SIN + "</td><td>" + employee.name + "</td><td>" + employee.birthDate
                                     + "</td><td>" + employee.phoneNumber + "</td><td>" + employee.address
-                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td><td>"
-                                    + "</td></tr>"
+                                    + "</td><td>" + employee.salary + "</td><td>" + employee.gender + "</td></tr>"
                                 );
                             });
 
