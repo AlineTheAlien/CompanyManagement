@@ -114,6 +114,7 @@
                             <tr>
                                 <th>Employee SIN</th>
                                 <th>Hours</th>
+                                <th>Salary</th>
                                 {{--<th>Dependents</th> --}}
                                 {{--<th>Projects</th> --}}
                                 <th>Action</th>
@@ -309,15 +310,16 @@
                             $.each(results[0], function(index, project) {
                                 $("#viewTotalHoursTable tbody").append(
                                     "<tr><td class='SIN'>" + project.employeeSIN + "</td><td class='hours'>" + project.hours
-                                    + "</td><td>"
+                                    + "</td><td>" + project.salary +  "</td><td>"
                                     + "<input id='id' type='text' class='hoursUpdate' name='hours'> "
                                     + "  <button class='btn btn-success'>Update hours</button>"
                                     + "</td></tr>"
                                 )
                             });
                             $("#viewTotalHoursTable tbody").append(
-                                "<tr class='totalHoursRow'><td><b> Total Hours </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td></tr>"
-                            )
+                                "<tr class='totalHoursRow'><td><b> Total Hours </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td></tr>" +
+                                 "<tr class='totalPayRow'><td><b> Total Pay </b></td><td class='totalPay'>" + results[2][0].totalPay + "</td></tr>"
+                            );
                         },
                         error:function (jqXHR, textStatus, errorThrown) {
                             alert(JSON.stringify(jqXHR, null, 2));
