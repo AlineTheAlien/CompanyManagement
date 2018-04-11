@@ -186,6 +186,8 @@
             });
 
             $('#dataTables-example').on('click', '#managers .btn-link', function(){
+                $("#viewEmployeesTable").hide();
+                $("#viewManagerTable").hide();
                 if ($(this).text() == " View employees "){
                     var id = $(this).parent().siblings('.id').text();
                     $.ajax({
