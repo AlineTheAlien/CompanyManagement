@@ -330,6 +330,7 @@
             });
 
             $('#viewTotalHoursTable').on('click', '.btn-success', function(){
+                var id = $("#viewTotalHoursCaption").text().replace("Total hours working on ProjectID = ", "");
                 var SIN = $(this).parent().siblings('.SIN').text();
                 var hours = $(this).siblings('.hoursUpdate').val();
                 var button = $(this);
@@ -337,7 +338,7 @@
                 $.ajax({
                     type:'post',
                     url: 'updateEmployeeHours',
-                    data:{SIN: SIN, hours: hours},
+                    data:{SIN: SIN, hours: hours, id: id},
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success:function(data){
                         button.parent().siblings('.hours').text(hours);

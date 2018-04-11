@@ -402,10 +402,11 @@ class EmployeeManagementController extends Controller
     public function UpdateEmployeeHours(Request $request) {
         $SIN = $request->input('SIN');
         $hours = $request->input('hours');
+        $id = $request->input('id');
 
         DB::connection('management')->update("UPDATE works_on SET 
                                               hours = '$hours'
-                                              WHERE employeeSIN = '$SIN';");
+                                              WHERE employeeSIN = '$SIN' AND projectID = '$id';");
     }
 
 
