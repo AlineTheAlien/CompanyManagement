@@ -114,9 +114,13 @@
         <h4><b>Team members:</b></h4>
         Aline Koftikian - 27764162</br>
         Ideawin-Bunthy Koun - 26314155</br>
-        Nassim El Sayed - 27010419</br>
+        Nassim El Sayed - 27010419</br></br>
+
+
+        <button type="button" id="totalPay" class="btn btn-primary btn-lg">View Company Current Total Pay</button>
+
     </div>
-    <!-- /#page-wrapper -->
+
 
 </div>
 
@@ -131,6 +135,24 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/startmin.js"></script>
+
+<script>
+    $('#totalPay').on('click', function (){
+        $.ajax({
+            type:'GET',
+            url: 'getCompanyTotalPay',
+            success:function(results){
+                $.each(results, function(index, result) {
+                    var total = result.totalPay + "$"
+                    $("#totalPay").html(total);
+                });
+            },
+            error:function (jqXHR, textStatus, errorThrown) {
+                alert(JSON.stringify(jqXHR, null, 2));
+            }
+        });
+    });
+    </script>
 
 </body>
 <footer id="footer" class="text text-center">Copyright &copy 2018 Aline Koftikian, Ideawin-Bunthy Koun, Nassim El-Sayed</footer>
