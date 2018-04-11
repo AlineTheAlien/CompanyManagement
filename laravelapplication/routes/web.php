@@ -99,6 +99,8 @@ Route::get('getDependents', 'EmployeeManagementController@GetDependents')->name(
 
 Route::get('getProjects', 'EmployeeManagementController@GetProjects')->name("getProjects");
 
+Route::get('getDepartmentProjects', 'EmployeeManagementController@GetDepartmentProjects')->name("getDepartmentProjects");
+
 Route::get('getProjectTotalHours', 'EmployeeManagementController@GetProjectTotalHours')->name("getProjectTotalHours");
 
 Route::get('getEmployeesAssignedOnProject', 'EmployeeManagementController@GetEmployeesAssignedOnProject')->name("getEmployeesAssignedOnProject");

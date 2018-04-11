@@ -104,12 +104,26 @@
                             </tbody>
                         </table>
 
+                        <table class="table table-striped table-bordered table-hover" id="viewProjectTable" style="display:none">
+                            <caption id = "viewProjectCaption">Test</caption>
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Total Hours</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th>Manager</th>
+                                <th>Other</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -119,9 +133,10 @@
                                 <tr>
                                     <td class = "id">{{$department->id}}</td>
                                     <td>{{$department->name}}</td>
-                                    <td id="managers">
+                                    <td id="other">
                                         <button type="button" class="btn btn-link"> View manager </button> <br/>
                                         <button type="button" class="btn btn-link"> View employees </button>
+                                        <button type="button" class="btn btn-link"> View projects </button>
                                     </td>
                                     <td>
                                         <button class="btn btn-warning"> Update </button>
@@ -185,9 +200,10 @@
                 });
             });
 
-            $('#dataTables-example').on('click', '#managers .btn-link', function(){
+            $('#dataTables-example').on('click', '#other .btn-link', function(){
                 $("#viewEmployeesTable").hide();
                 $("#viewManagerTable").hide();
+                $("#viewProjectsTable").hide();
                 if ($(this).text() == " View employees "){
                     var id = $(this).parent().siblings('.id').text();
                     $.ajax({
@@ -252,6 +268,33 @@
                         }
                     });
                 }
+
+                if ($(this).text() == " View projects "){
+                    var id = $(this).parent().siblings('.id').text();
+                    $.ajax({
+                        type:'GET',
+                        url: 'getDepartmentProjects',
+                        data:{id: id},
+                        success:function(projects){
+                            $("#viewProjectTable").show();
+                            $("#viewProjectTable td").remove();
+                            $("#viewProjectCaption").text("Projects for Department ID = " + id);
+                            $.each(projects, function(index, project) {
+                                $("#viewProjectTable tbody").append(
+                                    "<tr><td>" + project.id + "</td><td>" + project.name + "</td><td>" + project.location + "</td><td>"
+                                    + project.totalHours + "</td></tr>"
+                                )
+                            });
+                            $("#viewTotalPayTable tbody").append(
+                                "<tr class='totalHoursRow'><td><b> Total Pay </b></td><td class='totalHours'>" + results[1][0].totalHours + "</td><td></td><td></td></tr>"
+                            )
+                        },
+                        error:function (jqXHR, textStatus, errorThrown) {
+                            alert(JSON.stringify(jqXHR, null, 2));
+                        }
+                    });
+                }
+
             });
 
             $('#viewManagerTable').on('click', '#update_manager.btn-warning', function(){
