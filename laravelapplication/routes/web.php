@@ -62,7 +62,8 @@ Route::get('departments-create', function () {
 
 
 Route::get('projects-create', function () {
-    return view('projects-create');
+    $departments = DB::connection('management')->select("SELECT * FROM department;");
+    return view('projects-create')->with('departments', $departments);
 });
 
 Route::post('createDepartment', 'EmployeeManagementController@CreateDepartment')->name("createDepartment");

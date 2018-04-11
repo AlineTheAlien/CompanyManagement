@@ -7,9 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add new project</div>
                     <div class="panel-body">
-                        {{--
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('SOMETHINGHERE', ['id' => $project->id]) }}" enctype="multipart/form-data">
-                        --}}
                         <form class="form-horizontal" role="form" method="POST" action="{{route('createProject')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
@@ -25,17 +22,15 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('id') ? ' has-error' : '' }}">
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">Department</label>
-
                                 <div class="col-md-6">
-                                    <input id="id" type="text" class="form-control" name="id" value="{{ old('id') }}" required>
-
-                                    @if ($errors->has('id'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('id') }}</strong>
-                                    </span>
-                                    @endif
+                                    <select class="form-control js-states" name="department_id" required>
+                                        <option value="">Select department</option>
+                                        @foreach ($departments as $department)
+                                            <option value={{$department->id}} name="department" id="department" >{{$department->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -68,8 +63,8 @@
                                 <label for="stage" class="col-md-4 control-label">Stage</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control js-states" name="stage">
-                                        <option value="-1">Select stage</option>
+                                    <select class="form-control js-states" name="stage" required>
+                                        <option value="">Select stage</option>
                                         <option value="preliminary">preliminary</option>
                                         <option value="intermediate">intermediate</option>
                                         <option value="advanced">advanced</option>

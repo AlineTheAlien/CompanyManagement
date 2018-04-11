@@ -28,7 +28,7 @@
                                     <select class="form-control js-states" name="department_id" required>
                                         <option value="">Select department</option>
                                           @foreach ($departments as $department)
-                                            <option name="department" id="department" >{{$department->name}}</option>
+                                            <option value={{$department->id}} name="department" id="department" >{{$department->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

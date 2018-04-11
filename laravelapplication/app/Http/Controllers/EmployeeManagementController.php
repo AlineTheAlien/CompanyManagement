@@ -341,17 +341,23 @@ class EmployeeManagementController extends Controller
     public function CreateProject(Request $request)
     {
         $id = $request->input('id');
+        $departmentID = $request->input('department_id');
         $location = $request->input('location');
         $name= $request->input('name');
+        $stage= $request->input('stage');
 
         DB::connection('management')->insert("INSERT INTO project
-                (`id`, 
+                (`id`,
+                `departmentID`,
                 `location`,
-                `name`)
+                `name`,
+                `stage`)
                 VALUES
                 ($id,
+                '$departmentID',
                 '$location',
-                '$name');");
+                '$name',
+                '$stage');");
         return redirect('projects');
     }
 
